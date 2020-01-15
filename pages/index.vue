@@ -16,7 +16,7 @@
 <script>
 
 import { mapState } from 'vuex'
-import { EventBus } from '../event-bus.js'
+// import { EventBus } from '../event-bus.js'
 import Cube from '../components/Cube.vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
@@ -25,6 +25,13 @@ import MobileMenu from '../components/MobileMenu.vue'
 
 export default {
   name: 'Home',
+  components: {
+    Cube,
+    Header,
+    Footer,
+    DarkLight,
+    MobileMenu
+  },
   data () {
     return {
       videoplay: false,
@@ -37,16 +44,16 @@ export default {
 
     playing () { return !this.paused },
 
-    ...mapState([
-      'iconObject',
-      'light',
-      'cubeObject',
-      'bgc',
-      'faceColor',
-      'cubeHovered'
-    ])
+    ...mapState({
+      light: state => state.darklight.light,
+      iconObject: state => state.colorchange.iconObject,
+      cubeObject: state => state.colorchange.cubeObject,
+      bgc: state => state.backgroundchange.bgc,
+      faceColor: state => state.facechange.faceColor,
+      cubeHovered: state => state.facechange.cubeHovered
+    })
   },
-  mounted () {
+  /* mounted () {
     EventBus.$on('moviechange', (movie, play) => {
       if (play) {
         this.videosource = movie
@@ -72,14 +79,7 @@ export default {
         this.videoElement.volume = vol / 100
       } else { this.videoElement.muted = true }
     })
-  },
-  components: {
-    Cube,
-    Header,
-    Footer,
-    DarkLight,
-    MobileMenu
-  },
+  }, */
   methods: {
     bgcChange (color) {
       this.$store.dispatch('backgroundchange/backgroundChange', color)
