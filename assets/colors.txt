@@ -1,0 +1,9 @@
+red: #e43e30
+yellow: #f3b120
+green: #235d39
+orange: #ed7625
+purple: #625e9d
+blue: #0076bb
+lime: #8dc63f
+pink: #edb1ca
+navy: #244c5a
