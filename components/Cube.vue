@@ -33,13 +33,34 @@ export default {
     IconBase, NavBar
   },
   props: {
-    project: String,
-    letter: String,
-    color1: String,
-    color2: String,
-    image: String,
-    bgColor: Array,
-    pattern: Array
+    project: {
+      type: String,
+      default: ''
+    },
+    letter: {
+      type: String,
+      default: ''
+    },
+    color1: {
+      type: String,
+      default: ''
+    },
+    color2: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    bgColor: {
+      type: Array,
+      default () { return [] }
+    },
+    pattern: {
+      type: Array,
+      default () { return [] }
+    }
   },
   data () {
     return {
