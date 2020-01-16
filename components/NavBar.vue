@@ -24,13 +24,12 @@
                     img(v-else-if="play" alt='welcome' src='../assets/img/icons/pause.png'  @click='pause')
                     img(alt='welcome' src='../assets/img/icons/forward.png'  @click='next')
                     br
-                    //client-only
-                      vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'black', borderColor: 'black' }")
-                          template( v-slot:dot="{ value }")
-                             img(v-if="value <= 5" id='volume-slider' src='../assets/img/icons/vol0.png' )
-                             img(v-else-if="33 >= value && value > 5" id='volume-slider' src='../assets/img/icons/vol1.png' )
-                             img(v-else-if="66 >= value && value > 33" id='volume-slider' src='../assets/img/icons/vol2.png' )
-                             img(v-else-if="100 >= value && value > 66" id='volume-slider' src='../assets/img/icons/vol3.png' )
+                    vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'black', borderColor: 'black' }")
+                      template( v-slot:dot="{ value }")
+                         img(v-if="value <= 5" id='volume-slider' src='../assets/img/icons/vol0.png' )
+                         img(v-else-if="33 >= value && value > 5" id='volume-slider' src='../assets/img/icons/vol1.png' )
+                         img(v-else-if="66 >= value && value > 33" id='volume-slider' src='../assets/img/icons/vol2.png' )
+                         img(v-else-if="100 >= value && value > 66" id='volume-slider' src='../assets/img/icons/vol3.png' )
         transition(name='slide-fade')
             .nav-icons(v-if='activeLink =="projects"')
                 .icon-wrapper
@@ -53,17 +52,12 @@
 <script>
 
 import { mapState } from 'vuex'
-// import NoSSR from 'vue-no-ssr'
-// import VueSlider from 'vue-slider-component'
 import IconBase from './IconBase.vue'
-// import 'vue-slider-component/theme/default.css'
 
 export default {
   name: 'NavBar',
   components: {
     IconBase
-    // NoSSR,
-    // VueSlider
   },
   data () {
     return {

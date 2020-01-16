@@ -29,7 +29,11 @@ export default {
   */
   plugins: [
     '~/plugins/bus',
-    '~/plugins/global.js'
+    '~/plugins/global.js',
+    {
+      src: '~plugins/vue-slider-component.js',
+      ssr: false
+    }
   ],
   /*
   ** Nuxt.js dev-modules
