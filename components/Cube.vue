@@ -8,12 +8,14 @@
                 component(:is="letter")
         .cube__face.cube__face--back back
         .cube__face.cube__face--right(:style="bgColor[0]" @click="goToCaseStudy")
+          nuxt-link(:to="link")
             img(:alt='project' :src='getImgUrl(image, ".png")' width="100%" height="100%")
         .cube__face.cube__face--left
             IconBase(width="22vw" height="22vw" :icon-name="project" :icon-color="color2")
                 component(:is="letter")
         .cube__face.cube__face--top(:style="[cubeFace == 'showTop' || light? {'background' : 'black'} : bgColor[0]]")
             .project-name
+              nuxt-link(:to="link")
                 p(@click="goToCaseStudy") {{ project }}
             .icon-container(v-for="(icon, index) in iconObject" @click="colorChanger(icon.name, icon.clicked)")
                 IconBase(v-if="pattern.includes(index)" class="iconbases" :icon-name="icon.name" width="2.5vw" height="2.5vw"  :icon-color='icon.clicked? icon.color : baseColor')
@@ -25,42 +27,21 @@
 <script>
 
 import IconBase from './IconBase.vue'
-import NavBar from './NavBar.vue'
 
 export default {
   name: 'Cube',
   components: {
-    IconBase, NavBar
+    IconBase
   },
   props: {
-    project: {
-      type: String,
-      default: ''
-    },
-    letter: {
-      type: String,
-      default: ''
-    },
-    color1: {
-      type: String,
-      default: ''
-    },
-    color2: {
-      type: String,
-      default: ''
-    },
-    image: {
-      type: String,
-      default: ''
-    },
-    bgColor: {
-      type: Array,
-      default () { return [] }
-    },
-    pattern: {
-      type: Array,
-      default () { return [] }
-    }
+    project: { type: String, default: '' },
+    letter: { type: String, default: '' },
+    color1: { type: String, default: '' },
+    color2: { type: String, default: '' },
+    image: { type: String, default: '' },
+    link: { type: String, default: '' },
+    bgColor: { type: Array, default () { return [] } },
+    pattern: { type: Array, default () { return [] } }
   },
   data () {
     return {
@@ -71,13 +52,13 @@ export default {
   },
   computed: {
     light () {
-      return !this.$store.state.light
+      return !this.$store.state.darklight.light
     },
     iconObject () {
-      return this.$store.state.iconObject
+      return this.$store.state.colorchange.iconObject
     },
     cubeFace () {
-      return this.$store.state.cubeFace
+      return this.$store.state.facechange.cubeFace
     }
   },
   methods: {
@@ -85,14 +66,13 @@ export default {
       return require('../assets/img/' + pic + ext)
     },
     goToCaseStudy () {
-      this.$router.push(this.image)
       window.scrollTo(0, 0)
     },
     colorChanger (name, clicked) {
       this.$store.dispatch('colorchange/colorChange', { name, clicked })
     },
     shiftCube (entered, color) {
-      this.$store.dispatch('faceColor', { entered, color })
+      this.$store.dispatch('facechange/faceColor', { entered, color })
       if (this.cubeFace === 'showFront' && entered) {
         this.hovered = true
         this.pictureclass = 'show-picture'
@@ -102,7 +82,7 @@ export default {
       }
     },
     mobileShift (entered, color) {
-      this.$store.dispatch('faceColor', { entered, color })
+      this.$store.dispatch('facechange/faceColor', { entered, color })
       if (this.cubeFace === 'showFront' && entered) {
         this.hovered = true
         this.pictureclass = 'show-picture'
@@ -127,6 +107,10 @@ export default {
     --cube-translate:       translateZ(calc(var(--cube-face-size)/-2))
     --cube-translate-pos:   translateZ(calc(var(--cube-face-size)/2))
 }
+
+a
+  text-decoration: none
+  color: white
 
 body
     font-family: sans-serif

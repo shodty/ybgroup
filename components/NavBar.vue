@@ -24,12 +24,13 @@
                     img(v-else-if="play" alt='welcome' src='../assets/img/icons/pause.png'  @click='pause')
                     img(alt='welcome' src='../assets/img/icons/forward.png'  @click='next')
                     br
-                    vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'black', borderColor: 'black' }")
-                        template( v-slot:dot="{ value }")
-                           img(v-if="value <= 5" id='volume-slider' src='../assets/img/icons/vol0.png' )
-                           img(v-else-if="33 >= value && value > 5" id='volume-slider' src='../assets/img/icons/vol1.png' )
-                           img(v-else-if="66 >= value && value > 33" id='volume-slider' src='../assets/img/icons/vol2.png' )
-                           img(v-else-if="100 >= value && value > 66" id='volume-slider' src='../assets/img/icons/vol3.png' )
+                    //client-only
+                      vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'black', borderColor: 'black' }")
+                          template( v-slot:dot="{ value }")
+                             img(v-if="value <= 5" id='volume-slider' src='../assets/img/icons/vol0.png' )
+                             img(v-else-if="33 >= value && value > 5" id='volume-slider' src='../assets/img/icons/vol1.png' )
+                             img(v-else-if="66 >= value && value > 33" id='volume-slider' src='../assets/img/icons/vol2.png' )
+                             img(v-else-if="100 >= value && value > 66" id='volume-slider' src='../assets/img/icons/vol3.png' )
         transition(name='slide-fade')
             .nav-icons(v-if='activeLink =="projects"')
                 .icon-wrapper
@@ -46,21 +47,23 @@
         .nav.nav-text(href='#' @click='onClick("projects"); rotateCube("showRight")'    :class='[activeLink == "projects"? "active" : "", light? "lightclass" : "darkclass"]')  PROJECTS
         .nav.nav-text(href='#' @click='onClick("sort"); rotateCube("showTop")'          :class='[activeLink == "sort"? "active" : "", light? "lightclass" : "darkclass"]')      SORT
         .nav.nav-text(href='#' @click='onClick("videos"); '                             :class='[activeLink == "videos"? "active" : "", light? "lightclass" : "darkclass"]')    VIDEOS
+
 </template>
 
 <script>
 
 import { mapState } from 'vuex'
-import VueSlider from 'vue-slider-component'
-import { EventBus } from '../event-bus.js'
+// import NoSSR from 'vue-no-ssr'
+// import VueSlider from 'vue-slider-component'
 import IconBase from './IconBase.vue'
-import Cube from './Cube.vue'
-import 'vue-slider-component/theme/default.css'
+// import 'vue-slider-component/theme/default.css'
 
 export default {
   name: 'NavBar',
   components: {
-    Cube, IconBase, VueSlider
+    IconBase
+    // NoSSR,
+    // VueSlider
   },
   data () {
     return {
@@ -77,17 +80,17 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'iconObject',
-      'light',
-      'baseColor',
-      'cubeObject',
-      'cubeFace',
-      'videoArray'
-    ])
+    ...mapState({
+      light: state => state.darklight.light,
+      iconObject: state => state.colorchange.iconObject,
+      cubeObject: state => state.colorchange.cubeObject,
+      cubeFace: state => state.facechange.cubeFace,
+      baseColor: state => state.darklight.baseColor,
+      videoArray: state => state.videoarray.videoArray
+    })
   },
   mounted () {
-    EventBus.$on('menuChange', (entry) => {
+    this.$bus.$on('menuChange', (entry) => {
       this.activeLink = entry
     })
   },
@@ -97,21 +100,21 @@ export default {
     },
     onClick (entry) {
       this.activeLink = entry
-      if (entry === 'videos') { this.movieChange('cases/ybg/ybg_launch', true) } else { EventBus.$emit('moviechange', 'null', false) }
+      if (entry === 'videos') { this.movieChange('cases/ybg/ybg_launch', true) } else { this.$bus.$emit('moviechange', 'null', false) }
     },
     movieChange (movie, play) {
-      EventBus.$emit('moviechange', movie, play)
+      this.$bus.$emit('moviechange', movie, play)
     },
     colorChanger (name, clicked) {
       this.$store.dispatch('colorchange/colorChange', { name, clicked })
     },
     playVid () {
       this.play = true
-      EventBus.$emit('playVid', true)
+      this.$bus.$emit('playVid', true)
     },
     pause () {
       this.play = false
-      EventBus.$emit('pause', true)
+      this.$bus.$emit('pause', true)
     },
     next () {
       this.count++
@@ -124,7 +127,7 @@ export default {
       this.movieChange(this.videoArray[this.count], true)
     },
     changeVolume () {
-      EventBus.$emit('volumeChange', this.value)
+      this.$bus.$emit('volumeChange', this.value)
     }
   }
 }

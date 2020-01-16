@@ -28,6 +28,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/bus',
+    '~/plugins/global.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -58,7 +60,11 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend (config, { isClient, loaders: { vue } }) {
+    // Extend only webpack config for client-bundle
+      if (isClient) {
+        vue.transformAssetUrls.video = ['src', 'poster']
+      }
     }
   }
 }

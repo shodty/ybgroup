@@ -1,7 +1,7 @@
 <template lang="pug">
 #home
   .background-div(:style='[ light? {"background" : bgc } : {"background" : "black"} ]')
-  video(v-if="videoplay" poster="../assets/img/videobg.png" class="video-bottom" :src="getImgUrl(videosource, '.mp4')" autoplay muted loop @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused")
+  //video(v-if="videoplay" poster="../assets/videobg.png" class="video-bottom" :src="getImgUrl(videosource, '.mp4')" autoplay muted loop @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused")
   DarkLight(class="darklightclass")
   MobileMenu
   Header(displayNavBar = true)
@@ -9,26 +9,27 @@
       .test-wrapper
         b-row(align-h="center")
           b-col(v-for="cube in cubeObject" cols=6 md=4  @mouseenter='bgcChange(cube.color2)' @mouseleave='bgcChange("white")' class='nopadding' v-if="cube.show" :key="cube.text")
-            Cube( class="cubeClass" :project='cube.text' :letter='cube.letter' :color1='cubeHovered? faceColor : cube.color1' color2='cube.color2' :image='cube.image' :link='cube.link' :pattern='cube.pattern' :bgColor='[ light? { "background" : bgc} : {"background" : "black"} ]')
+            Cube( class="cubeClass" :project='cube.text' :letter='cube.letter' :color1='cubeHovered? faceColor : cube.color1' color2='cube.color2' :image='cube.image' :pattern='cube.pattern' :bgColor='[ light? { "background" : bgc} : {"background" : "black"} ]')
   Footer(class="footerclass")
 </template>
 
 <script>
 
 import { mapState } from 'vuex'
-import Cube from '~/components/Cube.vue'
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-import DarkLight from '~/components/DarkLight.vue'
-import MobileMenu from '~/components/MobileMenu.vue'
+import Cube from '../components/Cube.vue'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+import DarkLight from '../components/DarkLight.vue'
+import MobileMenu from '../components/MobileMenu.vue'
 
 export default {
+  name: 'Home',
   components: {
-    DarkLight,
-    MobileMenu,
-    Header,
     Cube,
-    Footer
+    Header,
+    Footer,
+    DarkLight,
+    MobileMenu
   },
   data () {
     return {
@@ -42,16 +43,22 @@ export default {
 
     playing () { return !this.paused },
 
-    ...mapState({
-      light: state => state.darklight.light,
+    ...mapState([
+      'light',
+      'iconObject',
+      'cubeObject',
+      'bgc',
+      'faceColor',
+      'cubeHovered'
+      /* light: state => state.darklight.light,
       iconObject: state => state.colorchange.iconObject,
       cubeObject: state => state.colorchange.cubeObject,
       bgc: state => state.backgroundchange.bgc,
       faceColor: state => state.facechange.faceColor,
-      cubeHovered: state => state.facechange.cubeHovered
-    })
+      cubeHovered: state => state.facechange.cubeHovered */
+    ])
   },
-  mounted () {
+  mounted () { /*
     this.$bus.$on('moviechange', (movie, play) => {
       if (play) {
         this.videosource = movie
@@ -60,23 +67,23 @@ export default {
         this.videosource = null
         this.videoplay = false
       }
-    })
+    }),
     this.$bus.$on('playVid', (play) => {
       if (play) {
         this.videoElement.play()
       }
-    })
+    }),
     this.$bus.$on('pause', (play) => {
       if (play) {
         this.videoElement.pause()
       }
-    })
+    }),
     this.$bus.$on('volumeChange', (vol) => {
       if (vol > 0) {
         this.videoElement.muted = false
         this.videoElement.volume = vol / 100
       } else { this.videoElement.muted = true }
-    })
+    }) */
   },
   methods: {
     bgcChange (color) {

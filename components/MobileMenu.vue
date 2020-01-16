@@ -6,22 +6,33 @@
         .menu
             .nav(@click="openMenu")
                 img(src="../assets/close2.png" width="32px" height="32px")
-            .nav(@click="goToLink('/'); rotateCube('showFront'); onClick()")
-                p HOME
+            .nav
+                nuxt-link(to='/')
+                  p(@click="openMenu(); rotateCube('showFront'); onClick()") HOME
             .nav(@click="show = !show")
                 p WORK
             ul(v-if='show' class="list")
-                li(@click="goToLink('os')") Our Street
-                li(@click="goToLink('acr')") All City Riders
-                li(@click="goToLink('jump')") Jump
-                li(@click="goToLink('mas')") Mas Taco
-                li(@click="goToLink('btm')") Bottomless
-                li(@click="goToLink('shang')") Shangri-La
-                li(@click="goToLink('cabin')") The Cabin
-                li(@click="goToLink('alt')") Art Life Tour
-                li(@click="goToLink('bm')") Bardis & Miry
-            .nav(@click="goToLink('contact')")
-                p CONTACT
+                nuxt-link(to='ourstreet')
+                  li(@click="openMenu()") Our Street
+                nuxt-link(to='allcityriders')
+                  li(@click="openMenu()") All City Riders
+                nuxt-link(to='jump')
+                  li(@click="openMenu()") Jump
+                nuxt-link(to='mastaco')
+                  li(@click="openMenu()") Mas Taco
+                nuxt-link(to='bottomless')
+                  li(@click="openMenu()") Bottomless
+                nuxt-link(to='shangrila')
+                  li(@click="openMenu()") Shangri-La
+                nuxt-link(to='thecabin')
+                  li(@click="openMenu()") The Cabin
+                nuxt-link(to='artlifetour')
+                  li(@click="openMenu()") Art Life Tour
+                nuxt-link(to='bardismiry')
+                  li(@click="openMenu()") Bardis & Miry
+            .nav
+              nuxt-link(to='contact')
+                p(@click="openMenu()") CONTACT
             b-row(class="copyright")
                 b-col(xs=6 md=6 lg=4 class='ml-auto mr-auto')
                     img(src="../assets/copyright.png" width="50%")
@@ -75,12 +86,18 @@ export default {
 *
   margin: 0px
 
+a
+  text-decoration: none
+  color: black
+  margin 0 auto
+
 .menu-icon
     z-index : 1300
     position: fixed
     top: 0
     right: 0
     padding 2vw
+    cursor: url('../assets/hand.png'), auto
 
 .menu-icon img {
     @media(max-width: 767px) {
@@ -154,6 +171,9 @@ li
     cursor: url('../assets/hand.png'), auto
     color black
     transition .25s
+
+.nav img
+    cursor: url('../assets/hand.png'), auto
 
 li:hover
     color white

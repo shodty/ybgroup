@@ -61,6 +61,7 @@ export const state = () => ({
       color1: '#2a276c',
       color2: '#e5b4c8',
       image: 'os',
+      link: 'ourstreet',
       pattern: ['concept', 'vid', 'gather', 'print', 'id', 'photo', 'social', 'web', 'collab'],
       text: 'Our Street',
       show: true
@@ -70,6 +71,7 @@ export const state = () => ({
       color1: '#67a844',
       color2: '#006bb6',
       image: 'acr',
+      link: 'allcityriders',
       pattern: ['vid', 'gather', 'print', 'id', 'photo', 'social', 'web'],
       text: 'All City Riders',
       show: true
@@ -79,6 +81,7 @@ export const state = () => ({
       color1: '#e03b26',
       color2: '#ffffff',
       image: 'jump',
+      link: 'ourstreet',
       pattern: ['vid', 'gather', 'photo', 'social', 'collab'],
       text: 'Jump',
       show: true
@@ -88,6 +91,7 @@ export const state = () => ({
       color1: '#00adbb',
       color2: '#c6d655',
       image: 'mas',
+      link: 'mastaco',
       pattern: ['vid', 'gather', 'print', 'photo', 'social', 'web'],
       text: 'Mas Taco',
       show: true
@@ -97,6 +101,7 @@ export const state = () => ({
       color1: '#f2bcb9',
       color2: '#f26351',
       image: 'btm',
+      link: 'bottomless',
       pattern: ['concept', 'vid', 'gather', 'print', 'id', 'photo', 'social', 'collab'],
       text: 'Bottomless',
       show: true
@@ -106,6 +111,7 @@ export const state = () => ({
       color1: '#d6693f',
       color2: '#f4e6c1',
       image: 'shang',
+      link: 'shangrila',
       pattern: ['print', 'id', 'photo'],
       text: 'Shangri-La',
       show: true
@@ -115,6 +121,7 @@ export const state = () => ({
       color1: '#34442c',
       color2: '#fbcc53',
       image: 'cabin',
+      link: 'thecabin',
       pattern: ['print', 'id', 'photo', 'web'],
       text: 'The Cabin',
       show: true
@@ -124,6 +131,7 @@ export const state = () => ({
       color1: '#8667ad',
       color2: '#61cbea',
       image: 'alt',
+      link: 'artlifetour',
       pattern: ['vid', 'gather', 'print', 'id', 'photo', 'social', 'collab'],
       text: 'Art Life Tour',
       show: true
@@ -133,6 +141,7 @@ export const state = () => ({
       color1: '#85ba9b',
       color2: '#feede5',
       image: 'bm',
+      link: 'bardismiry',
       pattern: ['print', 'id', 'social', 'web'],
       text: 'Bardis Miry',
       show: true

@@ -14,7 +14,6 @@
 
 <script>
 
-import { EventBus } from '../event-bus.js'
 import NavBar from './NavBar.vue'
 import IconTwo from './IconTwo.vue'
 
@@ -27,16 +26,10 @@ export default {
   props: { displayNavBar: Boolean },
   data () {
     return {
-
       activeLink: 'navigation',
       count: 0,
-      window: {
-        width: 0,
-        height: 0
-      },
       headerColor: 'black',
       componentName: ['yellow-brick-group', 'ybg-solid', 'ybg-bricked', 'ybg-hollow']
-
     }
   },
   computed: {
@@ -45,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    EventBus.$on('moviechange', (movie, play) => {
+    this.$bus.$on('moviechange', (movie, play) => {
       if (play) {
         this.count = 3
         return this.count

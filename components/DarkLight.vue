@@ -14,13 +14,11 @@
 <script>
 
 import IconBase from './IconBase.vue'
-import SunMoon from './icons/SunMoon.vue'
 
 export default {
   name: 'DarkLight',
   components: {
-    IconBase,
-    SunMoon
+    IconBase
   },
   data () {
     return {
