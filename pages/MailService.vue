@@ -6,13 +6,13 @@
   DarkLight
   b-row(align-h="center")
     b-col(cols=5 md=5)
-      b-form(name='ybg-mail-service' method='POST' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
+      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
         input(type='hidden' name='form-name' value='ask-question')
         b-form-row( id="input-group-1"  label-for="input-1" )
             b-col(cols="3" class="blackborder" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input(id="input-1" name="firstname" type="text" required placeholder="Enter first name" :value="firstname" @input="ev => updateFirstName")
+                b-form-input(id="input-1" name="firstname" type="text" required placeholder="Enter first name" v-model="message")
         b-form-row( id="input-group-2"  label-for="input-2" )
             b-col(cols="3" class="blackborder")
                 p Last Name
