@@ -7,31 +7,31 @@
   b-row(align-h="center")
     b-col(cols=5 md=5)
       b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
-        input(type='hidden' name='form-name' value='ask-question')
+        input(type='hidden' name='form-name' value='ybg-mail-service')
         b-form-row( id="input-group-1"  label-for="input-1" )
             b-col(cols="3" class="blackborder" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input(id="input-1" name="firstname" type="text" required placeholder="Enter first name" v-model="message")
+                b-form-input(id="input-1" name="First Name" type="text" required placeholder="Enter first name" :value="firstname" key='1')
         b-form-row( id="input-group-2"  label-for="input-2" )
             b-col(cols="3" class="blackborder")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input(id="input-2" name="lastname" type="text" required placeholder="Enter last name" :value="lastname" @input="ev => updateLastName")
+                b-form-input(id="input-2" name="Last Name" type="text" required placeholder="Enter last name" :value="lastname" key='2')
         b-form-row( id="input-group-3"  label-for="input-3" )
             b-col(cols="3" class="blackborder")
                 p Email
             b-col(class="nopadding")
-                b-form-input(id="input-3" name="email" type="email" required placeholder="Enter email" :value="email" @input="ev => updateEmail")
+                b-form-input(id="input-3" name="Email" type="email" required placeholder="Enter email" :value="email" key='3')
         b-form-row( id="input-group-4"  label-for="input-4" )
             b-col(cols="3" class="blackborder")
                 p Mailing Address
             b-col(class="nopadding")
-                b-form-input(id="input-4" name="mailingaddress" type="text" required placeholder="Enter mailing address" :value="mailingaddress" @input="ev => updateMailingAddress")
+                b-form-input(id="input-4" name="Mailing Address" type="text" required placeholder="Enter mailing address" :value="mailingaddress" key='4')
         b-form-row
             b-col(cols="10")
             b-col(cols="2" class="nopadding")
-                b-button(type="submit" variant="primary" class="btn-block white tanbackground") Done?
+                b-button(type="submit" variant="primary" class="btn-block black tanbackground") Done?
 
 </template>
 
@@ -60,20 +60,6 @@ export default {
     light () {
       return this.$store.state.darklight.light
     }
-  },
-  methods: {
-    updateFirstName (ev) {
-      this.firstname = ev.target.value
-    },
-    updateLastName (ev) {
-      this.firstlastnamename = ev.target.value
-    },
-    updateEmail (ev) {
-      this.email = ev.target.value
-    },
-    updateMailingAddress (ev) {
-      this.mailingaddress = ev.target.value
-    }
   }
 }
 </script>
@@ -96,6 +82,7 @@ input, textarea
     font-family: 'goopersemibold_italic', italic
     letter-spacing: 1px
     font-size: 1em
+    padding-left: 10px
 
 .blackborder
     border: 2px solid black
@@ -112,14 +99,16 @@ input, textarea
 p
   text-transform uppercase
   font-family: 'cardinal_grotesque_wideSBd', sans-serif
-  letter-spacing: 1px
+
   font-size: 1em
+  padding-left: 5px
+  color: black
   vertical-align: middle
   @media(max-width: 767px){
     font-size: 1em
   }
 
-.white
+.black
     color: black
     font-family: 'cardinal_grotesque_wideSBd', sans-serif
     font-size: 1em
