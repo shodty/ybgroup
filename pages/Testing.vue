@@ -1,6 +1,6 @@
 <template lang="pug">
 #main
-    form(name='form-test3' method='POST' data-netlify='true' data-netlify-honeypot='bot-field' @submit.prevent="handleSubmit")
+    form(name='form-test3' method='POST' data-netlify='true' data-netlify-honeypot='bot-field')
       input(type='hidden' name='form-test3' value='form-test3')
       label First Name
         input(:value='firstname' type='text' required placeholder='Enter first name' name='firstname' key='1')
