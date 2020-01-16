@@ -12,22 +12,22 @@
             b-col(cols="3" class="blackborder" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input(id="input-1" name="firstname" type="text" required placeholder="Enter first name")
+                b-form-input(id="input-1" name="firstname" type="text" required placeholder="Enter first name" :value="firstname" @input="ev => updateFirstName")
         b-form-row( id="input-group-2"  label-for="input-2" )
             b-col(cols="3" class="blackborder")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input(id="input-2" name="lastname" type="text" required placeholder="Enter last name")
+                b-form-input(id="input-2" name="lastname" type="text" required placeholder="Enter last name" :value="lastname" @input="ev => updateLastName")
         b-form-row( id="input-group-3"  label-for="input-3" )
             b-col(cols="3" class="blackborder")
                 p Email
             b-col(class="nopadding")
-                b-form-input(id="input-3" name="email" type="email" required placeholder="Enter email")
+                b-form-input(id="input-3" name="email" type="email" required placeholder="Enter email" :value="email" @input="ev => updateEmail")
         b-form-row( id="input-group-4"  label-for="input-4" )
             b-col(cols="3" class="blackborder")
                 p Mailing Address
             b-col(class="nopadding")
-                b-form-input(id="input-4" name="mailingaddress" type="text" required placeholder="Enter mailing address")
+                b-form-input(id="input-4" name="mailingaddress" type="text" required placeholder="Enter mailing address" :value="mailingaddress" @input="ev => updateMailingAddress")
         b-form-row
             b-col(cols="10")
             b-col(cols="2" class="nopadding")
@@ -54,7 +54,9 @@ export default {
       count: 0,
       form: {
         email: '',
-        name: ''
+        firstname: '',
+        lastname: '',
+        mailingaddress: ''
       }
     }
   },
@@ -64,6 +66,18 @@ export default {
     }
   },
   methods: {
+    updateFirstName (ev) {
+      this.firstname = ev.target.value
+    },
+    updateLastName (ev) {
+      this.firstlastnamename = ev.target.value
+    },
+    updateEmail (ev) {
+      this.email = ev.target.value
+    },
+    updateMailingAddress (ev) {
+      this.mailingaddress = ev.target.value
+    }
   }
 }
 </script>
