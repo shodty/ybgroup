@@ -50,14 +50,10 @@ export default {
   },
   data () {
     return {
-      activeLink: 'navigation',
-      count: 0,
-      form: {
-        email: '',
-        firstname: '',
-        lastname: '',
-        mailingaddress: ''
-      }
+      email: '',
+      firstname: '',
+      lastname: '',
+      mailingaddress: ''
     }
   },
   computed: {
