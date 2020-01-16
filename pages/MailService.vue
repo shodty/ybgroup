@@ -6,7 +6,7 @@
   DarkLight
   b-row(align-h="center")
     b-col(cols=5 md=5)
-      b-form(name='mail-service' method='post' id="mailserviceform" @submit="onSubmit" data-netlify="true" data-netlify-honeypot="bot-field")
+      b-form(name='ybg-mail-service' method='post' id="mailserviceform" @submit="onSubmit" data-netlify="true" data-netlify-honeypot="bot-field")
         input(type='hidden' name='form-name' value='ask-question')
         b-form-row( id="input-group-1"  label-for="input-1" )
             b-col(cols="3" class="blackborder" )
@@ -54,11 +54,8 @@ export default {
       count: 0,
       form: {
         email: '',
-        name: '',
-        food: null,
-        checked: []
-      },
-      foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn']
+        name: ''
+      }
     }
   },
   computed: {
