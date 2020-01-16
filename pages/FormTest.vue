@@ -6,15 +6,21 @@
     data-netlify-honeypot="bot-field"
   >
     <input type="hidden" name="form-name" value="ask-question">
-    <label v-for="(panelist, index) in panelists" :key="index">
+    <label>
       <input
-        :value="panelist"
-        @input="ev => updatePanelist"
-        :checked="panelist === currentPanelist"
+        value="panelist"
         type="radio"
         name="panelist"
       >
-      <span>{{ panelist }}</span>
+      <span> Man </span>
+    </label>
+    <label>
+      <input
+        value="panelist"
+        type="radio"
+        name="panelist"
+      >
+      <span> WoMan </span>
     </label>
     ...
     <button>Submit</button>
@@ -25,14 +31,9 @@ export default {
   name: 'QAForm',
   data () {
     return {
-      panelists: ['Evan You', 'Chris Fritz'],
-      currentPanelist: 'Evan You'
     }
   },
   methods: {
-    updatePanelist (ev) {
-      this.currentPanelist = ev.target.value
-    }
   }
 }
 </script>
