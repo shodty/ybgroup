@@ -1,7 +1,7 @@
 <template lang="pug">
 #envelope-container
     .mail-icon(v-if="!show")
-        img(src='../assets/mail_icon.png' @click='showEnvelope')
+        img(:src=' light? getImgUrl("mail_globe", ".png") : getImgUrl("mail_globe_white", ".png")' @click='showEnvelope')
     .envelope(v-if="show" @mouseenter="bgcChange(true, '#81cff3')"  @mouseleave="bgcChange(false, '#ffffff')")
         .inner(class="shaking")
             img(src="../assets/letter.png" class="letter-image")
@@ -24,7 +24,11 @@ export default {
       show: true
     }
   },
-
+  computed: {
+    light () {
+      return this.$store.state.darklight.light
+    }
+  },
   methods: {
     showEnvelope () {
       this.show = !this.show
@@ -34,6 +38,9 @@ export default {
       const white = 'white'
       this.$store.dispatch('backgroundchange/backgroundChange', color)
       this.$store.dispatch('facechange/faceColor', { entered, white })
+    },
+    getImgUrl (pic, ext) {
+      return require('../assets/' + pic + ext)
     }
   }
 }
@@ -46,6 +53,10 @@ export default {
     right: 0
     padding-right: 18vw
     z-index: 1000
+    @media(max-width: 767px) {
+        margin-top: 44vw
+        padding-right: 22vw
+    }
 
 .mail-icon
     z-index : 1300
@@ -57,12 +68,12 @@ export default {
 .mail-icon img {
     cursor: url('../assets/hand.png'), auto
     @media(max-width: 767px) {
-        width 8vw
-        margin-right: 2vw
+        width 13vw
+        margin-right: 1.5vw
         margin-top: 2vw
     }
     @media(min-width: 768px) {
-        width 2.6vw
+        width 4vw
     }
 }
 
@@ -71,15 +82,29 @@ export default {
 
 .envelope-image
     width: 8vw
+    @media(max-width: 767px) {
+        width 14vw
+        margin-right: 2vw
+        margin-top: 2vw
+    }
 
 .letter-image
     width: 6vw
+    @media(max-width: 767px) {
+        width 12vw
+        margin-right: 2vw
+        margin-top: 2vw
+    }
 
 .closer
     position absolute
     top 15%
     right 20%
     z-index: 2000
+    @media(max-width: 767px) {
+        top 15%
+        right 32%
+    }
 
 .closer img
     width 1vw
@@ -113,4 +138,5 @@ export default {
     -o-animation: shaking 5s ease infinite alternate;
     animation: shaking 5s ease infinite alternate;
 }
+
 </style>

@@ -146,7 +146,7 @@ p:hover
     font-weight: 1000
     font-size: 54px
     text-align: center
-    background: #83cef2
+    background: #f3b120
     transition: .1s
 
 .yellowmenu

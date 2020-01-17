@@ -1,7 +1,6 @@
 <template lang="pug">
 #main
   Header(displayNavBar = false)
-
   MobileMenu
   DarkLight
   MailLogo
@@ -10,47 +9,47 @@
       b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
         input(type='hidden' name='form-name' value='ybg-mail-service')
         b-row
-            b-col(cols="3" class="blackborder darkblue" )
+            b-col(cols="4" sm="3" class="blackborder darkblue" )
                 p First Name
             b-col(class="nopadding")
                 b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="firstname" key='1')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Last Name
             b-col(class="nopadding")
                 b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="lastname" key='2')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
                 b-form-input( name="Email" type="email" required placeholder="Enter email" :value="email" key='3')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 1
             b-col(class="nopadding")
                 b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="address1" key='4')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 2
             b-col(class="nopadding")
                 b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="address2" key='5')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p City
             b-col(class="nopadding")
                 b-form-input( name="City" type="text" placeholder="City" :value="city" key='6')
         b-row
-            b-col(cols="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue")
                 p State
-            b-col(cols="2" class="nopadding")
-                b-form-input( name="State" type="text" required placeholder="State (CA)" :value="state" key='7')
-            b-col(cols="1" class="blackborder darkblue")
+            b-col(cols="3" sm="2" class="nopadding")
+                b-form-input( name="State" type="text" required placeholder="State" :value="state" key='7')
+            b-col(cols="2" sm="1" class="blackborder darkblue")
                 p Zip
-            b-col(cols="2" class="nopadding")
+            b-col(cols="3" sm="2" class="nopadding")
                 b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="zip" key='8')
-            b-col(cols="1" class="nopadding")
+            b-col(cols="4" sm="1" class="nopadding")
                 b-button(type="reset" variant="primary" class="btn-block black redbackground") Reset
-            b-col(cols="3" class="nopadding")
+            b-col(cols="8" sm="3" class="nopadding")
                 b-button(type="submit" variant="primary" class="btn-block black tanbackground") Done?
   b-modal(ref='my-modal' hide-footer title='YBG MAIL SERVICE')
     .d-block.text-center
@@ -58,6 +57,8 @@
     b-button.mt-3(variant='outline-danger' block @click='hideModal') Close
     b-button.mt-2(variant='outline-warning' block)
       nuxt-link(to="/") YBG Home
+  b-row(align-h="center")
+    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')")
 </template>
 
 <script>
@@ -98,6 +99,9 @@ export default {
     },
     hideModal () {
       this.$refs['my-modal'].hide()
+    },
+    getImgUrl (pic, ext) {
+      return require('../assets/' + pic + ext)
     }
   }
 }
@@ -180,5 +184,14 @@ p
 }
 
 .form-control::-webkit-input-placeholder { color: black; }
+
+.bxb
+  padding 9vw 0
+  margin 0 auto
+  position relative
+  width 6%
+  @media(max-width: 767px){
+    width 12%
+  }
 
 </style>

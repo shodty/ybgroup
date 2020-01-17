@@ -24,7 +24,7 @@
                     img(v-else-if="play" alt='welcome' src='../assets/img/icons/pause.png'  @click='pause')
                     img(alt='welcome' src='../assets/img/icons/forward.png'  @click='next')
                     br
-                    vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'black', borderColor: 'black' }")
+                    vue-slider(v-model="value" @change="changeVolume" :process-style="{ backgroundColor: 'black' }" :tooltip-style="{ backgroundColor: 'white', borderColor: 'black', color: 'black' }")
                       template( v-slot:dot="{ value }")
                          img(v-if="value <= 5" id='volume-slider' src='../assets/img/icons/vol0.png' )
                          img(v-else-if="33 >= value && value > 5" id='volume-slider' src='../assets/img/icons/vol1.png' )
