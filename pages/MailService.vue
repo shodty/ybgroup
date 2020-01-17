@@ -63,8 +63,7 @@
     b-button.mt-3(variant='outline-danger' block @click='hideModal') Close
     b-button.mt-2(variant='outline-warning' block)
       nuxt-link(to="/") YBG Home
-  b-row
-    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
+  img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
 </template>
 
 <script>
@@ -247,7 +246,7 @@ p
   padding 6vw 0
   margin 0 auto
   position relative
-  align-items: flex-start
+  display block
   z-index: 2000
   width 100px
   @media(max-width: 767px){
