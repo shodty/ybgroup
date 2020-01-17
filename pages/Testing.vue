@@ -1,38 +1,62 @@
 <template lang="pug">
-#main
-    form(name='form-test3' method='POST' data-netlify='true' data-netlify-honeypot='bot-field')
-      input(type='hidden' name='form-name' value='form-test3')
-      label First Name
-        input(:value='firstname' type='text' required placeholder='Enter first name' name='firstname' key='1')
-      button Submit
+#canvas-main
+  #main
+    canvas(id="c" @click="main" :height='canvasHeight' :width='canvasWidth')
+  .testdiv
+    p love
+    p lorem loremloremloremloremloremloremloremloremloremlorem
+    button(@click='clear') clear
+    img(v-show="false" src="../assets/copyright.png" id='scream' width='50px')
 </template>
 <script>
 export default {
-  name: 'FormTest3',
+  name: 'Canvas',
   data () {
     return {
-      firstname: ''
+      vueCanvas: null,
+      rectWidth: 200,
+      canvasHeight: 0,
+      canvasWidth: 0
+    }
+  },
+  mounted () {
+    const c = document.getElementById('c')
+    const ctx = c.getContext('2d')
+    this.vueCanvas = ctx
+    this.canvasHeight = screen.height
+    this.canvasWidth = screen.width
+  },
+  methods: {
+    main () {
+      const img = document.getElementById('scream')
+      // this.vueCanvas.fillStyle = 'red'
+      // this.vueCanvas.fillRect(event.clientX - 25, event.clientY - 25, 50, 50)
+      this.vueCanvas.drawImage(img, event.clientX - 50, event.clientY - 50, 100, 100)
+    },
+    clear () {
+      const c = document.getElementById('c')
+      this.vueCanvas.clearRect(0, 0, c.width, c.height)
     }
   }
-/*   methods: {
-    encode (data) {
-        data.map(
-            return Object.keys(data)
-            .map(key => '${encodeURIComponent(key)}')
-        )
-    },
-    handleSubmit () {
-      fetch('/', {
-        method: 'post',
-        header: {
-          'Content-Type': 'application/x-www-urlencoded'
-        },
-        body: this.encode({
-          'form-name': 'form-test3',
-          ...this.form
-        })
-      })
-    }
-  } */
 }
 </script>
+
+<style lang="stylus">
+#main
+  position: absolute
+  z-index: 0
+  top 0
+  left 0
+  height: 100%
+  width: 100%
+
+#c
+  position: fixed;
+  border: 1px solid black;
+
+.testdiv
+  position: relative
+  z-index: 100
+  font-size: 54px
+
+</style>

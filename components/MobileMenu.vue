@@ -100,7 +100,7 @@ a
   margin 0 auto
 
 .menu-icon
-    z-index : 1300
+    z-index : 2700
     position: fixed
     top: 0
     right: 0
@@ -128,7 +128,7 @@ p:hover
 .menu-container
     top: 0
     position: fixed
-    z-index: 1200
+    z-index: 2500
     margin 0
     padding 0
     left: 100%;

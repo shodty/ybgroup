@@ -1,6 +1,12 @@
 <template lang="pug">
 #main
-  Header(displayNavBar = false)
+  #main-canvas
+    canvas(id="c" @click="stamp" :height='canvasHeight' :width='canvasWidth')
+    img(v-show="false" src='../assets/mail_globe_og.png' id='0' width='50px')
+    img(v-show="false" src='../assets/copyright.png' id='1' width='50px')
+    img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
+    img(v-show="false" src='../assets/air_mail_white.png' id='3' width='50px')
+  img(src="../assets/air_mail_black.png" class='headerimage')
   MobileMenu
   DarkLight
   MailLogo
@@ -48,7 +54,7 @@
             b-col(cols="3" sm="2" class="nopadding")
                 b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="zip" key='8')
             b-col(cols="4" sm="1" class="nopadding")
-                b-button(type="reset" variant="primary" class="btn-block black redbackground") Reset
+                b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
                 b-button(type="submit" variant="primary" class="btn-block black tanbackground") Done?
   b-modal(ref='my-modal' hide-footer title='YBG MAIL SERVICE')
@@ -58,7 +64,7 @@
     b-button.mt-2(variant='outline-warning' block)
       nuxt-link(to="/") YBG Home
   b-row(align-h="center")
-    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')")
+    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
 </template>
 
 <script>
@@ -78,6 +84,9 @@ export default {
   },
   data () {
     return {
+      vueCanvas: null,
+      canvasHeight: 0,
+      canvasWidth: 0,
       email: '',
       firstname: '',
       lastname: '',
@@ -85,13 +94,21 @@ export default {
       address2: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      index: 0
     }
   },
   computed: {
     light () {
       return this.$store.state.darklight.light
     }
+  },
+  mounted () {
+    const c = document.getElementById('c')
+    const ctx = c.getContext('2d')
+    this.vueCanvas = ctx
+    this.canvasHeight = screen.height
+    this.canvasWidth = screen.width
   },
   methods: {
     onSubmit () {
@@ -102,6 +119,23 @@ export default {
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)
+    },
+    stamp () {
+      this.vueCanvas.save()
+      this.index = Math.floor(Math.random() * 4)
+      const img = document.getElementById(this.index.toString())
+      this.vueCanvas.translate(event.clientX, event.clientY)
+      this.vueCanvas.rotate(Math.floor(Math.random() * Math.floor(360)) * Math.PI / 180)
+      if (this.index === 3) {
+        this.vueCanvas.drawImage(img, -100, -46, 200, 92)
+      } else {
+        this.vueCanvas.drawImage(img, -50, -50, 100, 100)
+      }
+      this.vueCanvas.restore()
+    },
+    clear () {
+      const c = document.getElementById('c')
+      this.vueCanvas.clearRect(0, 0, c.width, c.height)
     }
   }
 }
@@ -112,10 +146,35 @@ export default {
 #mailserviceform
     padding-top: 3vh
     margin: 0 auto
+    z-index: 2000
+    position: relative
+#c
+  position: fixed;
+  border: 1px solid black;
 
 *
   margin: 0px
   padding: 0px
+
+#main-canvas
+  position: absolute
+  z-index: 100
+  top 0
+  left 0
+  height: 100%
+  width: 100%
+
+.headerimage
+  position: relative
+  z-index : 0
+  margin: 0 auto
+  text-align: center
+  width: 30%
+  display: block
+  padding-bottom 4vh
+  @media(max-width: 767px){
+    width: 50%
+  }
 
 input, textarea
     background-color:#81cff3
@@ -143,8 +202,7 @@ input, textarea
     width: 100%
     top 0
     left 0
-    position fixed
-
+    position absolute
 p
   text-transform uppercase
   font-family: 'cardinal_grotesque_wideSBd', sans-serif
@@ -186,9 +244,10 @@ p
 .form-control::-webkit-input-placeholder { color: black; }
 
 .bxb
-  padding 9vw 0
+  padding 6vw 0
   margin 0 auto
   position relative
+  z-index: 2000
   width 6%
   @media(max-width: 767px){
     width 12%

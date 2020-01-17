@@ -2,9 +2,8 @@
 #header-div
     .headerimages
         .icon-container( @click='onClick')
-            .rotating
-                IconBase(icon-name="yellow brick group" width="15vh" height="15vh" :icon-color=' light? "black" : "white" ' rotate=true)
-                    component(:is="componentName[this.count]" )
+            IconBase(icon-name="yellow brick group" width="15vh" height="15vh" :icon-color=' light? "black" : "white" ' rotate=true)
+              component(:is="componentName[this.count]" )
 </template>
 
 <script>
