@@ -7,7 +7,7 @@
   MailLogo
   b-row(align-h="center")
     b-col(cols=10 md=8 lg=6)
-      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="onSubmit")
+      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
         input(type='hidden' name='form-name' value='ybg-mail-service')
         b-row
             b-col(cols="3" class="blackborder darkblue" )
