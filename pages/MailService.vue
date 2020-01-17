@@ -248,9 +248,9 @@ p
   margin 0 auto
   position relative
   z-index: 2000
-  width 6%
+  width 100px
   @media(max-width: 767px){
-    width 12%
+    width 50px
   }
 
 </style>
