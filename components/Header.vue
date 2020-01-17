@@ -8,7 +8,7 @@
         .mobile-container(class='hide-on-desktop')
           img(:src=' light? getImgUrl("ybg_bubbly", ".png") : getImgUrl("ybg_bubbly_white", ".png")'  width="80%")
         .mobile-instructions(class='hide-on-desktop')
-          img(:src=' light? getImgUrl("welcome_mobile", ".png") : getImgUrl("welcome_mobile_white", ".png")' width="60%")
+          img(:src=' light? getImgUrl("welcome_mobile", ".png") : getImgUrl("welcome_mobile_white", ".png")' width="60%" v-if='displayNavBar')
     NavBar(class='hide-on-mobile' v-if='displayNavBar')
 </template>
 

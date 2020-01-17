@@ -3,6 +3,7 @@
   .background-div(:style='[ light? {"background" : bgc } : {"background" : "black"} ]')
   video(v-if="videoplay" poster="../assets/img/videobg.png" class="video-bottom" :src="getImgUrl(videosource, '.mp4')" autoplay muted loop @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused")
   DarkLight(class="darklightclass")
+  Envelope
   MobileMenu
   Header(displayNavBar = true)
   .container-fluid
@@ -21,6 +22,7 @@ import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import DarkLight from '~/components/DarkLight.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
+import Envelope from '~/components/Envelope.vue'
 
 export default {
   components: {
@@ -28,6 +30,7 @@ export default {
     MobileMenu,
     Header,
     Cube,
+    Envelope,
     Footer
   },
   data () {

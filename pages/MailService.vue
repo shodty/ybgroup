@@ -4,40 +4,66 @@
 
   MobileMenu
   DarkLight
+  MailLogo
   b-row(align-h="center")
-    b-col(cols=5 md=5)
-      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
+    b-col(cols=10 md=8 lg=6)
+      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="onSubmit")
         input(type='hidden' name='form-name' value='ybg-mail-service')
-        b-form-row( id="input-group-1"  label-for="input-1" )
-            b-col(cols="3" class="blackborder" )
+        b-row
+            b-col(cols="3" class="blackborder darkblue" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input(id="input-1" name="First Name" type="text" required placeholder="Enter first name" :value="firstname" key='1')
-        b-form-row( id="input-group-2"  label-for="input-2" )
-            b-col(cols="3" class="blackborder")
+                b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="firstname" key='1')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input(id="input-2" name="Last Name" type="text" required placeholder="Enter last name" :value="lastname" key='2')
-        b-form-row( id="input-group-3"  label-for="input-3" )
-            b-col(cols="3" class="blackborder")
+                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="lastname" key='2')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
-                b-form-input(id="input-3" name="Email" type="email" required placeholder="Enter email" :value="email" key='3')
-        b-form-row( id="input-group-4"  label-for="input-4" )
-            b-col(cols="3" class="blackborder")
-                p Mailing Address
+                b-form-input( name="Email" type="email" required placeholder="Enter email" :value="email" key='3')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
+                p Address 1
             b-col(class="nopadding")
-                b-form-input(id="input-4" name="Mailing Address" type="text" required placeholder="Enter mailing address" :value="mailingaddress" key='4')
-        b-form-row
-            b-col(cols="10")
+                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="address1" key='4')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
+                p Address 2
+            b-col(class="nopadding")
+                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="address2" key='5')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
+                p City
+            b-col(class="nopadding")
+                b-form-input( name="City" type="text" placeholder="City" :value="city" key='6')
+        b-row
+            b-col(cols="3" class="blackborder darkblue")
+                p State
             b-col(cols="2" class="nopadding")
+                b-form-input( name="State" type="text" required placeholder="State (CA)" :value="state" key='7')
+            b-col(cols="1" class="blackborder darkblue")
+                p Zip
+            b-col(cols="2" class="nopadding")
+                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="zip" key='8')
+            b-col(cols="1" class="nopadding")
+                b-button(type="reset" variant="primary" class="btn-block black redbackground") Reset
+            b-col(cols="3" class="nopadding")
                 b-button(type="submit" variant="primary" class="btn-block black tanbackground") Done?
-
+  b-modal(ref='my-modal' hide-footer title='YBG MAIL SERVICE')
+    .d-block.text-center
+      h3 Thank you for your submission!
+    b-button.mt-3(variant='outline-danger' block @click='hideModal') Close
+    b-button.mt-2(variant='outline-warning' block)
+      nuxt-link(to="/") YBG Home
 </template>
 
 <script>
 
 import MobileMenu from '../components/MobileMenu.vue'
+import MailLogo from '../components/MailLogo.vue'
 import DarkLight from '../components/DarkLight.vue'
 import Header from '../components/Header.vue'
 
@@ -45,6 +71,7 @@ export default {
   name: 'Mailservice',
   components: {
     MobileMenu,
+    MailLogo,
     DarkLight,
     Header
   },
@@ -53,12 +80,24 @@ export default {
       email: '',
       firstname: '',
       lastname: '',
-      mailingaddress: ''
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zip: ''
     }
   },
   computed: {
     light () {
       return this.$store.state.darklight.light
+    }
+  },
+  methods: {
+    onSubmit () {
+      this.$refs['my-modal'].toggle('#toggle-btn')
+    },
+    hideModal () {
+      this.$refs['my-modal'].hide()
     }
   }
 }
@@ -67,7 +106,7 @@ export default {
 <style scoped lang="stylus">
 
 #mailserviceform
-    padding-top: 60px
+    padding-top: 3vh
     margin: 0 auto
 
 *
@@ -83,6 +122,12 @@ input, textarea
     letter-spacing: 1px
     font-size: 1em
     padding-left: 10px
+    @media(max-width: 767px){
+      padding-left: 4px
+    }
+
+.darkblue
+    background-color:#47abc6
 
 .blackborder
     border: 2px solid black
@@ -99,7 +144,6 @@ input, textarea
 p
   text-transform uppercase
   font-family: 'cardinal_grotesque_wideSBd', sans-serif
-
   font-size: 1em
   padding-left: 5px
   color: black
@@ -107,6 +151,9 @@ p
   @media(max-width: 767px){
     font-size: 1em
   }
+
+.btn-block
+  height: 100%
 
 .black
     color: black
@@ -116,6 +163,11 @@ p
 
 .tanbackground
     background-color: #f1d591
+    border: 2px solid black
+    border-radius 0px
+
+.redbackground
+    background-color: #f25555
     border: 2px solid black
     border-radius 0px
 

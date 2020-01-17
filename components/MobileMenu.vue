@@ -3,7 +3,7 @@
     .menu-icon(@click="openMenu")
         img(:src=' light? getImgUrl("menu", ".png") : getImgUrl("menu_white", ".png")')
     .menu-container(:class="opened? 'open' : 'closed'")
-        .menu
+        .menu( :class='mailed? "mailservice" : null')
             .nav(@click="openMenu")
                 img(src="../assets/close2.png" width="32px" height="32px")
             .nav
@@ -31,6 +31,10 @@
                 nuxt-link(to='bardismiry')
                   li(@click="openMenu()") Bardis & Miry
             .nav
+              nuxt-link(to='mailservice')
+                .mailnav
+                  p(@click="openMenu()" @mouseenter="mail()" @mouseleave="mail()") MAIL SERVICE
+            .nav
               nuxt-link(to='contact')
                 p(@click="openMenu()") CONTACT
             b-row(class="copyright")
@@ -49,7 +53,8 @@ export default {
     return {
       opened: false,
       faceColor: 'black',
-      show: false
+      show: false,
+      mailed: false
     }
   },
   computed: {
@@ -75,6 +80,9 @@ export default {
     },
     onClick () {
       EventBus.$emit('menuChange', 'start')
+    },
+    mail () {
+      this.mailed = !this.mailed
     }
   }
 }
@@ -110,6 +118,13 @@ a
     }
 }
 
+p
+  color: black
+  transition: .2s
+
+p:hover
+  color: white
+
 .menu-container
     top: 0
     position: fixed
@@ -131,7 +146,16 @@ a
     font-weight: 1000
     font-size: 54px
     text-align: center
+    background: #83cef2
+    transition: .1s
+
+.yellowmenu
     background: #f3b120
+
+.bluemenu
+    background: #83cef2
+
+.menu.mailservice
 
 .menu-container.closed {
     transition: left 1s
