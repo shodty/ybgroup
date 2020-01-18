@@ -6,7 +6,7 @@
     img(v-show="false" src='../assets/copyright.png' id='1' width='50px')
     img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
     img(v-show="false" src='../assets/air_mail_white.png' id='3' width='50px')
-  img(src="../assets/air_mail_black.png" class='headerimage')
+  img(:src=' light? getImgUrl("air_mail_black", ".png") : getImgUrl("air_mail_white", ".png")' class='headerimage')
   MobileMenu
   DarkLight
   MailLogo
@@ -63,8 +63,7 @@
     b-button.mt-3(variant='outline-danger' block @click='hideModal') Close
     b-button.mt-2(variant='outline-warning' block)
       nuxt-link(to="/") YBG Home
-  b-row
-    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
+  img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
 </template>
 
 <script>
@@ -276,6 +275,7 @@ p
   padding 6vw 0
   margin 0 auto
   position relative
+  display block
   z-index: 2000
   width 100px
   @media(max-width: 767px){
