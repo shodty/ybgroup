@@ -2,6 +2,7 @@
 #main
   #main-canvas
     canvas(id="c" @click="stamp" :height='canvasHeight' :width='canvasWidth')
+    canvas(id="r" @click="stamp" :height='canvasHeight' :width='canvasWidth')
     img(v-show="false" src='../assets/mail_globe_og.png' id='0' width='50px')
     img(v-show="false" src='../assets/copyright.png' id='1' width='50px')
     img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
@@ -12,51 +13,51 @@
   MailLogo
   b-row(align-h="center")
     b-col(cols=10 md=8 lg=6)
-      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field")
+      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
         input(type='hidden' name='form-name' value='ybg-mail-service')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="firstname" key='1')
+                b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="form.firstname" key='1')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="lastname" key='2')
+                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="form.lastname" key='2')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
-                b-form-input( name="Email" type="email" required placeholder="Enter email" :value="email" key='3')
+                b-form-input( name="Email" type="email" required placeholder="Enter email" :value="form.email" key='3')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 1
             b-col(class="nopadding")
-                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="address1" key='4')
+                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="form.address1" key='4')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 2
             b-col(class="nopadding")
-                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="address2" key='5')
+                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="form.address2" key='5')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p City
             b-col(class="nopadding")
-                b-form-input( name="City" type="text" placeholder="City" :value="city" key='6')
+                b-form-input( name="City" type="text" placeholder="City" :value="form.city" key='6')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p State
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="State" type="text" required placeholder="State" :value="state" key='7')
+                b-form-input( name="State" type="text" required placeholder="State" :value="form.state" key='7')
             b-col(cols="2" sm="1" class="blackborder darkblue")
                 p Zip
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="zip" key='8')
+                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="form.zip" key='8')
             b-col(cols="4" sm="1" class="nopadding")
                 b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
-                b-button(type="submit" variant="primary" class="btn-block black tanbackground" @click='firstRain') Done?
+                b-button(type="submit" variant="primary" class="btn-block black tanbackground" @onSubmit='firstRain') Done?
   b-modal(ref='my-modal' hide-footer title='YBG MAIL SERVICE')
     .d-block.text-center
       h3 Thank you for your submission!
@@ -68,6 +69,7 @@
 
 <script>
 
+import axios from 'axios'
 import MobileMenu from '../components/MobileMenu.vue'
 import MailLogo from '../components/MailLogo.vue'
 import DarkLight from '../components/DarkLight.vue'
@@ -86,14 +88,16 @@ export default {
       vueCanvas: null,
       canvasHeight: 0,
       canvasWidth: 0,
-      email: '',
-      firstname: '',
-      lastname: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      zip: '',
+      form: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      },
       index: 0
     }
   },
@@ -106,12 +110,34 @@ export default {
     const c = document.getElementById('c')
     const ctx = c.getContext('2d')
     this.vueCanvas = ctx
+    const r = document.getElementById('r')
+    const rctx = r.getContext('2d')
+    this.vueCanvasRain = rctx
     this.canvasHeight = screen.height
     this.canvasWidth = screen.width
   },
   methods: {
-    onSubmit () {
-      this.$refs['my-modal'].toggle('#toggle-btn')
+    encode (data) {
+      return Object.keys(data)
+        .map(
+          key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+        )
+        .join('&')
+    },
+    handleSubmit () { // refer to netlify vue form handling docs for explanation
+      const axiosConfig = {
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+      axios.post(
+        '/',
+        this.encode({
+          'form-name': 'ybg-mail-service',
+          ...this.form
+        }),
+        axiosConfig
+      )
+      // this.$refs['my-modal'].toggle('#toggle-btn')
+      this.firstRain()
     },
     hideModal () {
       this.$refs['my-modal'].hide()
@@ -135,7 +161,7 @@ export default {
     firstRain () {
       const noOfDrops = 25
       const fallingDrops = []
-      if (this.vueCanvas) {
+      if (this.vueCanvasRain) {
         setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
         for (let i = 0; i < noOfDrops; i++) {
           const fallingDr = {}
@@ -150,9 +176,9 @@ export default {
       }
     },
     raining (fallingDrops, noOfDrops) {
-      this.clear()
+      this.clearRain()
       for (let i = 0; i < noOfDrops; i++) {
-        this.vueCanvas.drawImage(fallingDrops[i].image, fallingDrops[i].x, fallingDrops[i].y) // The rain drop
+        this.vueCanvasRain.drawImage(fallingDrops[i].image, fallingDrops[i].x, fallingDrops[i].y) // The rain drop
 
         fallingDrops[i].y += fallingDrops[i].speed // Set the falling speed
         if (fallingDrops[i].y > this.canvasHeight) { // Repeat the raindrop when it falls out of view
@@ -164,6 +190,10 @@ export default {
     clear () {
       const c = document.getElementById('c')
       this.vueCanvas.clearRect(0, 0, c.width, c.height)
+    },
+    clearRain () {
+      const c = document.getElementById('r')
+      this.vueCanvasRain.clearRect(0, 0, c.width, c.height)
     }
   }
 }
@@ -178,7 +208,10 @@ export default {
     position: relative
 #c
   position: fixed;
-  border: 1px solid black;
+
+#r
+  position: fixed;
+  z-index: 5
 
 *
   margin: 0px
@@ -278,6 +311,7 @@ p
   display block
   z-index: 2000
   width 100px
+  cursor: url("../assets/close3.png"), auto
   @media(max-width: 767px){
     width 50px
   }

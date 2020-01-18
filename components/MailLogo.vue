@@ -69,10 +69,10 @@ export default {
   position: absolute
   display: block
   height: 100%
-  width: 10%
+  width: 100%
   margin: 0 auto
+  z-index : 1000
   top: 0
-  left: 45%
   cursor: url("../assets/eye.png"), auto
 
 </style>
