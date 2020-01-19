@@ -124,7 +124,7 @@ export default {
         .join('&')
     },
     handleSubmit () { // refer to netlify vue form handling docs for explanation
-      fetch('/', {
+      fetch('/mailservice', {
         method: 'post',
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: this.encode({
