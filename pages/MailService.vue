@@ -69,6 +69,7 @@
 
 <script>
 
+import axios from 'axios'
 import MobileMenu from '../components/MobileMenu.vue'
 import MailLogo from '../components/MailLogo.vue'
 import DarkLight from '../components/DarkLight.vue'
@@ -124,16 +125,17 @@ export default {
         .join('&')
     },
     handleSubmit () { // refer to netlify vue form handling docs for explanation
-      fetch('/mailservice', {
-        method: 'post',
-        header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: this.encode({
+      const axiosConfig = {
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+      axios.post(
+        '/mailservice',
+        this.encode({
           'form-name': 'ybg-mail-service',
           ...this.form
-        })
-      })
-        .then(() => console.log('succesfully sent'))
-        .catch(e => console.log(e))
+        }),
+        axiosConfig
+      )
       // this.$refs['my-modal'].toggle('#toggle-btn')
       this.firstRain()
     },
