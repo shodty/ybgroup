@@ -19,41 +19,41 @@
             b-col(cols="4" sm="3" class="blackborder darkblue" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="form.firstname" @input="ev => form.firstname = ev.target.value" key='1')
+                b-form-input( name="First Name" type="text" required placeholder="Enter first name" :value="form.firstname" v-model="form.firstname" key='1')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="form.lastname" @input="ev => form.lastname = ev.target.value" key='2')
+                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" :value="form.lastname" v-model="form.lastname" key='2')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
-                b-form-input( name="Email" type="email" required placeholder="Enter email" :value="form.email" @input="ev => form.email = ev.target.value" key='3')
+                b-form-input( name="Email" type="email" required placeholder="Enter email" :value="form.email" v-model="form.email" key='3')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 1
             b-col(class="nopadding")
-                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="form.address1" @input="ev => form.address1 = ev.target.value" key='4')
+                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" :value="form.address1" v-model="form.address1" key='4')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 2
             b-col(class="nopadding")
-                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="form.address2" @input="ev => form.address2 = ev.target.value" key='5')
+                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" :value="form.address2" v-model="form.address2" key='5')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p City
             b-col(class="nopadding")
-                b-form-input( name="City" type="text" placeholder="City" :value="form.city" @input="ev => form.city = ev.target.value" key='6')
+                b-form-input( name="City" type="text" placeholder="City" :value="form.city" v-model="form.city" key='6')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p State
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="State" type="text" required placeholder="State" :value="form.state" @input="ev => form.state = ev.target.value" key='7')
+                b-form-input( name="State" type="text" required placeholder="State" :value="form.state" v-model="form.state" key='7')
             b-col(cols="2" sm="1" class="blackborder darkblue")
                 p Zip
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="form.zip" @input="ev => form.zip = ev.target.value" key='8')
+                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" :value="form.zip" v-model="form.zip" key='8')
             b-col(cols="4" sm="1" class="nopadding")
                 b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
