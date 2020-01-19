@@ -19,41 +19,41 @@
             b-col(cols="4" sm="3" class="blackborder darkblue" )
                 p First Name
             b-col(class="nopadding")
-                b-form-input( name="First Name" type="text" required placeholder="Enter first name" v-model="form.firstname" key='1')
+                b-form-input( name="firstname" type="text" required placeholder="Enter first name" v-model="form.firstname" key='1')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input( name="Last Name" type="text" required placeholder="Enter last name" v-model="form.lastname" key='2')
+                b-form-input( name="lastname" type="text" required placeholder="Enter last name" v-model="form.lastname" key='2')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
-                b-form-input( name="Email" type="email" required placeholder="Enter email" v-model="form.email" key='3')
+                b-form-input( name="email" type="email" required placeholder="Enter email" v-model="form.email" key='3')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 1
             b-col(class="nopadding")
-                b-form-input( name="Address 1" type="text" required placeholder="Enter mailing address" v-model="form.address1" key='4')
+                b-form-input( name="address1" type="text" required placeholder="Enter mailing address" v-model="form.address1" key='4')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Address 2
             b-col(class="nopadding")
-                b-form-input( name="Address 2" type="text" placeholder="Apartment/Unit/P.O. Box" v-model="form.address2" key='5')
+                b-form-input( name="address2" type="text" placeholder="Apartment/Unit/P.O. Box" v-model="form.address2" key='5')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p City
             b-col(class="nopadding")
-                b-form-input( name="City" type="text" placeholder="City" v-model="form.city" key='6')
+                b-form-input( name="city" type="text" placeholder="City" v-model="form.city" key='6')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p State
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="State" type="text" required placeholder="State" v-model="form.state" key='7')
+                b-form-input( name="state" type="text" required placeholder="State" v-model="form.state" key='7')
             b-col(cols="2" sm="1" class="blackborder darkblue")
                 p Zip
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="Zip" type="text" required placeholder="5 digit zip" v-model="form.zip" key='8')
+                b-form-input( name="zip" type="text" required placeholder="5 digit zip" v-model="form.zip" key='8')
             b-col(cols="4" sm="1" class="nopadding")
                 b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
