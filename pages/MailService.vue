@@ -129,7 +129,7 @@ export default {
         header: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }
       axios.post(
-        '/',
+        '/mailservice',
         this.encode({
           'form-name': 'ybg-mail-service',
           ...this.form
