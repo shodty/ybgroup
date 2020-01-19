@@ -13,11 +13,13 @@
   MailLogo
   transition(name='slide-fade')
     .success(v-if="success")
-      img(src='../assets/submit_success.png' width='50%')
+      img(src='../assets/submit_success.png' width='40%')
       br
       nuxt-link(to='/')
-        button(class="success-btn black tanbackground") Back Home
-      button(class="success-btn black redbackground" @click="window.location.reload(true)") Reset Form
+        button(class="success-btn black tanbackground") Home
+      button(v-if="isItRaining" class="success-btn black whitebackground" @click="clear") Stop the Rain
+      button(v-if="!isItRaining" class="success-btn black whitebackground" @click="firstRain") Start the Rain
+      button(class="success-btn black redbackground" @click="reloadPage") Reset Form
   b-row(v-if="!success" align-h="center")
     b-col(cols=10 md=8 lg=6)
       b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
@@ -87,9 +89,11 @@ export default {
   data () {
     return {
       vueCanvas: null,
+      intervalID: 0,
       canvasHeight: 0,
       canvasWidth: 0,
       success: false,
+      isItRaining: false,
       form: {
         firstname: '',
         lastname: '',
@@ -117,6 +121,9 @@ export default {
     this.vueCanvasRain = rctx
     this.canvasHeight = screen.height
     this.canvasWidth = screen.width
+  },
+  beforeDestroy () {
+    clearInterval(this.intervalID)
   },
   methods: {
     encode (data) {
@@ -161,7 +168,7 @@ export default {
       const noOfDrops = 25
       const fallingDrops = []
       if (this.vueCanvasRain) {
-        setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
+        this.intervalID = setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
         for (let i = 0; i < noOfDrops; i++) {
           const fallingDr = {}
           fallingDr.image = new Image()
@@ -173,10 +180,8 @@ export default {
         }
       }
     },
-    stopRain () {
-      this.vueCanvasRain.remove()
-    },
     raining (fallingDrops, noOfDrops) {
+      this.isItRaining = true
       this.clearRain()
       for (let i = 0; i < noOfDrops; i++) {
         this.vueCanvasRain.drawImage(fallingDrops[i].image, fallingDrops[i].x, fallingDrops[i].y) // The rain drop
@@ -189,12 +194,18 @@ export default {
       }
     },
     clear () {
+      this.isItRaining = false
       const c = document.getElementById('c')
+      clearInterval(this.intervalID)
+      this.vueCanvasRain.clearRect(0, 0, c.width, c.height)
       this.vueCanvas.clearRect(0, 0, c.width, c.height)
     },
     clearRain () {
       const c = document.getElementById('r')
       this.vueCanvasRain.clearRect(0, 0, c.width, c.height)
+    },
+    reloadPage () {
+      window.location.reload(true)
     }
   }
 }
@@ -283,7 +294,7 @@ p
   display block
   margin 0 auto
   height: 100%
-  width: 50%
+  width: 40%
 
 .black
     color: black
@@ -306,6 +317,14 @@ p
 
 .redbackground:hover
   background-color: #a52828
+
+.whitebackground
+    background-color: #ffffff
+    border: 2px solid black
+    border-radius 0px
+
+.whitebackground:hover
+  background-color: #cccccc
 
 .blackbackground
     background-color: black
@@ -335,6 +354,9 @@ p
   padding-top 2vw
   text-align center
   z-index: 2000
+
+.success a
+  text-decoration none
 
 .success img
   padding-bottom 2vw
