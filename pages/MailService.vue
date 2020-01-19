@@ -11,7 +11,14 @@
   MobileMenu
   DarkLight
   MailLogo
-  b-row(align-h="center")
+  transition(name='slide-fade')
+    .success(v-if="success")
+      img(src='../assets/submit_success.png' width='50%')
+      br
+      nuxt-link(to='/')
+        button(class="success-btn black tanbackground") Back Home
+      button(class="success-btn black redbackground" @click="window.location.reload(true)") Reset Form
+  b-row(v-if="!success" align-h="center")
     b-col(cols=10 md=8 lg=6)
       b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
         input(type='hidden' name='form-name' value='ybg-mail-service')
@@ -58,12 +65,6 @@
                 b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
                 b-button(type="submit" variant="primary" class="btn-block black tanbackground" @onSubmit='firstRain') Done?
-  b-modal(ref='my-modal' hide-footer title='YBG MAIL SERVICE')
-    .d-block.text-center
-      h3 Thank you for your submission!
-    b-button.mt-3(variant='outline-danger' block @click='hideModal') Close
-    b-button.mt-2(variant='outline-warning' block)
-      nuxt-link(to="/") YBG Home
   img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
 </template>
 
@@ -88,6 +89,7 @@ export default {
       vueCanvas: null,
       canvasHeight: 0,
       canvasWidth: 0,
+      success: false,
       form: {
         firstname: '',
         lastname: '',
@@ -136,11 +138,8 @@ export default {
         }),
         axiosConfig
       )
-      // this.$refs['my-modal'].toggle('#toggle-btn')
+      this.success = true
       this.firstRain()
-    },
-    hideModal () {
-      this.$refs['my-modal'].hide()
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)
@@ -167,13 +166,15 @@ export default {
           const fallingDr = {}
           fallingDr.image = new Image()
           fallingDr.image.src = this.getImgUrl('thanks_note', '.png')
-
           fallingDr.x = Math.random() * this.canvasWidth
           fallingDr.y = Math.random() - 250
           fallingDr.speed = 2 + Math.random()
           fallingDrops.push(fallingDr)
         }
       }
+    },
+    stopRain () {
+      this.vueCanvasRain.remove()
     },
     raining (fallingDrops, noOfDrops) {
       this.clearRain()
@@ -278,6 +279,12 @@ p
 .btn-block
   height: 100%
 
+.success-btn
+  display block
+  margin 0 auto
+  height: 100%
+  width: 50%
+
 .black
     color: black
     font-family: 'cardinal_grotesque_wideSBd', sans-serif
@@ -289,10 +296,16 @@ p
     border: 2px solid black
     border-radius 0px
 
+.tanbackground:hover
+  background-color: #b59e6b
+
 .redbackground
     background-color: #f25555
     border: 2px solid black
     border-radius 0px
+
+.redbackground:hover
+  background-color: #a52828
 
 .blackbackground
     background-color: black
@@ -316,4 +329,23 @@ p
     width 50px
   }
 
+.success
+  position relative
+  margin 0 auto
+  padding-top 2vw
+  text-align center
+  z-index: 2000
+
+.success img
+  padding-bottom 2vw
+
+.slide-fade-enter-active
+  transition: all 2s ease
+
+.slide-fade-leave-active
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+.slide-fade-enter, .slide-fade-leave-to
+  transform: translateY(350px)
+  opacity: 0
 </style>
