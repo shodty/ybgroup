@@ -8,7 +8,7 @@
               .letter-container(v-if="sliding" )
                 nuxt-link(to="/mailservice")
                   img( src="../assets/letter.png" id="letter-image")
-        .inner(:class="sliding? null : 'shaking'" @mouseenter="slideOut")
+        .inner(:class="sliding? null : 'shaking'" @mouseenter="slideOut" @click="slideOut")
             nuxt-link(to="/mailservice")
               img(src="../assets/envelope.png" id="envelope-image" )
             .closer
