@@ -159,10 +159,16 @@ export default {
      transform: translate(0, 0)
   }
   1% {
-     transform: translate(-33%, -85%)
+    transform: translate(-33%, -85%)
+    @media(max-width: 767px) {
+        transform: translate(-33%, -165%)
+    }
   }
   99% {
-     transform: translate(-33%, -85%)
+    transform: translate(-33%, -85%)
+    @media(max-width: 767px) {
+        transform: translate(-33%, -165%)
+    }
   }
 }
 
