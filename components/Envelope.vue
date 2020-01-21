@@ -11,7 +11,7 @@
             nuxt-link(to="/mailservice")
               img(src="../assets/envelope.png" id="envelope-image" @click="bgcChange(false, '#ffffff')")
             .closer
-                img(src="../assets/close2.png" @click='showEnvelope')
+                img(src="../assets/close4.png" @click='showEnvelope')
     .mobile-mail(class='hide-on-desktop')
       .mail-icon
         nuxt-link(to="/mailservice")
@@ -47,7 +47,12 @@ export default {
       this.faceChange(entered, '#000')
     },
     faceChange (entered, color) {
-      this.$store.dispatch('facechange/faceColor', { entered, color })
+      if (this.light) {
+        this.$store.dispatch('facechange/faceColor', { entered, color })
+      } else {
+        color = '#81cff3'
+        this.$store.dispatch('facechange/faceColor', { entered, color })
+      }
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)

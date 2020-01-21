@@ -20,7 +20,7 @@
       button(v-if="isItRaining" class="success-btn black whitebackground" @click="clear") Stop the Rain
       button(v-if="!isItRaining" class="success-btn black whitebackground" @click="firstRain") Start the Rain
       button(class="success-btn black redbackground" @click="reloadPage") Reset Form
-  b-row(align-h="center")
+  b-row(v-if="!success" align-h="center")
     b-col(cols=11 lg=4 class="description")
       p(class="infotext") YBG Mail Service is our way of showing our appreciation for you and sharing our love of physical media.
       p(class="big") It's simple!
@@ -170,7 +170,7 @@ export default {
       this.vueCanvas.restore()
     },
     firstRain () {
-      const noOfDrops = 25
+      const noOfDrops = 20
       const fallingDrops = []
       if (this.vueCanvasRain) {
         this.intervalID = setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
@@ -180,7 +180,7 @@ export default {
           fallingDr.image.src = this.getImgUrl('thanks_note', '.png')
           fallingDr.x = Math.random() * this.canvasWidth
           fallingDr.y = Math.random() - 250
-          fallingDr.speed = 2 + Math.random()
+          fallingDr.speed = 1 + Math.random() * 2
           fallingDrops.push(fallingDr)
         }
       }
