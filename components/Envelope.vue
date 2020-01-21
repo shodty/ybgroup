@@ -2,12 +2,15 @@
 #envelope-container
     .mail-icon(v-if="!show")
         img(:src=' light? getImgUrl("mail_globe", ".png") : getImgUrl("mail_globe_white", ".png")' @click='showEnvelope')
-    .envelope(v-if="show" @mouseenter="bgcChange(true, '#81cff3')"  @mouseleave="bgcChange(false, '#ffffff')")
-        .inner(class="shaking")
-            img(src="../assets/letter.png" class="letter-image")
-        .inner(class="shaking")
-            nuxt-link(to="mailservice")
-                img(src="../assets/envelope.png" class="envelope-image")
+    .envelope(v-if="show" @mouseenter="bgcChange(true, '#f1d591')"  @mouseleave="bgcChange(false, '#ffffff')")
+        .inner(:class="sliding? null : 'shaking' ")
+            transition(name="letterslide" enter-active-class="slidein rotatein")
+              .letter-container(v-if="sliding" )
+                nuxt-link(to="/mailservice")
+                  img( src="../assets/letter.png" id="letter-image")
+        .inner(:class="sliding? null : 'shaking'" @mouseenter="slideOut")
+            nuxt-link(to="/mailservice")
+              img(src="../assets/envelope.png" id="envelope-image" )
             .closer
                 img(src="../assets/close2.png" @click='showEnvelope')
 
@@ -21,7 +24,8 @@ export default {
   },
   data () {
     return {
-      show: true
+      show: true,
+      sliding: false
     }
   },
   computed: {
@@ -32,6 +36,7 @@ export default {
   methods: {
     showEnvelope () {
       this.show = !this.show
+      this.sliding = false
       this.bgcChange('#ffffff')
     },
     bgcChange (entered, color) {
@@ -41,6 +46,9 @@ export default {
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)
+    },
+    slideOut () {
+      this.sliding = !this.sliding
     }
   }
 }
@@ -54,8 +62,8 @@ export default {
     padding-right: 18vw
     z-index: 1000
     @media(max-width: 767px) {
-        margin-top: 44vw
-        padding-right: 22vw
+        margin-top: 26vh
+        padding-right: 16vw
     }
 
 .mail-icon
@@ -77,23 +85,30 @@ export default {
     }
 }
 
-.envelope img
-    transform: rotate(-15deg)
-
-.envelope-image
-    width: 8vw
-    @media(max-width: 767px) {
-        width 14vw
-        margin-right: 2vw
-        margin-top: 2vw
-    }
-
-.letter-image
-    width: 6vw
+.envelope
     @media(max-width: 767px) {
         width 12vw
         margin-right: 2vw
         margin-top: 2vw
+    }
+
+.envelope img
+    transform: rotate(-15deg)
+
+#envelope-image
+    width: 8vw
+    @media(max-width: 767px) {
+        width 14vw
+    }
+
+.letter-container
+    position: absolute
+
+#letter-image
+    width: 7vw
+
+    @media(max-width: 767px) {
+        width 12vw
     }
 
 .closer
@@ -132,11 +147,41 @@ export default {
 }
 
 .shaking {
-    -webkit-animation: shaking 5s ease infinite alternate;
-    -moz-animation: shaking 5s ease infinite alternate;
-    -ms-animation: shaking 5s ease infinite alternate;
-    -o-animation: shaking 5s ease infinite alternate;
-    animation: shaking 5s ease infinite alternate;
+    -webkit-animation: shaking 4s ease infinite alternate;
+    -moz-animation: shaking 4s ease infinite alternate;
+    -ms-animation: shaking 4s ease infinite alternate;
+    -o-animation: shaking 4s ease infinite alternate;
+    animation: shaking 4s ease infinite alternate;
 }
+
+@keyframes slidein {
+  0% {
+     transform: translate(0, 0)
+  }
+  1% {
+     transform: translate(-33%, -85%)
+  }
+  99% {
+     transform: translate(-33%, -85%)
+  }
+}
+
+@keyframes rotatein {
+  0% {
+     transform: rotate(0deg)
+  }
+  1% {
+     transform: rotate(-15deg)
+  }
+  99% {
+     transform: rotate(-15deg)
+  }
+}
+
+.slidein
+  animation: slidein 45s linear both
+
+.rotatein
+  animation: slidein 45s linear both
 
 </style>
