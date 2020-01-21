@@ -37,12 +37,15 @@ export default {
     showEnvelope () {
       this.show = !this.show
       this.sliding = false
-      this.bgcChange('#ffffff')
+      this.bgcChange(false, '#ffffff')
     },
     bgcChange (entered, color) {
-      const white = 'white'
+      // const white = '#FFFFFF'
       this.$store.dispatch('backgroundchange/backgroundChange', color)
-      this.$store.dispatch('facechange/faceColor', { entered, white })
+      this.faceChange(entered, '#81cff3')
+    },
+    faceChange (entered, color) {
+      this.$store.dispatch('facechange/faceColor', { entered, color })
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)
