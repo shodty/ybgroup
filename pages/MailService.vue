@@ -252,7 +252,7 @@ export default {
 input, textarea
     background-color:#81cff3
     color: black
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
     font-family: 'goopersemibold_italic', italic
     letter-spacing: 1px
@@ -266,7 +266,7 @@ input, textarea
     background-color:#47abc6
 
 .blackborder
-    border: 2px solid black
+    border: 1px solid black
 
 #main
     padding-top: 60px
@@ -304,7 +304,7 @@ p
 
 .tanbackground
     background-color: #f1d591
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .tanbackground:hover
@@ -312,7 +312,7 @@ p
 
 .redbackground
     background-color: #f25555
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .redbackground:hover
@@ -320,7 +320,7 @@ p
 
 .whitebackground
     background-color: #ffffff
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .whitebackground:hover
