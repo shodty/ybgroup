@@ -74,10 +74,12 @@ export default {
 .mail-icon
     z-index : 1300
     position: fixed
-    top: 5%
+    top: 5vh
     right: 0
     padding 2vw
-
+    @media(max-width: 767px) {
+      top: 7.5vw
+    }
 .mail-icon img {
     cursor: url('../assets/hand.png'), auto
     @media(max-width: 767px) {
