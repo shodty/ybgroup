@@ -81,7 +81,7 @@ export const state = () => ({
       color1: '#e03b26',
       color2: '#ffffff',
       image: 'jump',
-      link: 'ourstreet',
+      link: 'jump',
       pattern: ['vid', 'gather', 'photo', 'social', 'collab'],
       text: 'Jump',
       show: true
