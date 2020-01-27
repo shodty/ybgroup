@@ -148,7 +148,9 @@ p:hover
     text-align: center
     background: #f3b120
     transition: .1s
-
+    @media(max-width: 767px) {
+      font-size: 46px
+    }
 .yellowmenu
     background: #f3b120
 

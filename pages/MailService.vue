@@ -21,48 +21,53 @@
       button(v-if="!isItRaining" class="success-btn black whitebackground" @click="firstRain") Start the Rain
       button(class="success-btn black redbackground" @click="reloadPage") Reset Form
   b-row(v-if="!success" align-h="center")
-    b-col(cols=10 md=8 lg=6)
+    b-col(cols=11 lg=4 class="description")
+      p(class="infotext") YBG Mail Service is our way of showing our appreciation for you and sharing our love of physical media.
+      p(class="big") It's simple!
+      p(class="infotext") Sign up through the form below and get free stuff in the mail.
+  b-row(v-if="!success" align-h="center")
+    b-col(cols=11 md=8 lg=6)
       b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
         input(type='hidden' name='form-name' value='ybg-mail-service')
         b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue" )
+            b-col(cols="4" sm="3" class="blackborder darkblue ")
                 p First Name
             b-col(class="nopadding")
-                b-form-input( name="firstname" type="text" required placeholder="Enter first name" v-model="form.firstname" key='1')
+                b-form-input( name="firstname" type="text" required v-model="form.firstname" key='1')
         b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
+            b-col(cols="4" sm="3" class="blackborder darkblue ")
                 p Last Name
             b-col(class="nopadding")
-                b-form-input( name="lastname" type="text" required placeholder="Enter last name" v-model="form.lastname" key='2')
+                b-form-input( name="lastname" type="text" required v-model="form.lastname" key='2')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p Email
             b-col(class="nopadding")
-                b-form-input( name="email" type="email" required placeholder="Enter email" v-model="form.email" key='3')
+                b-form-input( name="email" type="email" required v-model="form.email" key='3')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
-                p Address 1
+                p Mailing Address
             b-col(class="nopadding")
-                b-form-input( name="address1" type="text" required placeholder="Enter mailing address" v-model="form.address1" key='4')
+                b-form-input( name="address1" type="text" required v-model="form.address1" key='4')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
-                p Address 2
+                p Apt/Unit/PO Box
             b-col(class="nopadding")
-                b-form-input( name="address2" type="text" placeholder="Apartment/Unit/P.O. Box" v-model="form.address2" key='5')
+                b-form-input( name="address2" type="text" v-model="form.address2" key='5')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p City
             b-col(class="nopadding")
-                b-form-input( name="city" type="text" placeholder="City" v-model="form.city" key='6')
+                b-form-input( name="city" type="text" required v-model="form.city" key='6')
         b-row
             b-col(cols="4" sm="3" class="blackborder darkblue")
                 p State
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="state" type="text" required placeholder="State" v-model="form.state" key='7')
+                b-form-input( name="state" type="text" required v-model="form.state" key='7')
             b-col(cols="2" sm="1" class="blackborder darkblue")
                 p Zip
             b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="zip" type="text" required placeholder="5 digit zip" v-model="form.zip" key='8')
+                b-form-input( name="zip" type="text" required v-model="form.zip" key='8')
             b-col(cols="4" sm="1" class="nopadding")
                 b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
             b-col(cols="8" sm="3" class="nopadding")
@@ -165,7 +170,7 @@ export default {
       this.vueCanvas.restore()
     },
     firstRain () {
-      const noOfDrops = 25
+      const noOfDrops = 20
       const fallingDrops = []
       if (this.vueCanvasRain) {
         this.intervalID = setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
@@ -175,7 +180,7 @@ export default {
           fallingDr.image.src = this.getImgUrl('thanks_note', '.png')
           fallingDr.x = Math.random() * this.canvasWidth
           fallingDr.y = Math.random() - 250
-          fallingDr.speed = 2 + Math.random()
+          fallingDr.speed = 1 + Math.random() * 2
           fallingDrops.push(fallingDr)
         }
       }
@@ -225,6 +230,28 @@ export default {
   position: fixed;
   z-index: 5
 
+.description
+  padding-top 2vw
+  @media(max-width: 767px){
+    padding-top 4vw
+  }
+
+.infotext
+  text-align: center
+  font-family: 'cardinal_grotesque_wideSBd', sans
+  color: black
+  @media(max-width: 767px){
+    font-size .76em
+  }
+
+.big
+  font-size 2em
+  color: black
+  text-align: center
+  font-family: 'goopersemibold_italic', italic
+
+.medium
+  font-size 1.5em
 *
   margin: 0px
   padding: 0px
@@ -252,7 +279,7 @@ export default {
 input, textarea
     background-color:#81cff3
     color: black
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
     font-family: 'goopersemibold_italic', italic
     letter-spacing: 1px
@@ -266,7 +293,7 @@ input, textarea
     background-color:#47abc6
 
 .blackborder
-    border: 2px solid black
+    border: 1px solid black
 
 #main
     padding-top: 60px
@@ -276,7 +303,8 @@ input, textarea
     top 0
     left 0
     position absolute
-p
+
+.darkblue p
   text-transform uppercase
   font-family: 'cardinal_grotesque_wideSBd', sans-serif
   font-size: 1em
@@ -284,7 +312,7 @@ p
   color: black
   vertical-align: middle
   @media(max-width: 767px){
-    font-size: 1em
+    font-size: .7em
   }
 
 .btn-block
@@ -304,7 +332,7 @@ p
 
 .tanbackground
     background-color: #f1d591
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .tanbackground:hover
@@ -312,7 +340,7 @@ p
 
 .redbackground
     background-color: #f25555
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .redbackground:hover
@@ -320,7 +348,7 @@ p
 
 .whitebackground
     background-color: #ffffff
-    border: 2px solid black
+    border: 1px solid black
     border-radius 0px
 
 .whitebackground:hover
@@ -370,4 +398,5 @@ p
 .slide-fade-enter, .slide-fade-leave-to
   transform: translateY(350px)
   opacity: 0
+
 </style>

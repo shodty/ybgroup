@@ -68,8 +68,8 @@ export const state = () => ({
     },
     acr: {
       letter: 'letter-a',
-      color1: '#67a844',
-      color2: '#006bb6',
+      color1: '#006bb6',
+      color2: '#ffffff',
       image: 'acr',
       link: 'allcityriders',
       pattern: ['vid', 'gather', 'print', 'id', 'photo', 'social', 'web'],

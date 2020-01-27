@@ -1,19 +1,21 @@
 <template lang="pug">
 #envelope-container
-    .mail-icon(v-if="!show")
-        img(:src=' light? getImgUrl("mail_globe", ".png") : getImgUrl("mail_globe_white", ".png")' @click='showEnvelope')
-    .envelope(v-if="show" @mouseenter="bgcChange(true, '#f1d591')"  @mouseleave="bgcChange(false, '#ffffff')")
+    .mail-icon(v-if="!show" class='hide-on-mobile')
+        img(:src=' light? getImgUrl("mail_globe2", ".png") : getImgUrl("mail_globe_white2", ".png")' @click='showEnvelope')
+    .envelope(v-if="show" @mouseenter="bgcChange(true, '#f1d591')"  @mouseleave="bgcChange(false, '#ffffff')" class='hide-on-mobile')
         .inner(:class="sliding? null : 'shaking' ")
-            transition(name="letterslide" enter-active-class="slidein rotatein")
-              .letter-container(v-if="sliding" )
-                nuxt-link(to="/mailservice")
-                  img( src="../assets/letter.png" id="letter-image")
-        .inner(:class="sliding? null : 'shaking'" @mouseenter="slideOut" @click="slideOut")
+            .letter-container(v-if="sliding" :class="sliding? 'slidein' : null")
+              nuxt-link(to="/mailservice")
+                img( src="../assets/letter.png" id="letter-image" @click="bgcChange(false, '#ffffff')")
+        .inner(:class="sliding? null : 'shaking'" @mouseenter="slideOut(true)")
             nuxt-link(to="/mailservice")
-              img(src="../assets/envelope.png" id="envelope-image" )
+              img(src="../assets/envelope.png" id="envelope-image" @click="bgcChange(false, '#ffffff')")
             .closer
-                img(src="../assets/close2.png" @click='showEnvelope')
-
+                img(src="../assets/close4.png" @click='showEnvelope')
+    .mobile-mail(class='hide-on-desktop')
+      .mail-icon
+        nuxt-link(to="/mailservice")
+          img(:src=' light? getImgUrl("mail_globe2", ".png") : getImgUrl("mail_globe_white2", ".png")')
 </template>
 
 <script>
@@ -42,16 +44,21 @@ export default {
     bgcChange (entered, color) {
       // const white = '#FFFFFF'
       this.$store.dispatch('backgroundchange/backgroundChange', color)
-      this.faceChange(entered, '#81cff3')
+      this.faceChange(entered, '#000')
     },
     faceChange (entered, color) {
-      this.$store.dispatch('facechange/faceColor', { entered, color })
+      if (this.light) {
+        this.$store.dispatch('facechange/faceColor', { entered, color })
+      } else {
+        color = '#81cff3'
+        this.$store.dispatch('facechange/faceColor', { entered, color })
+      }
     },
     getImgUrl (pic, ext) {
       return require('../assets/' + pic + ext)
     },
-    slideOut () {
-      this.sliding = !this.sliding
+    slideOut (slideboolean) {
+      this.sliding = slideboolean
     }
   }
 }
@@ -72,10 +79,12 @@ export default {
 .mail-icon
     z-index : 1300
     position: fixed
-    top: 5%
+    top: 5vh
     right: 0
     padding 2vw
-
+    @media(max-width: 767px) {
+      top: 7.5vw
+    }
 .mail-icon img {
     cursor: url('../assets/hand.png'), auto
     @media(max-width: 767px) {
@@ -103,12 +112,16 @@ export default {
     @media(max-width: 767px) {
         width 14vw
     }
+    cursor: -webkit-grab
+    cursor: grab
 
 .letter-container
     position: absolute
 
 #letter-image
     width: 7vw
+    cursor: -webkit-grabbing
+    cursor: grabbing
 
     @media(max-width: 767px) {
         width 12vw
@@ -126,7 +139,7 @@ export default {
 
 .closer img
     width 1vw
-    cursor: url('../assets/hand.png'), auto
+    cursor: not-allowed
 
 .inner
     position: absolute
@@ -157,40 +170,18 @@ export default {
     animation: shaking 4s ease infinite alternate;
 }
 
-@keyframes slidein {
+@-webkit-keyframes slidein {
   0% {
      transform: translate(0, 0)
   }
-  1% {
+  100% {
     transform: translate(-33%, -85%)
-    @media(max-width: 767px) {
-        transform: translate(-33%, -165%)
-    }
-  }
-  99% {
-    transform: translate(-33%, -85%)
-    @media(max-width: 767px) {
-        transform: translate(-33%, -165%)
-    }
-  }
-}
-
-@keyframes rotatein {
-  0% {
-     transform: rotate(0deg)
-  }
-  1% {
-     transform: rotate(-15deg)
-  }
-  99% {
-     transform: rotate(-15deg)
   }
 }
 
 .slidein
-  animation: slidein 45s linear both
-
-.rotatein
-  animation: slidein 45s linear both
+  -webkit-animation-name: slidein;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
 
 </style>
