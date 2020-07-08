@@ -80,6 +80,15 @@ html {
 
 }
 
+@font-face {
+    font-family: 'ruta_23regular';
+    src: url('../assets/fonts/ruta-regular_v1-webfont.woff2') format('woff2'),
+         url('../assets/fonts/ruta-regular_v1-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 .hide-on-mobile {
   @media(max-width: 767px) {
     display: none !important

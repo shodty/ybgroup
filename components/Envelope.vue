@@ -1,8 +1,9 @@
 <template lang="pug">
 #envelope-container
-    .mail-icon(v-if="!show" class='hide-on-mobile')
-        img(:src=' light? getImgUrl("mail_globe2", ".png") : getImgUrl("mail_globe_white2", ".png")' @click='showEnvelope')
-    .envelope(v-if="show" @mouseenter="bgcChange(true, '#f1d591')"  @mouseleave="bgcChange(false, '#ffffff')" class='hide-on-mobile')
+    nuxt-link(to="/mailservice")
+      .mail-icon(class='hide-on-mobile')
+          img(:src=' light? getImgUrl("mail_globe2", ".png") : getImgUrl("mail_globe_white2", ".png")' @mouseenter="rotating = true"  @mouseleave="rotating = false" :class="rotating? 'rotating' : null ")
+    //.envelope(v-if="!show" @mouseenter="bgcChange(true, '#f1d591')"  @mouseleave="bgcChange(false, '#ffffff')" class='hide-on-mobile')
         .inner(:class="sliding? null : 'shaking' ")
             .letter-container(v-if="sliding" :class="sliding? 'slidein' : null")
               nuxt-link(to="/mailservice")
@@ -27,7 +28,8 @@ export default {
   data () {
     return {
       show: true,
-      sliding: false
+      sliding: false,
+      rotating: false
     }
   },
   computed: {
@@ -177,6 +179,24 @@ export default {
   100% {
     transform: translate(-33%, -85%)
   }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+    -webkit-animation: rotating 16s linear infinite;
+    -moz-animation: rotating 16s linear infinite;
+    -ms-animation: rotating 16s linear infinite;
+    -o-animation: rotating 16s linear infinite;
+    animation: rotating 16s linear infinite;
 }
 
 .slidein
