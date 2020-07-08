@@ -89,7 +89,7 @@ export default {
   height 100vh
   width 100vw
   position relative
-
+  overflow hidden
 *
   margin: 0px
   padding: 0px
@@ -139,4 +139,5 @@ export default {
 
 .absolute
   position absolute
+
 </style>
