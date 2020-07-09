@@ -82,12 +82,12 @@ export default {
 
 .gridbackground
   position absolute
-  height 100vh
+  height 96vh
   width 100vw
 
 .parental
-  height 99vh
-  width 99vw
+  height 59vh
+  width 59vw
   position relative
 
 *
