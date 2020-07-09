@@ -6,8 +6,8 @@
   .parental(ref="parental")
     TextBox.absolute(v-for="(box, index) in boxCount" :initW='600' :initH='100' :top='72' :left='96' :index="index" :boxCount="boxCount" )
     //TextBox.absolute(v-once :initW='1356' :initH='500' :top='180' :left='12' :textsize=256 content="Ruta 23")
-  //.bottombar
-    .bottomcontrols
+  .bottombar
+    //.bottomcontrols
       .inlinedivsquare(@click="changeBGColor('black')" style="background: black")
       .inlinedivsquare(@click="changeBGColor('#0076bd')" style="background: #0076bd")
       .inlinedivsquare(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white")
@@ -137,6 +137,7 @@ export default {
   color white
   width 100%
   z-index 100
+
 .absolute
   position absolute
 
