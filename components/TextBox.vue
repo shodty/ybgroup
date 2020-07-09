@@ -266,7 +266,6 @@ export default {
   text-align center
   letter-spacing 0
 .dragger
-  z-index 10
   position absolute
   top -32px
   left 0
