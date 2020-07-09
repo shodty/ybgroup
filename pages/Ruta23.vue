@@ -7,14 +7,14 @@
     TextBox.absolute(v-for="(box, index) in boxCount" :initW='600' :initH='100' :top='72' :left='96' :index="index" :boxCount="boxCount" )
     //TextBox.absolute(v-once :initW='1356' :initH='500' :top='180' :left='12' :textsize=256 content="Ruta 23")
   .bottombar
-    //.bottomcontrols
-      .inlinedivsquare(@click="changeBGColor('black')" style="background: black")
-      .inlinedivsquare(@click="changeBGColor('#0076bd')" style="background: #0076bd")
-      .inlinedivsquare(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white")
-      .inlinedivsquare(@click="changeBGColor('white')" style="background: white")
-      .inlinedivgrid(@click="gridded = !gridded" style="color: white") GRID
-      .inlinedivplus(@click="createTextBox" style="color: white; margin-left: 24px") +
-      .inlinedivgrid(@click="resetCount" style="color: white; margin-left: 24px") RESET
+    .bottomcontrols.no-overflow
+      .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black")
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#0076bd')" style="background: #0076bd")
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white")
+      .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white")
+      .inlinedivgrid.no-overflow(@click="gridded = !gridded" style="color: white") GRID
+      .inlinedivplus.no-overflow(@click="createTextBox" style="color: white; margin-left: 24px") +
+      .inlinedivgrid.no-overflow(@click="resetCount" style="color: white; margin-left: 24px") RESET
 </template>
 
 <script>
@@ -112,19 +112,13 @@ export default {
   border 1px solid black !important
 
 .inlinedivgrid
-  position relative
   display inline-block
-  line-height 0
-  top -12px
   font-family: 'ruta_23regular', sans-serif
   font-size 2em
   cursor crosshair
 
 .inlinedivplus
-  position relative
   display inline-block
-  line-height 0
-  top -12px
   font-family: Verdana, Geneva, Tahoma, sans-serif
   font-size 2em
   cursor crosshair
@@ -141,4 +135,6 @@ export default {
 .absolute
   position absolute
 
+.no-overflow
+  overflow hidden
 </style>
