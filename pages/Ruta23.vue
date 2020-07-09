@@ -86,10 +86,10 @@ export default {
   width 100vw
 
 .parental
-  height 100vh
-  width 100vw
+  height 99vh
+  width 99vw
   position relative
-  overflow hidden
+
 *
   margin: 0px
   padding: 0px
@@ -136,7 +136,7 @@ export default {
   background #ff675d
   color white
   width 100%
-
+  z-index 100
 .absolute
   position absolute
 
