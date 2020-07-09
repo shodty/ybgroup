@@ -7,13 +7,16 @@
     TextBox.absolute(v-for="(box, index) in boxCount" :initW='600' :initH='100' :top='72' :left='96' :index="index" :boxCount="boxCount" )
     //TextBox.absolute(v-once :initW='1356' :initH='500' :top='180' :left='12' :textsize=256 content="Ruta 23")
   .bottombar
-    .bottomcontrols.no-overflow
+    b-row.bottomcontrols.no-overflow
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") BG:
       .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black")
       .inlinedivsquare.no-overflow(@click="changeBGColor('#0076bd')" style="background: #0076bd")
       .inlinedivsquare.no-overflow(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white")
       .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white")
+      .inlinedivgrid.no-overflow(@click="createTextBox" style="color: white; cursor: cell") ADD BOX
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
       .inlinedivgrid.no-overflow(@click="gridded = !gridded" style="color: white") GRID
-      .inlinedivplus.no-overflow(@click="createTextBox" style="color: white; margin-left: 24px") +
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
       .inlinedivgrid.no-overflow(@click="resetCount" style="color: white; margin-left: 24px") RESET
 </template>
 
@@ -50,8 +53,14 @@ export default {
       bgc: state => state.backgroundchange.bgc
     }),
     gridStyles () {
+      let gridcolor = 'linear-gradient(-90deg, rgba(255, 103, 93, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px, linear-gradient(rgba(255, 103, 93, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px'
+      if (this.bgc === '#f26760' || this.bgc === '#0076bd') {
+        gridcolor = 'linear-gradient(-90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px, linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px'
+      } else if (this.bgc === 'black') {
+        gridcolor = 'linear-gradient(-90deg, rgba(0, 117, 191, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px, linear-gradient(rgba(0, 117, 191, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px'
+      }
       return {
-        'background': 'linear-gradient(-90deg, rgba(255, 103, 93, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px, linear-gradient(rgba(255, 103, 93, 0.2) 1px, transparent 1px) 0% 0% / 12px 12px'
+        'background': gridcolor
       }
     },
     noGridStyles () {
@@ -65,6 +74,7 @@ export default {
     changeBGColor (color) {
       this.backgroundcolor = color
       this.$store.dispatch('backgroundchange/backgroundChange', color)
+      console.log(this.bgc)
     },
     createTextBox () {
       this.boxCount = this.boxCount + 1
@@ -103,7 +113,7 @@ export default {
 
 .inlinedivsquare
   display inline-block
-  margin 12px 12px
+  margin 12px 0px 12px 12px
   cursor crosshair
   width 25px
   height 25px
@@ -116,12 +126,15 @@ export default {
   font-family: 'ruta_23regular', sans-serif
   font-size 2em
   cursor crosshair
+  height 40px
+  margin-left 16px
 
 .inlinedivplus
   display inline-block
   font-family: Verdana, Geneva, Tahoma, sans-serif
   font-size 2em
   cursor crosshair
+  height 40px
 
 .bottombar
   position fixed
@@ -137,4 +150,5 @@ export default {
 
 .no-overflow
   overflow hidden
+
 </style>

@@ -2,10 +2,10 @@
 vue-draggable-resizable.drag(:w="getW" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='[ stroked? strokeStyles : boxStyles ]' class-name-active="my-active-class" :active.sync="active")
     .cutoff(@mouseenter='showControls=true, active=true' @mouseleave='showControls=false')
         .controller(:style='[ showControls? {"opacity" : 100 } : {"opacity" : 0} ]')
-            .inlinediv(@click="changeColor('black')" style="color: black") F
-            .inlinediv(@click="changeColor('#0076bd')" style="color: #0076bd") F
-            .inlinediv(@click="changeColor('#f26760')" style="color: #f26760") F
-            .inlinediv.strokedblack(@click="changeColor('white')" style="color: white") F
+            .inlinediv.strokedwhite(@click="changeColor('black')" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") F
+            .inlinediv.strokedwhite(@click="changeColor('#0076bd')" :style="bgc === '#0076bd'? '-webkit-text-stroke-width: 1px !important; color: #0076bd' : '-webkit-text-stroke-width: 0px !important; color: #0076bd'") F
+            .inlinediv.strokedwhite(@click="changeColor('#f26760')" :style="bgc === '#f26760'? '-webkit-text-stroke-width: 1px !important; color: #f26760' : '-webkit-text-stroke-width: 0px !important; color: #f26760'") F
+            .inlinediv.strokedblack(@click="changeColor('white')" :style="bgc === 'white'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") F
             .slider
                 vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style="{ backgroundColor: '#0076bd' }" :tooltip-style="{ backgroundColor: 'white', borderColor: '#0076bd', color: '#0076bd' }")
                     template(v-slot:dot)
@@ -16,14 +16,14 @@ vue-draggable-resizable.drag(:w="getW" :h="getH" :x="getX" :y="getY" @dragging="
                         .circlered
             .dragger(:style="draggerStyle" @mousedown="upZ(index)")
                // img.dragicon(src="../assets/drag_white.png" width="16px")
-            .inlinedivtext(@click="stroked = !stroked" style="color: black") S
-            .inlinedivtext(@click="align = 'left'")
+            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") S
+            .inlinedivtext(@click="align = 'left'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/l.png" width="16px")
-            .inlinedivtext(@click="align = 'center'")
+            .inlinedivtext(@click="align = 'center'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/c.png" width="16px")
-            .inlinedivtext(@click="align = 'right'")
+            .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/r.png" width="16px")
-            .inlinedivtext(@click="boxClose = true" style="color: black") x
+            .inlinedivtext.strokedwhite(@click="boxClose = true" style="color: black" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") x
         div.textinside(contenteditable="plaintext-only" spellcheck="false") {{content}}
 </template>
 
@@ -62,23 +62,24 @@ export default {
       align: 'center',
       textsize: '16',
       boxText: [
-        'THIS IS THE BEGINNING',
+        'THIS IS THE BEGINNING. este es el comienzo.',
         '0123456789',
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         'RUTA 23',
+        'Somos un pueblo',
         'EL PARQUE, LA CONDESA',
         'CDMX',
         'MEXICO CITY',
         '¿ꜛꜜ…¿·•‖//()[]–€¥¢↖§…ꜛꜜ',
         'BEYOND SPACE, BEYOND TIME',
         'YELLOW BRICK GROUP 2020',
-        '. \\ -¤- / .',
-        'ME & YOU',
+        '. \\ -¤- / . \\ • / -¤- \\ .',
+        'you and me = tu y yo',
         '®',
         '©',
-        'Ƒ',
-        '§§§§§§§§§§'
-
+        '§§§§§§§§§§',
+        'alone together. solo juntos',
+        'todo el mundo junto'
       ],
       stack: 0,
       w: this.initW,
@@ -139,8 +140,13 @@ export default {
       }
     },
     draggerStyle () {
+      let bgcolor = '#f26760'
+      if (this.bgc === '#f26760') {
+        bgcolor = 'white'
+      }
       return {
-        'width': this.w + 'px'
+        'width': this.w + 'px',
+        'background': bgcolor
       }
     },
     ...mapState({
@@ -214,14 +220,6 @@ export default {
 .inlinediv:hover
   font-size 2.5em
 
-.strokedblack
-  -webkit-text-stroke-width: 1px !important
-  -webkit-text-stroke-color: black
-
-.strokedwhite
-  -webkit-text-stroke-width: 1px !important
-  -webkit-text-stroke-color: white
-
 .inlinedivtext
   position relative
   font-family: 'ruta_23regular', sans-serif
@@ -234,6 +232,14 @@ export default {
   -webkit-text-stroke-width: 0px !important
   letter-spacing 0 !important
 
+.strokedblack
+  -webkit-text-stroke-width: 1px !important
+  -webkit-text-stroke-color: black
+  color white
+.strokedwhite
+  -webkit-text-stroke-width: 1px !important
+  -webkit-text-stroke-color: white
+  color black
 .slider
   z-index 100
   display inline-block
