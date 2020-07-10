@@ -90,7 +90,7 @@ export default {
         '©',
         '§§§§§§§§§§',
         'alone together. solo juntos.',
-        'todo el mundo junto',
+        'todo el mundo juntos',
         'break the rules. romper las reglas'
       ],
       colorPalette: [

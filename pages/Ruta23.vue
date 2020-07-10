@@ -76,7 +76,7 @@ export default {
           y: 0.25,
           x: 2.5,
           textSize: 0.25,
-          content: '§§§§§§§§§§§§§§§§§§§§§§§§§§§§',
+          content: '§§§§§§§§§§§§§§§§§§§§§§§§§§',
           align: 'left',
           color: '#f26760',
           tracking: 0.29,
@@ -88,7 +88,7 @@ export default {
           y: 5.5,
           x: 2.5,
           textSize: 0.25,
-          content: '§§§§§§§§§§§§§§§§§§§§§§§§§§§§',
+          content: '§§§§§§§§§§§§§§§§§§§§§§§§§§',
           align: 'left',
           color: '#f26760',
           tracking: 0.29,
@@ -343,13 +343,12 @@ export default {
 
 .bottombar
   position fixed
-  height 48px
   bottom 0
   background #ff675d
   color white
   width 100%
   z-index 100
-
+  overflow: hidden
 .absolute
   position absolute
 
