@@ -1,6 +1,7 @@
 <template lang="pug">
 #tester-div
     p {{text}}
+
 </template>
 
 <script>

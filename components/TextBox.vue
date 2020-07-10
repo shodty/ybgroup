@@ -1,30 +1,35 @@
 <template lang="pug">
-vue-draggable-resizable.drag(:w="getW" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='[ stroked? strokeStyles : boxStyles ]' class-name-active="my-active-class" :active.sync="active")
-    .cutoff(@mouseenter='showControls=true, active=true' @mouseleave='showControls=false')
-        .controller(:style='[ showControls? {"opacity" : 100 } : {"opacity" : 0} ]')
-            .inlinediv.strokedwhite(@click="changeColor('black')" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") F
-            .inlinediv.strokedwhite(@click="changeColor('#0076bd')" :style="bgc === '#0076bd'? '-webkit-text-stroke-width: 1px !important; color: #0076bd' : '-webkit-text-stroke-width: 0px !important; color: #0076bd'") F
-            .inlinediv.strokedwhite(@click="changeColor('#f26760')" :style="bgc === '#f26760'? '-webkit-text-stroke-width: 1px !important; color: #f26760' : '-webkit-text-stroke-width: 0px !important; color: #f26760'") F
-            .inlinediv.strokedblack(@click="changeColor('white')" :style="bgc === 'white'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") F
+vue-draggable-resizable.drag(:w="getW" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='boxStyles' class-name-active="my-active-class" :active.sync="active" :resizable="resize")
+    .cutoff(@mouseenter='showControls=true' @mouseleave='showControls=false' :style='outlineStyles')
+        .controller(v-if="resize" :style='[active? {"opacity" : 100 } : {"opacity" : 0} ]' @mousedown="upZ(index)")
+            .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') F
+            .inlinediv.strokedwhite.blue(@click="changeColor('#0076bd')" :style='strokeStyles("#0076bd")') F
+            .inlinediv.strokedwhite.red(@click="changeColor('#f26760')" :style='strokeStyles("#f26760")') F
+            .inlinediv.strokedblack.white(@click="changeColor('white')" :style='strokeStyles("white")') F
             .slider
-                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style="{ backgroundColor: '#0076bd' }" :tooltip-style="{ backgroundColor: 'white', borderColor: '#0076bd', color: '#0076bd' }")
+                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#0076bd"? { backgroundColor: "white" } : { backgroundColor: "#0076bd" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#0076bd', color: '#0076bd' }" )
                     template(v-slot:dot)
-                        .circle
+                        .circle(style="border : 1px solid white !important")
             .slider(style="margin-left: 20px")
-                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style="{ backgroundColor: '#f26760' }" :tooltip-style="{ backgroundColor: 'white', borderColor: '#f26760', color: '#f26760' }")
+                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#f26760"? { backgroundColor: "white" } : { backgroundColor: "#f26760" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#f26760', color: '#f26760' }")
                     template(v-slot:dot)
-                        .circlered
-            .dragger(:style="draggerStyle" @mousedown="upZ(index)")
-               // img.dragicon(src="../assets/drag_white.png" width="16px")
-            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") S
+                        .circlered(style="border : 1px solid white !important")
+            .dragger(:style="draggerStyle")
+            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="style=strokeStyles('black')")
+                img.dragicon(:src="strokeFillIcon()" width="16px")
             .inlinedivtext(@click="align = 'left'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/l.png" width="16px")
             .inlinedivtext(@click="align = 'center'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/c.png" width="16px")
             .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/r.png" width="16px")
-            .inlinedivtext.strokedwhite(@click="boxClose = true" style="color: black" :style="bgc === 'black'? '-webkit-text-stroke-width: 1px !important' : '-webkit-text-stroke-width: 0px !important'") x
-        div.textinside(contenteditable="plaintext-only" spellcheck="false") {{content}}
+            .inlinedivclose.back.strokedwhite(@click="inBack = true" style="color: white" :style="style=strokeStyles('black')") ▾
+            .inlinedivclose.strokedred(@click="boxClose = true" style="color: white" :style="style=strokeStyles('black')") x
+        .controller(v-if="!resize" :style='[ showControls || active? {"opacity" : 100 } : {"opacity" : 0} ]' @mousedown="upZ(index)")
+          .dragger(:style="draggerStyle")
+          .inlinedivclose.back.strokedwhite(@click="inBack = true" style="color: white" :style="style=strokeStyles('black')") ▾
+          .inlinedivclose.strokedred(@click="boxClose = true" style="color: white" :style="style=strokeStyles('black')") x
+        div.textinside(contenteditable="plaintext-only" spellcheck="false" @focus="upZ(index)") {{content}}
 </template>
 
 <script>
@@ -47,20 +52,26 @@ export default {
     top: { type: Number, default: 100 },
     left: { type: Number, default: 100 },
     index: { type: Number, default: 0 },
-    boxCount: { type: Number, default: 0 }
+    initTextSize: { type: Number, default: 66 },
+    initContent: { type: String, default: 'random' },
+    initAlign: { type: String, default: 'left' },
+    initColor: { type: String, default: 'red' },
+    initTracking: { type: Number, default: 0 },
+    initStroked: { type: Boolean, default: false },
+    resize: { type: Boolean, default: true }
   },
   data () {
     return {
       active: false,
-      stroked: false,
+      stroked: this.initStroked,
       gridded: true,
       showControls: false,
-      textcolor: '#f26760',
       backgroundcolor: 'white',
-      tracking: 0,
+      tracking: this.initTracking,
       strokecolor: 'white',
-      align: 'center',
-      textsize: '16',
+      outlinecolor: 'red',
+      align: this.initAlign,
+      textsize: this.initTextSize,
       boxText: [
         'THIS IS THE BEGINNING. este es el comienzo.',
         '0123456789',
@@ -74,24 +85,41 @@ export default {
         'BEYOND SPACE, BEYOND TIME',
         'YELLOW BRICK GROUP 2020',
         '. \\ -¤- / . \\ • / -¤- \\ .',
-        'you and me = tu y yo',
+        'you and me! tu y yo!',
         '®',
         '©',
         '§§§§§§§§§§',
-        'alone together. solo juntos',
-        'todo el mundo junto'
+        'alone together. solo juntos.',
+        'todo el mundo junto',
+        'break the rules. romper las reglas'
+      ],
+      colorPalette: [
+        '#0076bd',
+        '#f26760',
+        'white',
+        'black'
       ],
       stack: 0,
       w: this.initW,
       h: 0,
       x: 0,
       y: 0,
-      boxClose: false
+      boxClose: false,
+      inBack: false
     }
   },
   computed: {
     zindex () {
       return this.$store.state.ruta.zindex
+    },
+    textcolor: {
+      get () {
+        if (this.initColor === 'red') { return this.colorPalette[Math.floor(Math.random() * this.colorPalette.length)] }
+        return this.initColor
+      },
+      set (newValue) {
+        this.initColor = newValue
+      }
     },
     thiszindex () {
       if (this.boxClose) { return -1 } else if (this.zindex === this.index) {
@@ -99,7 +127,8 @@ export default {
       } else { return 0 }
     },
     content () {
-      return this.boxText[Math.floor(Math.random() * this.boxText.length)]
+      if (this.initContent === 'random') { return this.boxText[Math.floor(Math.random() * this.boxText.length)] }
+      return this.initContent
     },
     light () {
       return this.$store.state.darklight.light
@@ -117,26 +146,31 @@ export default {
       return this.top
     },
     boxStyles () {
+      let currentZ = 0
+      let textColor = this.textcolor
+      let strokeWidth = '0'
+      if (this.inBack) { currentZ = 0 } else { currentZ = this.thiszindex }
+      if (this.stroked) {
+        textColor = 'transparent'
+        strokeWidth = 'calc(var(--text-size)/64)'
+      }
       return {
-        '--text-color': this.textcolor,
+        '--text-color': textColor,
         'caret-color': this.textcolor,
         '--text-size': this.textsize + 'px',
-        'letter-spacing': ((this.tracking) * this.textsize).toString() + 'px',
         'text-align': this.align,
-        'z-index': this.thiszindex
+        'letter-spacing': ((this.tracking) * this.textsize).toString() + 'px',
+        '-webkit-text-stroke-width': strokeWidth,
+        '-webkit-text-stroke-color': this.textcolor,
+        'z-index': currentZ
       }
     },
-    strokeStyles () {
+    outlineStyles () {
+      if (this.showControls) {
+        return { 'outline': '2px dashed ' + this.outlinecolor }
+      }
       return {
-        '--text-color': 'transparent',
-        '--stroke-color': this.textcolor,
-        'caret-color': this.textcolor,
-        '--text-size': this.textsize + 'px',
-        'letter-spacing': ((this.tracking) * this.textsize).toString() + 'px',
-        '-webkit-text-stroke-width': 'calc(var(--text-size)/64)',
-        '-webkit-text-stroke-color': this.textcolor,
-        'text-align': this.align,
-        'z-index': this.thiszindex
+        'outline': '0px'
       }
     },
     draggerStyle () {
@@ -172,7 +206,24 @@ export default {
       this.y = y
     },
     upZ (index) {
+      this.inBack = false
+      this.active = true
       this.$store.dispatch('ruta/upZ', index)
+    },
+    strokeStyles (color) {
+      if (this.bgc === color) { return '-webkit-text-stroke-width: 1px !important' }
+      return '-webkit-text-stroke-width: 0px !important'
+    },
+    strokeFillIcon () {
+      if (this.textcolor === '#f26760' && !this.stroked) { return require('../assets/red_fill.png') }
+      if (this.textcolor === '#f26760' && this.stroked) { return require('../assets/red_stroke.png') }
+      if (this.textcolor === '#0076bd' && !this.stroked) { return require('../assets/blue_fill.png') }
+      if (this.textcolor === '#0076bd' && this.stroked) { return require('../assets/blue_stroke.png') }
+      if (this.textcolor === 'white' && !this.stroked) { return require('../assets/white_fill.png') }
+      if (this.textcolor === 'white' && this.stroked) { return require('../assets/white_stroke.png') }
+      if (this.textcolor === 'black' && !this.stroked) { return require('../assets/black_fill.png') }
+      if (this.textcolor === 'black' && this.stroked) { return require('../assets/black_stroke.png') }
+      return require('../assets/black_stroke.png')
     }
   }
 }
@@ -232,6 +283,24 @@ export default {
   -webkit-text-stroke-width: 0px !important
   letter-spacing 0 !important
 
+.inlinedivclose
+  position absolute
+  top -32px
+  left 0
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-weight 1000
+  font-size 1.8em
+  display inline-block
+  padding 0px 5px
+  cursor crosshair
+  transition font-size .2s ease
+  line-height 1
+  -webkit-text-stroke-width: 0px !important
+  letter-spacing 0 !important
+
+.back
+  left 24px
+
 .strokedblack
   -webkit-text-stroke-width: 1px !important
   -webkit-text-stroke-color: black
@@ -240,6 +309,7 @@ export default {
   -webkit-text-stroke-width: 1px !important
   -webkit-text-stroke-color: white
   color black
+
 .slider
   z-index 100
   display inline-block
@@ -267,10 +337,10 @@ export default {
   z-index 25
   height 36px
   width 100%
-  transition opacity .5s ease
   white-space : nowrap;
   text-align center
   letter-spacing 0
+
 .dragger
   position absolute
   top -32px
@@ -278,7 +348,7 @@ export default {
   height 24px
   cursor grab
   background #ff675d
-
+  outline 1px solid white
 .dragger img
     position relative
     top 4px
@@ -300,17 +370,30 @@ export default {
   width 100%
 
 .handle
-  background #ff675d !important
+  background #f26760 !important
   border 1px solid white !important
 
 .bottombar
   position absolute
   height 48px
   bottom 0
-  background #ff675d
+  background #f26760
   color white
   width 100%
 
 .dragicon
     background transparent
+
+.black
+  color black
+
+.white
+  color white
+
+.red
+  color #f26760
+
+.blue
+  color #0076bd
+
 </style>
