@@ -11,21 +11,21 @@
   .bottombar
     b-row.bottomcontrols.no-overflow
       .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") BG:
-      .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black")
-      .inlinedivsquare.no-overflow(@click="changeBGColor('#0076bd')" style="background: #0076bd")
-      .inlinedivsquare.no-overflow(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white")
-      .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white")
-      .inlinedivgrid.no-overflow(@click="createTextBox" style="color: white; cursor: cell") ADD BOX
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
-      .inlinedivgrid.no-overflow(@click="gridded = !gridded" style="color: white; font-family: Georgia") ⋮⋮⋮
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 16px; cursor: default") •
-      .inlinedivgrid.no-overflow(@click="resetCount" style="color: white; margin-left: 24px") START
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
-      .inlinedivgrid.no-overflow(@click="one" style="color: white; margin-left: 24px") RUTA
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
-      .inlinedivgrid.no-overflow(@click="chaos" style="color: white; margin-left: 24px") chaos machine
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default") •
-      .inlinedivgrid.no-overflow(@click="clear" style="color: white; margin-left: 24px") clear
+      .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black") b
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#0076bd')" style="background: #0076bd") b
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#f26760')" style="background: #f26760; border: 1px solid white") r
+      .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black") w
+      .inlinedivgrid.no-overflow.bluehover(@click="createTextBox" style="cursor: cell") ADD BOX
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") |
+      .inlinedivgrid.no-overflow.bluehover(@click="gridded = !gridded" style="font-family: Georgia") ⋮⋮⋮
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") |
+      .inlinedivgrid.no-overflow.bluehover(@click="resetCount" style="margin-left: 24px") START
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") |
+      .inlinedivgrid.no-overflow.bluehover(@click="one" style="margin-left: 24px") RUTA
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") |
+      .inlinedivgrid.no-overflow.bluehover(@click="chaos" style="margin-left: 24px") chaos machine
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") |
+      .inlinedivgrid.no-overflow.bluehover(@click="clear" style="margin-left: 24px") clear
 
 </template>
 
@@ -282,7 +282,7 @@ export default {
     chaos () {
       this.chaosCount = 0
       this.layout = 'chaos'
-      this.chaosCount = 25
+      this.chaosCount = 50
     },
     roundToMultiple (value, multiple) {
       return Math.ceil(value / multiple) * multiple
@@ -322,7 +322,8 @@ export default {
   cursor crosshair
   width 25px
   height 25px
-
+  text-align center
+  font-family: 'ruta_23regular', sans-serif
 .inlinedivsquare:hover
   border 1px solid black !important
 
@@ -354,5 +355,12 @@ export default {
 
 .no-overflow
   overflow hidden
+
+.bluehover
+  transition color .2s ease
+  color white
+
+.bluehover:hover
+  color #0076bd
 
 </style>
