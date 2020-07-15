@@ -1,37 +1,21 @@
 <template lang='pug'>
 div
-  .view-cart-wrapper(v-if='!$store.state.shopify.cartOpen')
-    .view-cart(@click="$store.commit('shopify/openCart')")
-      img(:src=' light? getImgUrl("cart", ".png") : getImgUrl("cart_whi", ".png")')
-  nuxt-link(to='/')
-    .home-wrapper
-      img(:src=' light? getImgUrl("home_blk", ".png") : getImgUrl("home_whi", ".png")')
+  IconButtons(:darkmode='false')
   nuxt
   Cart
-  DarkLight.ignore
   MobileMenu
 </template>
 
 <script>
 import Cart from '~/components/Cart.vue'
-import DarkLight from '~/components/DarkLight.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
+import IconButtons from '~/components/IconButtons.vue'
 
 export default {
   components: {
     Cart,
     MobileMenu,
-    DarkLight
-  },
-  computed: {
-    light () {
-      return this.$store.state.darklight.light
-    }
-  },
-  methods: {
-    getImgUrl (pic, ext) {
-      return require('../assets/img/icons/' + pic + ext)
-    }
+    IconButtons
   }
 }
 </script>
@@ -152,26 +136,6 @@ html {
    margin: 0 !important;
 }
 
-.view-cart, .home-wrapper
-  font-size: 22px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: red;
-  position fixed
-  left: .8%
-  z-index: 100000
-  top 13%
-
-.view-cart img
-  height 28px
-
-.home-wrapper
-  top 7.5%
-  left 1%
-.home-wrapper img
-  width 28px
-
 .button
   background-color: #2752ff;
   color: white;
@@ -190,6 +154,4 @@ html {
     background: #bfbfbf;
     cursor: not-allowed;
 
-.ignore
-    pointer-events: none !important
 </style>

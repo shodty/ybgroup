@@ -4,28 +4,29 @@
   .gridbackground(:style="gridStyles")
   .paper.multiply
   .parental(ref="parental")
-    TextBox.absolute(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index")
+    TextBox.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index")
+    TextBox.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index")
     TextBox.absolute(v-if='layout === "what"' v-for="(box, index) in whatObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"B" + index'  :key="'B' + index")
     TextBox.absolute(v-if='layout === "why"' v-for="(box, index) in whyObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :zkey='"C" + index' :key="'C' + index")
     TextBox.absolute(v-for="(box, index) in chaosCount"  :initW='w' :initH='h' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * Math.random(), 6)' :initStroked='(Math.random() >= 0.5)' :initTracking='Math.random()' :chaos='true' :zkey='"D" + index' :key="'D' + index")
-    TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :zkey='"E" + index' :key="'E' + index")
+    TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
   .bottombar
     b-row.bottomcontrols
-      .inlinedivsquare(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") b
-      .inlinedivsquare(@click="changeBGColor('#008ff8')" style="background: #008ff8" v-tooltip="'blue'") b
-      .inlinedivsquare(@click="changeBGColor('#ff5b49')" style="background: #ff5b49; border: 1px solid white" v-tooltip="'red'") r
-      .inlinedivsquare(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
-      .inlinedivgrid.bluehover(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px" v-tooltip="'Toggle Grid'") ⋮⋮⋮
-      .inlinedivgrid.bluehover(@click="resetCount" style="margin-left: 24px") START
-      .inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      .inlinedivgrid.bluehover(@click="chaos" style="margin-left: 24px") chaos machine
+      .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") b
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#008ff8')" style="background: #008ff8" v-tooltip="'blue'") b
+      .inlinedivsquare.no-overflow(@click="changeBGColor('#ff5b49')" style="background: #ff5b49; border: 1px solid white" v-tooltip="'red'") r
+      .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
+      .inlinedivgrid.bluehover.no-overflow(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px; color: white" v-tooltip="'Toggle Grid'") ⋮⋮⋮
+      .inlinedivgrid.bluehover.no-overflow(@click="resetCount" style="margin-left: 24px") START
+      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
+      .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") chaos machine
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       //.inlinedivgrid.bluehover(@click="scramble" style="margin-left: 24px") scramble
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       //.inlinedivgrid.bluehover(@click="clear" style="margin-left: 24px" v-tooltip="'Blank Canvas'") clear
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      .inlinedivgrid.buyclass(@click='addToCart') Add to Cart
-  .circlebuttons
+      .inlinedivgrid.buyclass.no-overflow(@click='addToCart') Add to Cart
+  .circlebuttons.no-overflow
       .addbutton(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
       .clearbutton(@click="clear" v-tooltip="'Clear Canvas'") x
       .buybtn.buycursor(@click='addToCart' v-tooltip="'Add to Cart'") $
@@ -42,7 +43,7 @@ import '../static/v-tooltip.css'
 
 export default {
   name: 'Ruta23',
-  layout: 'rutalayout',
+  layout: 'ruta23',
   components: {
     VueDraggableResizable,
     TextBox,
@@ -68,7 +69,8 @@ export default {
       layout: state => state.ruta.layout,
       startObject: state => state.rutalayouts.startObject,
       whatObject: state => state.rutalayouts.whatObject,
-      whyObject: state => state.rutalayouts.whyObject
+      whyObject: state => state.rutalayouts.whyObject,
+      startMobile: state => state.rutalayouts.startMobile
     }),
     gridStyles () {
       let gridcolor = 'white'
@@ -91,11 +93,17 @@ export default {
     w () {
       if (process.client) { return Math.ceil((window.innerWidth / 1.1) / 12) * 12 } else { return 600 }
     },
+    newW () {
+      if (process.client) { return Math.ceil((window.innerWidth / 4) / 12) * 12 } else { return 600 }
+    },
     h () {
       if (process.client) { return Math.ceil((window.innerHeight / 2) / 12) * 12 } else { return 300 }
     },
     x () {
       if (process.client) { return Math.ceil(((window.innerWidth - this.w) / 2) / 12) * 12 } else { return 150 }
+    },
+    newX () {
+      if (process.client) { return Math.ceil(((window.innerWidth - this.newW) / 2) / 12) * 12 } else { return 150 }
     },
     y () {
       if (process.client) { return Math.ceil(((window.innerHeight - this.h) / 4) / 12) * 12 } else { return 200 }
@@ -276,7 +284,7 @@ export default {
   color white
   width 100%
   z-index 2000
-
+  overflow: hidden
 .absolute
   position absolute
 

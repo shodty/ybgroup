@@ -2,7 +2,7 @@ export const state = () => ({
   zindex: 0,
   layout: 'purchase',
   zstack: [],
-  grid: true
+  grid: false
 })
 
 export const mutations = {
