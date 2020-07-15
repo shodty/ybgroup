@@ -8,6 +8,11 @@ export const actions = {
     let checkout = {}
     if (shopCheckoutID) {
       checkout = await app.$shopifyClient.checkout.fetch(shopCheckoutID)
+      if (checkout.completedAt) {
+        checkout = await app.$shopifyClient.checkout.create()
+      }
+      checkout = await app.$shopifyClient.checkout.create()
+    } else {
       checkout = await app.$shopifyClient.checkout.create()
     }
 

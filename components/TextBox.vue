@@ -101,7 +101,7 @@ export default {
         '©',
         '§§§§§§§§§§',
         'alone together. solo juntos.',
-        'todo el mundo juntos',
+        'todo el mundo',
         '■',
         '* * *',
         '#',

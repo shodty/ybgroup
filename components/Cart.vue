@@ -110,6 +110,7 @@ footer {
   display: block;
   width: 100%;
   text-decoration none
+  color: white
   &:hover,
   &:focus {
     color: #fff;

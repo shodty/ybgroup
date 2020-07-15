@@ -28,14 +28,19 @@ export const actions = {
     const shopCheckoutID = app.$cookies.get('shopCheckoutID')
     let checkout = {}
     if (shopCheckoutID) {
-      checkout = await app.$shopifyClient.checkout.fetch(shopCheckoutID)
-      checkout = await app.$shopifyClient.checkout.create()
+      checkout = await app.$shopify.checkout.fetch(shopCheckoutID)
+      if (checkout.completedAt) {
+        checkout = await app.$shopify.checkout.create()
+      }
+      checkout = await app.$shopify.checkout.create()
+    } else {
+      checkout = await app.$shopify.checkout.create()
     }
 
     const shop = {
       checkout: await checkout,
-      products: await app.$shopifyClient.product.fetchAll(),
-      shop: await app.$shopifyClient.shop.fetchInfo()
+      products: await app.$shopify.product.fetchAll(),
+      shop: await app.$shopify.shop.fetchInfo()
     }
 
     await app.$cookies.set('shopCheckoutID', shop.checkout.id)
