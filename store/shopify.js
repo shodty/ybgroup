@@ -1,6 +1,27 @@
 
 export const state = () => ({
+  cartOpen: false,
+  checkout: { lineItems: [] },
+  products: [],
+  shop: {}
 })
+
+export const mutations = {
+  initShop (state, payload) {
+    for (const item in payload) {
+      state[item] = payload[item]
+    }
+  },
+  updateCheckout (state, payload) {
+    state.checkout = payload
+  },
+  openCart (state) {
+    state.cartOpen = true
+  },
+  closeCart (state) {
+    state.cartOpen = false
+  }
+}
 
 export const actions = {
   async nuxtServerInit ({ commit }, { app }) {
@@ -19,6 +40,6 @@ export const actions = {
 
     await app.$cookies.set('shopCheckoutID', shop.checkout.id)
 
-    commit('shopify/initShop', shop)
+    commit('initShop', shop)
   }
 }

@@ -20,6 +20,26 @@ export default {
   */
   loading: { color: '#fff' },
   /*
+  ** Build configuration
+  */
+  build: {
+    analyze: false,
+    extend (config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
+        })
+      }
+    },
+    vendor: ['isomorphic-fetch', 'shopify-buy']
+  },
+  /*
   ** Global CSS
   */
   css: [
@@ -33,7 +53,9 @@ export default {
     {
       src: '~plugins/vue-slider-component.js',
       ssr: false
-    }
+    },
+    '~/plugins/vue-tooltip.js',
+    '~/plugins/shopify'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -49,7 +71,8 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration
@@ -57,18 +80,24 @@ export default {
   */
   axios: {
   },
-  /*
-  ** Build configuration
-  */
-  build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, { isClient, loaders: { vue } }) {
-    // Extend only webpack config for client-bundle
-      if (isClient) {
-        vue.transformAssetUrls.video = ['src', 'poster']
-      }
-    }
+  /** shopify: {
+
+     * Your shopify domain
+
+    domain: 'yellow-brick-group.myshopify.com',
+
+     * Your shopify storefront access token
+
+    storefrontAccessToken: 'c457b61d335473bcc75ab81d94827259',
+
+     * This will be larger than the optimized version, as it will contain all fields that are available in the
+     * Storefront API. (https://help.shopify.com/en/api/custom-storefronts/storefront-api/reference)
+     * This should only be used when you need to add custom queries to supplement the JS Buy SDK queries.
+
+    unoptimized: false
+  }, */
+  env: {
+    shopifyAccessToken: 'c457b61d335473bcc75ab81d94827259',
+    shopifyDomain: 'yellow-brick-group.myshopify.com'
   }
 }

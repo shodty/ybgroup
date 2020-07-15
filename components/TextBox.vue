@@ -1,35 +1,40 @@
 <template lang="pug">
-vue-draggable-resizable.drag(:w="getW" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='boxStyles' class-name-active="my-active-class" :active.sync="active" :resizable="resize")
-    .cutoff(@mouseenter='showControls=true' @mouseleave='showControls=false' :style='outlineStyles')
-        .controller(v-if="resize" :style='[active? {"opacity" : 100 } : {"opacity" : 0} ]' @mousedown="upZ(index)")
-            .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') F
-            .inlinediv.strokedwhite.blue(@click="changeColor('#0076bd')" :style='strokeStyles("#0076bd")') F
-            .inlinediv.strokedwhite.red(@click="changeColor('#f26760')" :style='strokeStyles("#f26760")') F
-            .inlinediv.strokedblack.white(@click="changeColor('white')" :style='strokeStyles("white")') F
+vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='boxStyles' class-name-active="my-active-class" :active.sync="active")
+    .cutoff(@mouseenter='showControls=true' @mouseleave='showControls=false' :style='outlineStyles'  @mousedown="upZ(index)")
+        .controller(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
+            .dragger(:style="draggerStyle()")
+            .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') ⬤
+            .inlinediv.strokedwhite.blue(@click="changeColor('#008ff8')" :style='strokeStyles("#008ff8")') ⬤
+            .inlinediv.strokedwhite.red(@click="changeColor('#ff5b49')" :style='strokeStyles("#ff5b49")') ⬤
+            .inlinediv.strokedblack.white(@click="changeColor('white')" :style='strokeStyles("white")') ⬤
+            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="style=strokeStyles('black')")
+                img.dragicon(:src="strokeFillIcon()" width="16px")
             .slider
-                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#0076bd"? { backgroundColor: "white" } : { backgroundColor: "#0076bd" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#0076bd', color: '#0076bd' }" )
+                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#008ff8"? { backgroundColor: "white" } : { backgroundColor: "#008ff8" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#008ff8', color: '#008ff8' }" )
                     template(v-slot:dot)
                         .circle(style="border : 1px solid white !important")
             .slider(style="margin-left: 20px")
-                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#f26760"? { backgroundColor: "white" } : { backgroundColor: "#f26760" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#f26760', color: '#f26760' }")
+                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#ff5b49"? { backgroundColor: "white" } : { backgroundColor: "#ff5b49" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#ff5b49', color: '#ff5b49' }")
                     template(v-slot:dot)
                         .circlered(style="border : 1px solid white !important")
-            .dragger(:style="draggerStyle")
-            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="style=strokeStyles('black')")
-                img.dragicon(:src="strokeFillIcon()" width="16px")
             .inlinedivtext(@click="align = 'left'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/l.png" width="16px")
             .inlinedivtext(@click="align = 'center'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/c.png" width="16px")
             .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/r.png" width="16px")
-            .inlinedivclose.back.strokedwhite(@click="inBack = true" style="color: white" :style="style=strokeStyles('black')") ▾
-            .inlinedivclose.strokedred(@click="boxClose = true" style="color: white" :style="style=strokeStyles('black')") x
+            .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
+            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'close'") x
         .controller(v-if="!resize" :style='[ showControls || active? {"opacity" : 100 } : {"opacity" : 0} ]' @mousedown="upZ(index)")
-          .dragger(:style="draggerStyle")
-          .inlinedivclose.back.strokedwhite(@click="inBack = true" style="color: white" :style="style=strokeStyles('black')") ▾
-          .inlinedivclose.strokedred(@click="boxClose = true" style="color: white" :style="style=strokeStyles('black')") x
-        div.textinside(contenteditable="plaintext-only" spellcheck="false" @focus="upZ(index)") {{content}}
+          .dragger(:style="draggerStyle()")
+          .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
+          .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')"  v-tooltip="'close'") x
+        div.textinside(v-if="layout === 'default'" contenteditable="true" spellcheck="false" @click="upZ(index)") {{content}}
+        div.textinside.whatcursor(v-if="layout === 'what'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('what')") {{content}}
+        div.textinside.whatcursor(v-if="layout === 'why'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('why')") {{content}}
+        div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)" @click='addToCart') {{content}}
+        div.textinside(v-if="layout === 'zine'" spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
+          img(src="../assets/zine2.png" width="250px")
 </template>
 
 <script>
@@ -47,8 +52,8 @@ export default {
     VueDraggableResizable
   },
   props: {
-    initW: { type: Number, default: 100 },
-    initH: { type: Number, default: 100 },
+    initW: { type: Number, default: 1 },
+    initH: { type: Number, default: 1 },
     top: { type: Number, default: 100 },
     left: { type: Number, default: 100 },
     index: { type: Number, default: 0 },
@@ -58,20 +63,26 @@ export default {
     initColor: { type: String, default: 'red' },
     initTracking: { type: Number, default: 0 },
     initStroked: { type: Boolean, default: false },
-    resize: { type: Boolean, default: true }
+    resize: { type: Boolean, default: true },
+    initActive: { type: Boolean, default: false },
+    chaos: { type: Boolean, default: false },
+    layout: { type: String, default: 'default' },
+    zkey: { type: String, default: 'A0' }
   },
   data () {
     return {
-      active: false,
-      stroked: this.initStroked,
+      active: this.initActive,
       gridded: true,
       showControls: false,
       backgroundcolor: 'white',
-      tracking: this.initTracking,
       strokecolor: 'white',
+      stroked: this.initStroked,
+      textcolor: this.initColor,
       outlinecolor: 'red',
-      align: this.initAlign,
+      tracking: this.initTracking,
       textsize: this.initTextSize,
+      align: this.initAlign,
+      grid: 12,
       boxText: [
         'THIS IS THE BEGINNING. este es el comienzo.',
         '0123456789',
@@ -91,7 +102,7 @@ export default {
         '§§§§§§§§§§',
         'alone together. solo juntos.',
         'todo el mundo juntos',
-        '■■■■■■■■■',
+        '■',
         '* * *',
         '#',
         '••••••••••••',
@@ -99,8 +110,8 @@ export default {
         'break the rules. romper las reglas'
       ],
       colorPalette: [
-        '#0076bd',
-        '#f26760',
+        '#008ff8',
+        '#ff5b49',
         'white',
         'black'
       ],
@@ -109,27 +120,41 @@ export default {
       h: 0,
       x: 0,
       y: 0,
-      boxClose: false,
-      inBack: false
+      display: 'default',
+      quantity: 1,
+      chaosed: true
     }
   },
   computed: {
     zindex () {
       return this.$store.state.ruta.zindex
     },
-    textcolor: {
+    computeTextColor: {
       get () {
-        if (this.initColor === 'red') { return this.colorPalette[Math.floor(Math.random() * this.colorPalette.length)] }
-        return this.initColor
+        if (this.textcolor === 'red') {
+          let colors = []
+          if (this.bgc === '#008ff8') {
+            colors = ['#ff5b49', 'white', 'black']
+          }
+          if (this.bgc === '#ff5b49') {
+            colors = ['#008ff8', 'white', 'black']
+          }
+          if (this.bgc === 'white') {
+            colors = ['#008ff8', '#ff5b49', 'black']
+          }
+          if (this.bgc === 'black') {
+            colors = ['#008ff8', '#ff5b49', 'white']
+          }
+          return colors[Math.floor(Math.random() * colors.length)]
+        }
+        return this.textcolor
       },
       set (newValue) {
-        this.initColor = newValue
+        this.textcolor = newValue
       }
     },
     thiszindex () {
-      if (this.boxClose) { return -1 } else if (this.zindex === this.index) {
-        return 100
-      } else { return 0 }
+      return this.$store.state.ruta.zstack.indexOf(this.zkey)
     },
     content () {
       if (this.initContent === 'random') { return this.boxText[Math.floor(Math.random() * this.boxText.length)] }
@@ -138,36 +163,45 @@ export default {
     light () {
       return this.$store.state.darklight.light
     },
-    getW () {
-      return this.initW
-    },
     getH () {
+      if (this.chaos) {
+        const random = this.initH * Math.random()
+        return Math.ceil(random / this.grid) * this.grid
+      }
       return this.initH
     },
     getX () {
+      if (this.chaos) {
+        const random = this.left * Math.random() * 12
+        return Math.ceil(random / this.grid) * this.grid
+      }
       return this.left
     },
     getY () {
+      if (this.chaos) {
+        const random = this.top * Math.random() * 6
+        return Math.ceil(random / this.grid) * this.grid
+      }
       return this.top
     },
     boxStyles () {
-      let currentZ = 0
-      let textColor = this.textcolor
+      const currentZ = this.thiszindex
+      let textColor = this.computeTextColor
       let strokeWidth = '0'
-      if (this.inBack) { currentZ = 0 } else { currentZ = this.thiszindex }
       if (this.stroked) {
         textColor = 'transparent'
         strokeWidth = 'calc(var(--text-size)/64)'
       }
       return {
         '--text-color': textColor,
-        'caret-color': this.textcolor,
+        'caret-color': textColor,
         '--text-size': this.textsize + 'px',
         'text-align': this.align,
         'letter-spacing': ((this.tracking) * this.textsize).toString() + 'px',
         '-webkit-text-stroke-width': strokeWidth,
-        '-webkit-text-stroke-color': this.textcolor,
-        'z-index': currentZ
+        '-webkit-text-stroke-color': this.computeTextColor,
+        'z-index': currentZ,
+        'display': this.display
       }
     },
     outlineStyles () {
@@ -178,23 +212,39 @@ export default {
         'outline': '0px'
       }
     },
-    draggerStyle () {
-      let bgcolor = '#f26760'
-      if (this.bgc === '#f26760') {
-        bgcolor = 'white'
-      }
-      return {
-        'width': this.w + 'px',
-        'background': bgcolor
-      }
-    },
     ...mapState({
       bgc: state => state.backgroundchange.bgc
-    })
+    }),
+    product () {
+      return this.$store.state.shopify.products[0]
+    },
+    selectedOptions () {
+      return this.product.options.reduce(
+        (acc, cur) => ({ ...acc, [cur.name]: cur.values[0].value }),
+        {}
+      )
+    },
+    selectedVariant () {
+      return this.$shopifyClient.product.helpers.variantForOptions(
+        this.product,
+        this.selectedOptions
+      )
+    }
+  },
+  mounted () {
+    this.addToZStack()
   },
   methods: {
+    getW () {
+      if (this.chaos && this.chaosed) {
+        const random = this.initW * Math.random()
+        this.chaosed = false
+        this.w = Math.ceil(random / this.grid) * this.grid
+      }
+      return this.w
+    },
     changeColor (color) {
-      this.textcolor = color
+      this.computeTextColor = color
     },
     changeBGColor (color) {
       this.backgroundcolor = color
@@ -211,24 +261,64 @@ export default {
       this.y = y
     },
     upZ (index) {
-      this.inBack = false
       this.active = true
-      this.$store.dispatch('ruta/upZ', index)
+      this.$store.dispatch('ruta/moveToTop', this.zkey)
+    },
+    draggerStyle () {
+      let bgcolor = '#ff5b49'
+      if (this.bgc === '#ff5b49') {
+        bgcolor = 'white'
+      }
+      return {
+        'width': this.getW() + 'px',
+        'background': bgcolor
+      }
     },
     strokeStyles (color) {
       if (this.bgc === color) { return '-webkit-text-stroke-width: 1px !important' }
       return '-webkit-text-stroke-width: 0px !important'
     },
     strokeFillIcon () {
-      if (this.textcolor === '#f26760' && !this.stroked) { return require('../assets/red_fill.png') }
-      if (this.textcolor === '#f26760' && this.stroked) { return require('../assets/red_stroke.png') }
-      if (this.textcolor === '#0076bd' && !this.stroked) { return require('../assets/blue_fill.png') }
-      if (this.textcolor === '#0076bd' && this.stroked) { return require('../assets/blue_stroke.png') }
-      if (this.textcolor === 'white' && !this.stroked) { return require('../assets/white_fill.png') }
-      if (this.textcolor === 'white' && this.stroked) { return require('../assets/white_stroke.png') }
-      if (this.textcolor === 'black' && !this.stroked) { return require('../assets/black_fill.png') }
-      if (this.textcolor === 'black' && this.stroked) { return require('../assets/black_stroke.png') }
+      if (this.computeTextColor === '#ff5b49' && !this.stroked) { return require('../assets/red_fill.png') }
+      if (this.computeTextColor === '#ff5b49' && this.stroked) { return require('../assets/red_stroke.png') }
+      if (this.computeTextColor === '#008ff8' && !this.stroked) { return require('../assets/blue_fill.png') }
+      if (this.computeTextColor === '#008ff8' && this.stroked) { return require('../assets/blue_stroke.png') }
+      if (this.computeTextColor === 'white' && !this.stroked) { return require('../assets/white_fill.png') }
+      if (this.computeTextColor === 'white' && this.stroked) { return require('../assets/white_stroke.png') }
+      if (this.computeTextColor === 'black' && !this.stroked) { return require('../assets/black_fill.png') }
+      if (this.computeTextColor === 'black' && this.stroked) { return require('../assets/black_stroke.png') }
       return require('../assets/black_stroke.png')
+    },
+    changeLayout (layout) {
+      this.$store.dispatch('ruta/toggleGrid', false)
+      this.$store.dispatch('ruta/changeLayout', layout)
+    },
+    addToZStack () {
+      this.$store.dispatch('ruta/addToZStack', this.zkey)
+    },
+    moveToBack () {
+      this.$store.dispatch('ruta/moveToBottom', this.zkey)
+    },
+    closeBox () {
+      this.display = 'none'
+      this.$store.dispatch('ruta/removeFromZStack', this.zkey)
+    },
+    addToCart () {
+      this.$store.commit('shopify/openCart')
+
+      const checkoutId = this.$store.state.shopify.checkout.id
+      const lineItemsToAdd = [
+        {
+          variantId: this.selectedVariant.id,
+          quantity: parseInt(this.quantity, 10)
+        }
+      ]
+
+      this.$shopifyClient.checkout
+        .addLineItems(checkoutId, lineItemsToAdd)
+        .then((res) => {
+          this.$store.commit('shopify/updateCheckout', res)
+        })
     }
   }
 }
@@ -239,14 +329,14 @@ export default {
   overflow hidden
 
 .circle
-  background #0076bd
+  background #008ff8
   width 10px
   height 10px
   border-radius 5px
   margin-top 2px
 
 .circlered
-  background #f26760
+  background #ff5b49
   width 10px
   height 10px
   border-radius 5px
@@ -375,14 +465,14 @@ export default {
   width 100%
 
 .handle
-  background #f26760 !important
+  background #ff5b49 !important
   border 1px solid white !important
 
 .bottombar
   position absolute
   height 48px
   bottom 0
-  background #f26760
+  background #ff5b49
   color white
   width 100%
 
@@ -396,9 +486,15 @@ export default {
   color white
 
 .red
-  color #f26760
+  color #ff5b49
 
 .blue
-  color #0076bd
+  color #008ff8
+
+.multiply
+  mix-blend-mode: multiply
+
+.whatcursor
+  cursor: url('../assets/what.png'), auto;
 
 </style>

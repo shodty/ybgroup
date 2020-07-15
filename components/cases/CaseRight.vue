@@ -14,7 +14,6 @@
     slot(name='image11')
     slot(name='image12')
     slot(name='z1')
-    MobileMenu
     .prev-next(class="mobile-menu-hide")
       .prev
           img(:src=' light? getImgUrl("prev", ".png") : getImgUrl("prev_white", ".png")' @click="goToLink(false)")
@@ -26,13 +25,8 @@
 
 <script>
 
-import MobileMenu from '../MobileMenu.vue'
-
 export default {
   name: 'CaseLeft',
-  components: {
-    MobileMenu
-  },
   props: {
     bg: { type: String, default: '' },
     case: { type: String, default: '' }

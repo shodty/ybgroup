@@ -8,8 +8,6 @@
     img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
     img(v-show="false" src='../assets/air_mail_white.png' id='3' width='50px')
   img(:src=' light? getImgUrl("air_mail_black", ".png") : getImgUrl("air_mail_white", ".png")' class='headerimage')
-  MobileMenu
-  DarkLight
   MailLogo
   transition(name='slide-fade')
     .success(v-if="success")
@@ -78,17 +76,13 @@
 <script>
 
 import axios from 'axios'
-import MobileMenu from '../components/MobileMenu.vue'
 import MailLogo from '../components/MailLogo.vue'
-import DarkLight from '../components/DarkLight.vue'
 import Header from '../components/Header.vue'
 
 export default {
   name: 'Mailservice',
   components: {
-    MobileMenu,
     MailLogo,
-    DarkLight,
     Header
   },
   data () {

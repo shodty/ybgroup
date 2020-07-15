@@ -1,8 +1,6 @@
 <template lang="pug">
 #contact-main
   .bg(:style='[ light? {"background" : "white" } : {"background" : "black"} ]')
-  MobileMenu
-  DarkLight
   .text(:class='light? "black" : "white" ')
     h1 (LET’S&nbspWORK TOGETHER!)
     //h2 +1&nbsp916&nbsp123&nbsp4567
@@ -22,15 +20,8 @@
 
 <script>
 
-import MobileMenu from '../components/MobileMenu.vue'
-import DarkLight from '../components/DarkLight.vue'
-
 export default {
   name: 'Contact',
-  components: {
-    MobileMenu,
-    DarkLight
-  },
   data () {
     return {
       activeLink: 'navigation',

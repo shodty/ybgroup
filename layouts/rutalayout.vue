@@ -8,7 +8,7 @@ div
       img(:src=' light? getImgUrl("home_blk", ".png") : getImgUrl("home_whi", ".png")')
   nuxt
   Cart
-  DarkLight
+  DarkLight.ignore
   MobileMenu
 </template>
 
@@ -190,4 +190,6 @@ html {
     background: #bfbfbf;
     cursor: not-allowed;
 
+.ignore
+    pointer-events: none !important
 </style>

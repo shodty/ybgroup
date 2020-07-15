@@ -46,7 +46,8 @@
         .nav.nav-text(href='#' @click='onClick("projects"); rotateCube("showRight")'    :class='[activeLink == "projects"? "active" : "", light? "lightclass" : "darkclass"]')  PROJECTS
         .nav.nav-text(href='#' @click='onClick("sort"); rotateCube("showTop")'          :class='[activeLink == "sort"? "active" : "", light? "lightclass" : "darkclass"]')      SORT
         .nav.nav-text(href='#' @click='onClick("videos"); '                             :class='[activeLink == "videos"? "active" : "", light? "lightclass" : "darkclass"]')    VIDEOS
-
+        nuxt-link(to='ruta23')
+          .nav.nav-text.ruta(href='#' :class='[light? "lightclass" : "darkclass"]')   <span style='color: #f26760; line-height: 2'>*</span>RUTA 23<span style='color: #f26760; line-height: 2'>*</span>
 </template>
 
 <script>
@@ -249,4 +250,8 @@ export default {
     left -8px
     top -6px
     height 26px
+
+.ruta
+  font-family: 'ruta_23regular', sans-serif
+  color #008ff8
 </style>
