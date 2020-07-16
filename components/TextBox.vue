@@ -2,7 +2,7 @@
 vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='boxStyles' class-name-active="my-active-class" :active.sync="active")
     .cutoff(@mouseenter='showControls=true' @mouseleave='showControls=false' :style='outlineStyles'  @mousedown="upZ(index)")
         .controller.hide-on-mobile(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
-            .dragger(:style="draggerStyle()")
+            .dragger.draggerstyle(:style="draggerStyle()")
             .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') ⬤
             .inlinediv.strokedwhite.blue(@click="changeColor('#008ff8')" :style='strokeStyles("#008ff8")') ⬤
             .inlinediv.strokedwhite.red(@click="changeColor('#ff5b49')" :style='strokeStyles("#ff5b49")') ⬤
@@ -23,14 +23,14 @@ vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging
                 img.dragicon(src="../assets/c.png" width="16px")
             .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/r.png" width="16px")
-            .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
-            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'close'") x
+            .inlinedivclose.back.strokedred(@click="moveToBack" style="color: white" :style="style=strokeStyles('#ff5b49')" v-tooltip="'send to back'") ▾
+            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('#ff5b49')" v-tooltip="'close'") x
         .controller(v-if="!resize" :style='[ showControls || active? {"opacity" : 100 } : {"opacity" : 0} ]' @mousedown="upZ(index)")
-          .dragger(:style="draggerStyle()")
-          .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
-          .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')"  v-tooltip="'close'") x
+          .dragger.draggerstyle(:style="draggerStyle()")
+          .inlinedivclose.back.strokedred(@click="moveToBack" style="color: white" :style="style=strokeStyles('#ff5b49')" v-tooltip="'send to back'") ▾
+          .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('#ff5b49')"  v-tooltip="'close'") x
         .controller.hide-on-desktop(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
-            .dragger(:style="draggerStyle()")
+            .dragger.draggerstyle(:style="draggerStyle()")
             .bottomsliders
               .slidermobile
                 vue-slider.textsize(v-model="textsize" :min="6" :max="282" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#008ff8"? { backgroundColor: "white" } : { backgroundColor: "#008ff8" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#008ff8', color: '#008ff8' }" )
@@ -46,29 +46,21 @@ vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging
             .inlinediv.strokedblack.white(@click="changeColor('white')" :style='strokeStyles("white")') ⬤
             .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="style=strokeStyles('black')")
                 img.dragicon(:src="strokeFillIcon()" width="16px")
-            //.slider
-                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#008ff8"? { backgroundColor: "white" } : { backgroundColor: "#008ff8" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#008ff8', color: '#008ff8' }" )
-                    template(v-slot:dot)
-                        .circle(style="border : 1px solid white !important")
-            //.slider(style="margin-left: 20px")
-                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#ff5b49"? { backgroundColor: "white" } : { backgroundColor: "#ff5b49" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#ff5b49', color: '#ff5b49' }")
-                    template(v-slot:dot)
-                        .circlered(style="border : 1px solid white !important")
             .inlinedivtext(@click="align = 'left'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/l.png" width="16px")
             .inlinedivtext(@click="align = 'center'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/c.png" width="16px")
             .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
                 img.dragicon(src="../assets/r.png" width="16px")
-            .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
-            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'close'") x
+            .inlinedivclose.back.strokedred(@click="moveToBack" style="color: white" :style="style=strokeStyles('#ff5b49')" v-tooltip="'send to back'") ▾
+            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('#ff5b49')" v-tooltip="'close'") x
         div.textinside(v-if="layout === 'default'" contenteditable="true" spellcheck="false" @click="upZ(index)") {{content}}
         div.textinside.whatcursor(v-if="layout === 'what'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('what')") {{content}}
         div.textinside.whatcursor(v-if="layout === 'why'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('why')") {{content}}
         div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)" @click='addToCart') {{content}}
         div.textinsidemobile(v-if="layout === 'mobile'" contenteditable="true" spellcheck="false" @focus="upZ(index)") Type Here
         div.textinside(v-if="layout === 'zine'"  spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
-          img(src="../assets/zine2.png" width="250px")
+          img.dragger(src="../assets/zine2.png" width="250px" style="cursor: grab")
 </template>
 
 <script>
@@ -101,7 +93,8 @@ export default {
     initActive: { type: Boolean, default: false },
     chaos: { type: Boolean, default: false },
     layout: { type: String, default: 'default' },
-    zkey: { type: String, default: 'A0' }
+    zkey: { type: String, default: 'A0' },
+    pointer: { type: Boolean, default: true }
   },
   data () {
     return {
@@ -221,7 +214,11 @@ export default {
     boxStyles () {
       const currentZ = this.thiszindex
       let textColor = this.computeTextColor
+      let pointerevents = 'default'
       let strokeWidth = '0'
+      if (!this.pointer) {
+        pointerevents = 'none'
+      }
       if (this.stroked) {
         textColor = 'transparent'
         strokeWidth = 'calc(var(--text-size)/64)'
@@ -235,7 +232,8 @@ export default {
         '-webkit-text-stroke-width': strokeWidth,
         '-webkit-text-stroke-color': this.computeTextColor,
         'z-index': currentZ,
-        'display': this.display
+        'display': this.display,
+        'pointer-events': pointerevents
       }
     },
     outlineStyles () {
@@ -424,7 +422,6 @@ export default {
   cursor crosshair
   transition font-size .2s ease
   line-height 1
-  -webkit-text-stroke-width: 0px !important
   letter-spacing 0 !important
 
 .back
@@ -438,6 +435,9 @@ export default {
   -webkit-text-stroke-width: 1px !important
   -webkit-text-stroke-color: white
   color black
+.strokedred
+  -webkit-text-stroke-width: 1px !important
+  -webkit-text-stroke-color: #ff5b49 !important
 
 .slider
   z-index 100
@@ -481,7 +481,7 @@ export default {
   text-align center
   letter-spacing 0
 
-.dragger
+.draggerstyle
   position absolute
   top -32px
   left 0
@@ -489,7 +489,8 @@ export default {
   cursor grab
   background #ff675d
   outline 1px solid white
-.dragger img
+
+.draggerstyle img
     position relative
     top 4px
 

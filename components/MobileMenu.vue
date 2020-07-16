@@ -31,6 +31,9 @@
                 nuxt-link(to='bardismiry')
                   li(@click="openMenu()") Bardis & Miry
             .nav
+                nuxt-link(to='ruta23')
+                  p(@click="openMenu()") RUTA  23
+            .nav
               nuxt-link(to='mailservice')
                 .mailnav
                   p(@click="openMenu()" @mouseenter="mail()" @mouseleave="mail()") MAIL SERVICE

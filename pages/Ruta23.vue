@@ -4,13 +4,13 @@
   .gridbackground(:style="gridStyles")
   .paper.multiply
   .parental(ref="parental")
-    TextBox.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index")
-    TextBox.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index")
+    TextBox.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index" :pointer='box.pointer')
+    TextBox.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index" :pointer='box.pointer')
     TextBox.absolute(v-if='layout === "what"' v-for="(box, index) in whatObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"B" + index'  :key="'B' + index")
     TextBox.absolute(v-if='layout === "why"' v-for="(box, index) in whyObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :zkey='"C" + index' :key="'C' + index")
     TextBox.absolute(v-for="(box, index) in chaosCount"  :initW='w' :initH='h' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * Math.random(), 6)' :initStroked='(Math.random() >= 0.5)' :initTracking='Math.random()' :chaos='true' :zkey='"D" + index' :key="'D' + index")
     TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
-    TextBox.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
+    TextBox.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h*.8, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
   .bottombar
     b-row.bottomcontrols
       .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") b
@@ -21,7 +21,7 @@
       .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="resetCount" style="margin-left: 24px") START
       .inlinedivgrid.bluehover.no-overflow.hide-on-desktop(@click="createMobileTextBox()" style="margin-left: 24px") PLAY
       .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") chaos machine
+      .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") COLLAGE
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       //.inlinedivgrid.bluehover(@click="scramble" style="margin-left: 24px") scramble
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
@@ -29,10 +29,10 @@
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       .inlinedivgrid.buyclass.no-overflow(@click='addToCart') Add to Cart
   .circlebuttons.no-overflow
-      .addbutton.hide-on-mobile(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
-      .addbutton.hide-on-desktop(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
-      .clearbutton.hide-on-mobile(@click="clear" v-tooltip="'Clear Canvas'") x
-      .buybtn.buycursor(@click='addToCart' v-tooltip="'Add to Cart'") $
+      .addbutton.hide-on-mobile.pointerall(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+      .addbutton.hide-on-desktop.pointerall(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+      .clearbutton.pointerall(@click="clear" v-tooltip="'Clear Canvas'") x
+      .buybtn.buycursor.pointerall(@click='addToCart' v-tooltip="'Add to Cart'") $
 </template>
 
 <script>
@@ -272,15 +272,27 @@ export default {
   text-align center
   transition background .45s ease
   border 2px solid white
-
+  @media(max-width: 767px) {
+    height 36px
+    width 36px
+    font-size 28px
+  }
 .clearbutton
   line-height 1.2
   font-size 32px
+  @media(max-width: 767px) {
+    font-size 22px
+    line-height 1.4
+  }
+
 .buybtn
   line-height 1.4
   font-size 32px
   font-weight 600
-
+  @media(max-width: 767px) {
+    font-size 22px
+    line-height 1.45
+  }
 .buycursor
   cursor: url('../assets/buy.png'), auto;
 .addbutton:hover, .clearbutton:hover, .buybtn:hover
@@ -318,6 +330,7 @@ export default {
 
 .circlebuttons
   width 100%
+  pointer-events: none
   z-index: 9999
   display flex
   justify-content center
@@ -325,4 +338,10 @@ export default {
   position fixed
   margin 0 auto
   bottom 72px
+  @media(max-width: 767px) {
+    bottom 56px
+  }
+
+.pointerall
+  pointer-events: all
 </style>

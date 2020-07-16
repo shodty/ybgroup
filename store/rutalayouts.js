@@ -36,7 +36,8 @@ export const state = () => ({
       align: 'center',
       color: '#ff5b49',
       tracking: 0.29,
-      stroked: true
+      stroked: true,
+      pointer: false
     },
     {
       width: 1,
@@ -48,7 +49,8 @@ export const state = () => ({
       align: 'center',
       color: '#ff5b49',
       tracking: 0.29,
-      stroked: true
+      stroked: true,
+      pointer: false
     },
     {
       width: 0.66,
@@ -87,7 +89,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.15,
@@ -100,7 +103,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.1,
@@ -129,7 +133,7 @@ export const state = () => ({
       resize: false,
       layout: 'what'
     },
-    {
+    /* {
       width: 0.4,
       height: 0.25,
       y: 4.9,
@@ -142,7 +146,7 @@ export const state = () => ({
       stroked: false,
       resize: false,
       layout: 'why'
-    },
+    }, */
     {
       width: 0.65,
       height: 0.375,
@@ -461,7 +465,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 1,
@@ -474,7 +479,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0.29,
       stroked: true,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 1,
@@ -487,7 +493,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0.29,
       stroked: true,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.8,
@@ -500,7 +507,8 @@ export const state = () => ({
       color: '#008ff8',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 1,
@@ -513,7 +521,8 @@ export const state = () => ({
       color: 'black',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.9,
@@ -526,7 +535,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.9,
@@ -539,9 +549,10 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
-    {
+    /* {
       width: 0.9,
       height: 0.25,
       y: 4.6,
@@ -555,7 +566,7 @@ export const state = () => ({
       resize: false,
       layout: 'what'
     },
-    /* {
+    {
       width: 0.9,
       height: 0.25,
       y: 4.5,
@@ -580,11 +591,12 @@ export const state = () => ({
       color: '#000',
       tracking: 0.2,
       stroked: false,
-      resize: false
+      resize: false,
+      pointer: false
     },
     {
       width: 0.9,
-      height: 0.255,
+      height: 0.355,
       y: 3.3,
       x: 1,
       textSize: 0.6,
