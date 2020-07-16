@@ -27,12 +27,14 @@
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       //.inlinedivgrid.bluehover(@click="clear" style="margin-left: 24px" v-tooltip="'Blank Canvas'") clear
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      .inlinedivgrid.buyclass.no-overflow(@click='addToCart') Add to Cart
+      .inlinedivgrid.buyclass.no-overflow
+        a(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") Add to Cart
   .circlebuttons.no-overflow
       .addbutton.hide-on-mobile.pointerall(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
       .addbutton.hide-on-desktop.pointerall(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
       .clearbutton.pointerall(@click="clear" v-tooltip="'Clear Canvas'") x
-      .buybtn.buycursor.pointerall(@click='addToCart' v-tooltip="'Add to Cart'") $
+      .buybtn.pointerall(v-tooltip="'Add to Cart'")
+        a.buycursor(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") $
 </template>
 
 <script>
@@ -344,4 +346,8 @@ export default {
 
 .pointerall
   pointer-events: all
+
+a
+  color white
+
 </style>
