@@ -3,13 +3,13 @@
     .mobile.hide-on-desktop
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
-            HomeButton
+            HomeButton(v-if="!isHome")
         .hide-on-desktop
             CartButton
     .desktop.hide-on-mobile
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
-            HomeButton
+            HomeButton(v-if="!isHome")
         CartButton
 </template>
 
@@ -28,6 +28,11 @@ export default {
   },
   props: {
     darkmode: { type: Boolean, default: true }
+  },
+  computed: {
+    isHome () {
+      return this.$route.name === 'index'
+    }
   }
 }
 

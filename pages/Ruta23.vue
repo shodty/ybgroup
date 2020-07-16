@@ -10,6 +10,7 @@
     TextBox.absolute(v-if='layout === "why"' v-for="(box, index) in whyObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :zkey='"C" + index' :key="'C' + index")
     TextBox.absolute(v-for="(box, index) in chaosCount"  :initW='w' :initH='h' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * Math.random(), 6)' :initStroked='(Math.random() >= 0.5)' :initTracking='Math.random()' :chaos='true' :zkey='"D" + index' :key="'D' + index")
     TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
+    TextBox.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
   .bottombar
     b-row.bottomcontrols
       .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") b
@@ -17,7 +18,8 @@
       .inlinedivsquare.no-overflow(@click="changeBGColor('#ff5b49')" style="background: #ff5b49; border: 1px solid white" v-tooltip="'red'") r
       .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
       .inlinedivgrid.bluehover.no-overflow(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px; color: white" v-tooltip="'Toggle Grid'") ⋮⋮⋮
-      .inlinedivgrid.bluehover.no-overflow(@click="resetCount" style="margin-left: 24px") START
+      .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="resetCount" style="margin-left: 24px") START
+      .inlinedivgrid.bluehover.no-overflow.hide-on-desktop(@click="createMobileTextBox()" style="margin-left: 24px") PLAY
       .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") chaos machine
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
@@ -27,8 +29,9 @@
       //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
       .inlinedivgrid.buyclass.no-overflow(@click='addToCart') Add to Cart
   .circlebuttons.no-overflow
-      .addbutton(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
-      .clearbutton(@click="clear" v-tooltip="'Clear Canvas'") x
+      .addbutton.hide-on-mobile(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+      .addbutton.hide-on-desktop(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+      .clearbutton.hide-on-mobile(@click="clear" v-tooltip="'Clear Canvas'") x
       .buybtn.buycursor(@click='addToCart' v-tooltip="'Add to Cart'") $
 </template>
 
@@ -54,6 +57,7 @@ export default {
       strokecolor: 'white',
       backgroundcolor: 'white',
       boxCount: 0,
+      mobileBoxCount: 0,
       chaosCount: 0,
       grid: 12,
       stroked: false,
@@ -136,6 +140,10 @@ export default {
     createTextBox () {
       this.boxCount = this.boxCount + 1
     },
+    createMobileTextBox () {
+      this.$store.dispatch('ruta/changeLayout', 'clear')
+      this.mobileBoxCount += 1
+    },
     resetCount () {
       this.boxCount = 0
       this.chaosCount = 0
@@ -149,6 +157,7 @@ export default {
     clear () {
       this.$store.dispatch('ruta/changeLayout', 'clear')
       this.boxCount = 0
+      this.mobileBoxCount = 0
       this.chaosCount = 0
     },
     chaos () {

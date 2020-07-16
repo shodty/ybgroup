@@ -1,7 +1,7 @@
 <template lang="pug">
 vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging="onDrag" @resizing="onResize" drag-handle=".dragger" :parent="true" :grid="[12,12]"  :style='boxStyles' class-name-active="my-active-class" :active.sync="active")
     .cutoff(@mouseenter='showControls=true' @mouseleave='showControls=false' :style='outlineStyles'  @mousedown="upZ(index)")
-        .controller(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
+        .controller.hide-on-mobile(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
             .dragger(:style="draggerStyle()")
             .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') ⬤
             .inlinediv.strokedwhite.blue(@click="changeColor('#008ff8')" :style='strokeStyles("#008ff8")') ⬤
@@ -29,11 +29,45 @@ vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging
           .dragger(:style="draggerStyle()")
           .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
           .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')"  v-tooltip="'close'") x
+        .controller.hide-on-desktop(v-if="resize && active" :style='[active? {"display" : 100 } : {"opacity" : 0} ]')
+            .dragger(:style="draggerStyle()")
+            .bottomsliders
+              .slidermobile
+                vue-slider.textsize(v-model="textsize" :min="6" :max="282" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#008ff8"? { backgroundColor: "white" } : { backgroundColor: "#008ff8" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#008ff8', color: '#008ff8' }" )
+                    template(v-slot:dot)
+                        .circle(style="border : 1px solid white !important")
+              .slidermobile(style="margin-left: 20px")
+                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#ff5b49"? { backgroundColor: "white" } : { backgroundColor: "#ff5b49" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#ff5b49', color: '#ff5b49' }")
+                    template(v-slot:dot)
+                        .circlered(style="border : 1px solid white !important")
+            .inlinediv.strokedwhite.black(@click="changeColor('black')" :style='strokeStyles("black")') ⬤
+            .inlinediv.strokedwhite.blue(@click="changeColor('#008ff8')" :style='strokeStyles("#008ff8")') ⬤
+            .inlinediv.strokedwhite.red(@click="changeColor('#ff5b49')" :style='strokeStyles("#ff5b49")') ⬤
+            .inlinediv.strokedblack.white(@click="changeColor('white')" :style='strokeStyles("white")') ⬤
+            .inlinedivtext.strokedwhite(@click="stroked = !stroked" style="color: black" :style="style=strokeStyles('black')")
+                img.dragicon(:src="strokeFillIcon()" width="16px")
+            //.slider
+                vue-slider.textsize(v-model="textsize" :min="6" :max="576" :interval="6" :rail-style="{backgroundColor: '#9bbccc'}" :process-style='bgc === "#008ff8"? { backgroundColor: "white" } : { backgroundColor: "#008ff8" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#008ff8', color: '#008ff8' }" )
+                    template(v-slot:dot)
+                        .circle(style="border : 1px solid white !important")
+            //.slider(style="margin-left: 20px")
+                vue-slider(v-model="tracking" :min="0" :max="1" :interval="0.01" :rail-style="{backgroundColor: '#eab8b7'}" :process-style='bgc === "#ff5b49"? { backgroundColor: "white" } : { backgroundColor: "#ff5b49" }' :tooltip-style="{ backgroundColor: 'white', borderColor: '#ff5b49', color: '#ff5b49' }")
+                    template(v-slot:dot)
+                        .circlered(style="border : 1px solid white !important")
+            .inlinedivtext(@click="align = 'left'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
+                img.dragicon(src="../assets/l.png" width="16px")
+            .inlinedivtext(@click="align = 'center'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
+                img.dragicon(src="../assets/c.png" width="16px")
+            .inlinedivtext(@click="align = 'right'" :style="bgc === 'black'? 'background: white' : 'background: transparent'")
+                img.dragicon(src="../assets/r.png" width="16px")
+            .inlinedivclose.back.strokedwhite(@click="moveToBack" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'send to back'") ▾
+            .inlinedivclose.strokedred(@click="closeBox" style="color: white" :style="style=strokeStyles('black')" v-tooltip="'close'") x
         div.textinside(v-if="layout === 'default'" contenteditable="true" spellcheck="false" @click="upZ(index)") {{content}}
         div.textinside.whatcursor(v-if="layout === 'what'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('what')") {{content}}
         div.textinside.whatcursor(v-if="layout === 'why'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('why')") {{content}}
         div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)" @click='addToCart') {{content}}
-        div.textinside(v-if="layout === 'zine'" spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
+        div.textinsidemobile(v-if="layout === 'mobile'" contenteditable="true" spellcheck="false" @focus="upZ(index)") Type Here
+        div.textinside(v-if="layout === 'zine'"  spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
           img(src="../assets/zine2.png" width="250px")
 </template>
 
@@ -416,6 +450,17 @@ export default {
   -webkit-text-stroke-width: 0px !important
   font-family: Verdana, Geneva, Tahoma, sans-serif
 
+.slidermobile
+  z-index 100
+  display inline-block
+  margin-right 12px
+  cursor e-resize
+  min-width 40%
+  font-size 12px !important
+  letter-spacing 0 !important
+  -webkit-text-stroke-width: 0px !important
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+
 .textsize .vue-slider-dot-tooltip-text::after
   content: "px";
 
@@ -459,6 +504,17 @@ export default {
   overflow hidden
   top: 36px;
 
+.textinsidemobile
+  position relative
+  color: var(--text-color);
+  font-size: calc(var(--text-size) * 1);
+  z-index 0
+  outline 0
+  height: calc(100% - 36px);
+  width 100%
+  overflow hidden
+  top: 58px;
+
 .cutoff
   overflow hidden
   height: 100%;
@@ -497,4 +553,8 @@ export default {
 .whatcursor
   cursor: url('../assets/what.png'), auto;
 
+.bottomsliders
+  display flex
+  justify-content center
+  margin-bottom 8px
 </style>

@@ -95,7 +95,7 @@ export const state = () => ({
       y: 4.07,
       x: 4.12,
       textSize: 0.25,
-      content: '$25',
+      content: '$30',
       align: 'right',
       color: '#ff5b49',
       tracking: 0,
@@ -439,8 +439,8 @@ export const state = () => ({
   startMobile: [
     {
       width: 1,
-      height: 0.225,
-      y: 1.1,
+      height: 0.35,
+      y: 0.9,
       x: 0.8,
       textSize: 1,
       content: 'Ruta 23',
@@ -448,12 +448,12 @@ export const state = () => ({
       color: '#008ff8',
       tracking: 0,
       stroked: true,
-      resize: true
+      resize: false
     },
     {
       width: 1,
-      height: 0.225,
-      y: 1,
+      height: 0.35,
+      y: 0.8,
       x: 1,
       textSize: 1,
       content: 'Ruta 23',
@@ -461,44 +461,46 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: true
+      resize: false
     },
     {
       width: 1,
       height: 0.15,
-      y: 0.25,
+      y: 0.05,
       x: 1,
       textSize: 0.25,
       content: '§§§§§§§§§§§§§§§§§§§§§§§§§§',
       align: 'center',
       color: '#ff5b49',
       tracking: 0.29,
-      stroked: true
+      stroked: true,
+      resize: false
     },
     {
       width: 1,
       height: 0.15,
-      y: 5.5,
+      y: 6,
       x: 1,
       textSize: 0.25,
       content: '§§§§§§§§§§§§§§§§§§§§§§§§§§',
       align: 'center',
       color: '#ff5b49',
       tracking: 0.29,
-      stroked: true
+      stroked: true,
+      resize: false
     },
     {
-      width: 0.66,
-      height: 0.25,
-      y: 0.85,
+      width: 0.8,
+      height: 0.15,
+      y: 0.45,
       x: 2.2,
       textSize: 0.1666,
       content: 'inspired by mexico city',
-      align: 'left',
+      align: 'center',
       color: '#008ff8',
       tracking: 0,
       stroked: false,
-      resize: true
+      resize: false
     },
     {
       width: 1,
@@ -511,7 +513,7 @@ export const state = () => ({
       color: 'black',
       tracking: 0,
       stroked: false,
-      resize: true
+      resize: false
     },
     {
       width: 0.9,
@@ -532,7 +534,7 @@ export const state = () => ({
       y: 2.3,
       x: 1,
       textSize: 0.8,
-      content: '$25',
+      content: '$30',
       align: 'center',
       color: '#ff5b49',
       tracking: 0,
@@ -542,18 +544,18 @@ export const state = () => ({
     {
       width: 0.9,
       height: 0.25,
-      y: 4,
+      y: 4.6,
       x: 1,
       textSize: 0.4,
       content: 'What\'s included?',
       align: 'center',
-      color: '#000',
+      color: '#ff5b49',
       tracking: 0,
       stroked: false,
       resize: false,
       layout: 'what'
     },
-    {
+    /* {
       width: 0.9,
       height: 0.25,
       y: 4.5,
@@ -566,25 +568,24 @@ export const state = () => ({
       stroked: false,
       resize: false,
       layout: 'why'
-    },
+    }, */
     {
       width: 1,
       height: 0.25,
       y: 5.1,
       x: 0.5,
       textSize: 0.2,
-      content: '* Visit on desktop to * experiment!',
+      content: '* Visit on desktop to * experiment with RUTA 23!',
       align: 'center',
       color: '#000',
       tracking: 0.2,
       stroked: false,
-      resize: false,
-      layout: 'why'
+      resize: false
     },
     {
       width: 0.9,
-      height: 0.375,
-      y: 3,
+      height: 0.255,
+      y: 3.3,
       x: 1,
       textSize: 0.6,
       content: 'purchase now',
@@ -592,7 +593,7 @@ export const state = () => ({
       color: '#008ff8',
       tracking: 0,
       stroked: false,
-      resize: true,
+      resize: false,
       layout: 'buy'
     }
   ]
