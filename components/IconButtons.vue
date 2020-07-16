@@ -4,13 +4,13 @@
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
             HomeButton(v-if="!isHome")
-        .hide-on-desktop
+        //.hide-on-desktop
             CartButton
     .desktop.hide-on-mobile
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
             HomeButton(v-if="!isHome")
-        CartButton
+        //CartButton
 </template>
 
 <script>

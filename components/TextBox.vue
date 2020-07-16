@@ -57,7 +57,7 @@ vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging
         div.textinside(v-if="layout === 'default'" contenteditable="true" spellcheck="false" @click="upZ(index)") {{content}}
         div.textinside.whatcursor(v-if="layout === 'what'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('what')") {{content}}
         div.textinside.whatcursor(v-if="layout === 'why'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('why')") {{content}}
-        div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)" @click='addToCart')
+        div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)")
           a(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button" style="color: #008ff8") {{content}}
         div.textinsidemobile(v-if="layout === 'mobile'" contenteditable="true" spellcheck="false" @focus="upZ(index)") Type Here
         div.textinside(v-if="layout === 'zine'"  spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
