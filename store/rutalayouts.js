@@ -133,20 +133,20 @@ export const state = () => ({
       resize: false,
       layout: 'what'
     },
-    /* {
+    {
       width: 0.4,
       height: 0.25,
       y: 4.9,
       x: 10.9,
       textSize: 0.1666,
-      content: 'Why purchase?',
+      content: 'Instructions',
       align: 'right',
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
       resize: false,
       layout: 'why'
-    }, */
+    },
     {
       width: 0.65,
       height: 0.375,
@@ -425,10 +425,10 @@ export const state = () => ({
       layout: 'zine'
     }
   ],
-  whyObject: [
+  howObject: [
     {
       width: 1,
-      height: 0.725,
+      height: 1.25,
       y: 1,
       x: 1,
       textSize: 0.8,
@@ -437,7 +437,8 @@ export const state = () => ({
       color: '#ff5b49',
       tracking: 0,
       stroked: false,
-      resize: true
+      resize: false,
+      layout: 'video'
     }
   ],
   startMobile: [

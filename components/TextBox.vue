@@ -59,6 +59,8 @@ vue-draggable-resizable.drag(:w="getW()" :h="getH" :x="getX" :y="getY" @dragging
         div.textinside.whatcursor(v-if="layout === 'why'" spellcheck="false" @focus="upZ(index)" @click="changeLayout('why')") {{content}}
         div.textinside.buycursor(v-if="layout === 'buy'" spellcheck="false" @focus="upZ(index)")
           a(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button" style="color: #008ff8") {{content}}
+        div.textinside(v-if="layout === 'video'" @focus="upZ(index)")
+          iframe(width="800" height="450" src="https://www.youtube-nocookie.com/embed/RN2-Npu4TGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
         div.textinsidemobile(v-if="layout === 'mobile'" contenteditable="true" spellcheck="false" @focus="upZ(index)") Type Here
         div.textinside(v-if="layout === 'zine'"  spellcheck="false" @focus="upZ(index)" style="cursor: pointer; line-height: 0")
           img.dragger(src="../assets/zine2.png" width="250px" style="cursor: grab")
