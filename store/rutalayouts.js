@@ -427,9 +427,23 @@ export const state = () => ({
   ],
   howObject: [
     {
+      width: 0.8,
+      height: 0.25,
+      y: 5.35,
+      x: 2.9,
+      textSize: 0.0666,
+      content: 'Click "YOUTUBE" button on video to open in new tab & follow along!',
+      align: 'center',
+      color: '#008ff8',
+      tracking: 0,
+      stroked: false,
+      resize: false,
+      pointer: false
+    },
+    {
       width: 1,
       height: 1.25,
-      y: 1,
+      y: 0.9,
       x: 1,
       textSize: 0.8,
       content: 'Why Purchase?',
@@ -440,6 +454,7 @@ export const state = () => ({
       resize: false,
       layout: 'video'
     }
+
   ],
   startMobile: [
     {
