@@ -437,6 +437,9 @@ export const state = () => ({
       color: '#008ff8',
       tracking: 0,
       stroked: false
+      // stroked: false,
+      // resize: false,
+      // pointer: false
     },
     {
       width: 1,
