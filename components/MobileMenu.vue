@@ -38,6 +38,9 @@
                 .mailnav
                   p(@click="openMenu()" @mouseenter="mail()" @mouseleave="mail()") MAIL SERVICE
             .nav
+              a(href='https://ybgroupshop.us')
+                p(@click="openMenu()") SHOP
+            .nav
               nuxt-link(to='contact')
                 p(@click="openMenu()") CONTACT
             b-row(class="copyright")
@@ -107,7 +110,8 @@ a
     position: fixed
     top: 0
     right: 0
-    padding 2vw
+    padding 1vw
+    padding-top .8vw
     cursor: url('../assets/hand.png'), auto
 
 .menu-icon img {

@@ -48,6 +48,8 @@
         .nav.nav-text(href='#' @click='onClick("videos"); '                             :class='[activeLink == "videos"? "active" : "", light? "lightclass" : "darkclass"]')    VIDEOS
         nuxt-link(to='ruta23')
           .nav.nav-text.ruta(href='#' :class='[light? "lightclass" : "darkclass"]')   <span style='color: #f26760; line-height: 2'>*</span>RUTA 23<span style='color: #f26760; line-height: 2'>*</span>
+        a(href='https://ybgroupshop.us')
+          .nav.nav-text(href='#' :class='[light? "lightclass" : "darkclass"]')   SHOP
 </template>
 
 <script>

@@ -32,7 +32,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-
 }
 
 *,
@@ -81,6 +80,22 @@ html {
 }
 
 @font-face {
+    font-family: 'cardinal_grotesque_wideReg';
+    src: url('../assets/fonts/CardinalGrotesqueWide-Regular.woff2') format('woff2'),
+         url('../assets/fonts/CardinalGrotesqueWide-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cardinal_grotesque_wideBlack';
+    src: url('../assets/fonts/CardinalGrotesqueWide-Black.woff2') format('woff2'),
+         url('../assets/fonts/CardinalGrotesqueWide-Black.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
     font-family: 'cardinal_grotesque_wideSBd';
     src: url('../assets/fonts/cardinalgrotesquewide-semibold-webfont.woff2') format('woff2'),
          url('../assets/fonts/cardinalgrotesquewide-semibold-webfont.woff') format('woff');
@@ -88,11 +103,19 @@ html {
     font-style: normal;
 
 }
-
 @font-face {
     font-family: 'goopersemibold_italic';
     src: url('../assets/fonts/gooper-semibolditalic-webfont.woff2') format('woff2'),
          url('../assets/fonts/gooper-semibolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'goopersuperbold_italic';
+    src: url('../assets/fonts/Gooper5-SuperItalic.woff2') format('woff2'),
+         url('../assets/fonts/Gooper5-SuperItalic.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
