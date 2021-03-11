@@ -48,12 +48,15 @@ export default {
     top: 0
     left: 0
     z-index 5950
+    width 20%
 
 .mobile
     margin-left: 3vw
     margin-top: 3vw
 
 .desktop
+    display flex
+    width 100%
     margin-left: .75vw
-    margin-top: .75vw
+    margin-top: .55vw
 </style>

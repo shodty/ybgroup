@@ -111,7 +111,7 @@ a
     top: 0
     right: 0
     padding 1vw
-    padding-top .8vw
+    padding-top .6vw
     cursor: url('../assets/hand.png'), auto
 
 .menu-icon img {
@@ -121,7 +121,7 @@ a
         margin-top: 2vw
     }
     @media(min-width: 768px) {
-        width 4vw
+        width 3.5vw
     }
 }
 

@@ -6,8 +6,8 @@
   Header(displayNavBar = true)
   .container-fluid
       .test-wrapper
-        b-row(align-h="center")
-          b-col(v-for="cube in cubeObject" cols=6 md=4  @mouseenter='bgcChange(cube.color2)' @mouseleave='bgcChange("white")' class='nopadding' v-if="cube.show" :key="cube.text")
+        b-row.shift-right(align-h="center")
+          b-col(v-for="cube in cubeObject" cols=3 md=3  @mouseenter='bgcChange(cube.color2)' @mouseleave='bgcChange("white")' class='nopadding' v-if="cube.show" :key="cube.text")
             Cube( class="cubeClass" :project='cube.text' :letter='cube.letter' :color1='cubeHovered? faceColor : cube.color1' color2='cube.color2' :image='cube.image' :link='cube.link' :pattern='cube.pattern' :bgColor='[ light? { "background" : bgc} : {"background" : "black"} ]')
   Footer(class="footerclass")
 </template>
@@ -107,6 +107,9 @@ export default {
     width: 72%
   }
 }
+
+.shift-right
+  margin-left 2%
 *
   margin: 0px
   padding 0px
@@ -135,7 +138,7 @@ body
   left 0
   height: 100%
   width: 100%
-  transition: 1s
+  transition: .5s
 
 .main-container
   margin: 0 auto

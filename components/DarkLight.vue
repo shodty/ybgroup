@@ -1,10 +1,10 @@
 <template lang="pug">
 #dark-light
   .icon-holder(v-if="darkmode" :class="[{ lightmode: light }, { darkmode: !light }]" @click='flip')
-      IconBase(icon-name="dark light" width="40" height="40" :icon-color=' light? "black" : "white" ')
+      IconBase(icon-name="dark light" width="26" height="26" :icon-color=' light? "black" : "white" ')
           component(is="sun-moon")
   .icon-holder(v-else :class="[{ lightmode: light }, { darkmode: !light }]")
-      IconBase(icon-name="dark light" width="40" height="40" :icon-color=' light? "black" : "white" ')
+      IconBase(icon-name="dark light" width="26" height="26" :icon-color=' light? "black" : "white" ')
           component(is="sun-moon")
 </template>
 
@@ -40,6 +40,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+
+#dark-light
+  width 26px
+  margin-top 2px
 
 *
     margin: 0px

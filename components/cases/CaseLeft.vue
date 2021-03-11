@@ -2,7 +2,7 @@
 #case-left(:style='[ light? {"background" : "white" } : {"background" : "black"} ]')
     .escape(class="escape-desktop hide-for-desktop" @click="goHome")
         img(:src=' light? getImgUrl("escape_black", ".png") : getImgUrl("escape_white", ".png")'  width="22px")
-    DarkLight
+    // DarkLight
     .case-content(:class='light? "black" : "white" ')
         h1 {{caseTitle}}
         .line-two
@@ -121,6 +121,10 @@ export default {
         position: fixed
         height: 100%
     }
+}
+
+.case-content {
+    padding-top: 8%
 }
 
 .white {

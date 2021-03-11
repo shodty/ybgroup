@@ -1,77 +1,180 @@
-<template lang="pug">
-#jump-main
-    CaseLeft(caseTitle='Jump' year='2019' :pattern='patterns.jump' case='jump')
-        p(slot="description")
-            |Our work with JUMP bikes has given us the opportunity to conceptualize, organize and execute content and events in multiple cities.
-            |The content we've captured in each city is pursued with a specialized message and unique goals, and each shoot
-            |presents it's own puzzle to solve in order to achieve those goals. From partnering with local cycling studios, to putting on group
-            |rides through Sacramanto, San Francisco, and Santa Cruz, to shooting “Do not throw your bike in the ocean”
-            |videos, JUMP Bikes has been a constant adventure.
 
-    CaseRight(case='jump')
-        img(class='case-image' slot='image1' alt='jump1' src='../assets/img/cases/jump/1.jpg' id='jump1')
-        video(class='case-image' slot='image2' alt='jump2' src='../assets/img/cases/jump/2.mp4' id='jump2' controls muted loop poster="../assets/img/posters/jump1.jpg")
-        video(class='case-image' slot='image3' alt='jump3' src='../assets/img/cases/jump/3.mp4' id='jump3' controls muted loop poster="../assets/img/posters/jump4.jpg")
-        video(class='case-image' slot='image4' alt='jump4' src='../assets/img/cases/jump/4.mp4' id='jump4' controls muted loop poster="../assets/img/posters/jump2.jpg")
-        img(class='case-image' slot='image5' alt='jump5' src='../assets/img/cases/jump/5.jpg' id='jump5')
-        video(class='case-image' slot='image6' alt='jump6' src='../assets/img/cases/jump/6.mp4' id='jump6' controls muted loop poster="../assets/img/posters/jump3.jpg")
-        img(class='case-image-last' slot='image7' alt='jump7' src='../assets/img/cases/jump/7.jpg' id='jump7')
+<template lang="pug">
+.case-study
+    .workwrapper
+        .title JUMP / SOCIAL CAMPAIGN
+        .leftarrow(@click="changeImg(false)")
+        .rightarrow(@click="changeImg(true)")
+        .full
+            div(v-for="(slide, index) in slideObject.slideCount" @click="changeImg(true)" @mouseenter="showText(false)" @mouseleave="showText(false)")
+                .ctrimg(v-if="(index+1 == count) && (slideObject.ext[index] != 'mp4')" key=1)
+                    img(:src='getImgUrl(index+1, slideObject.ext[index])')
+                .ctrimg(v-else-if="(index+1 == count)" key=2)
+                    video(:src='getImgUrl(index+1, slideObject.ext[index])' autoplay muted loop )
+            //.textdesc(:class="showingtext? 'showtext' : 'hidetext' ")
+                .headtext {{name}}
+                .bodytext Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    | Lorem ipsum dolor sit amet, cons
+        nuxt-link(to='work')
+            .backbtn BACK
+        SliderCounter.footer(:lit='count' :slideObject='slideObject' :icon='slideObject.icon')
+
+</template>
 </template>
 
 <script>
 
-import CaseLeft from '../components/cases/CaseLeft.vue'
-import CaseRight from '../components/cases/CaseRight.vue'
+import SliderCounter from '../components/SliderCounter.vue'
 
 export default {
-  name: 'Jump',
   components: {
-    CaseLeft,
-    CaseRight
+    layout: 'casestudy',
+    SliderCounter
   },
   data () {
     return {
-      patterns: {
-        ourstreet: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        acr: [1, 1, 0, 1, 0, 1, 1, 1, 0],
-        bottomless: [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        shangrila: [1, 0, 0, 1, 0, 1, 1, 1, 1],
-        bardismiry: [1, 0, 0, 1, 0, 0, 1, 0, 1],
-        cabin: [1, 0, 0, 1, 0, 1, 1, 1, 0],
-        jump: [0, 1, 1, 0, 0, 1, 1, 0, 1],
-        artlife: [1, 0, 1, 1, 0, 1, 1, 0, 1],
-        mastaco: [0, 0, 1, 1, 0, 1, 1, 1, 0]
+      count: 1,
+      name: 'jump',
+      showingtext: false,
+      currentSlide: 1,
+      slideObject: {
+        slideCount: 9,
+        pattern: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        ext: ['mp4', 'jpg', 'mp4', 'jpg', 'jpg', 'mp4', 'jpg', 'mp4', 'jpg'],
+        icon: ['social', 'social', 'concept', 'web', 'id', 'id', 'id', 'print', 'print', 'print', 'gather', 'id', 'gather', 'id']
       }
     }
   },
+  mounted () {
+    this.$bus.$on('countchange', (index) => {
+      this.count = index
+      return this.count
+    })
+  },
   methods: {
 
+    changeImg (up) {
+      if (up) {
+        this.count++
+        if (this.count > this.slideObject.slideCount) { this.count = 1 }
+      } else {
+        this.count--
+        if (this.count < 1) { this.count = this.slideObject.slideCount }
+      }
+    },
+    showText () {
+      this.showingtext = !this.showingtext
+    },
+    getImgUrl (pic, ext) {
+      return require('../assets/cases/' + this.name + '/' + pic + '.' + ext)
+    }
   }
 }
-
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+.case-study
+    width: 100vw
+    height: 100vh
+    overflow hidden
+    background black
 
-*
-  margin: 0px
-  padding 0px
+.workwrapper
+    position relative
+    top 5vh
+    width 97%
+    height 95vh
+    background white
+    border 3px solid black
+hr
+    border-top: 4px solid black
 
-#jump-main
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  color: #2c3e50
-  transition: 1s
-  width:100%
-  height:100%
+.title
+    width 100%
+    top 1.5%
+    font-size 20px
+    position absolute
+    text-align center
+    font-family cardinal_grotesque_wideSBd
 
-.case-image
-    width:100%
-    padding-bottom: 20px
+.backbtn
+    width 100%
+    bottom .1%
+    padding-left 20px
+    font-size 32px
+    position absolute
+    text-align left
+    font-family cardinal_grotesque_wideBlack
+    color black
+.textdesc
+    transition opacity .6s ease
+    background: black
+    border-radius 0px 25px 25px 25px
+    color white
+    padding 15px 30px 30px 30px
+    position absolute
+    bottom 6%
+    right 6%
+    width 20%
+    font-family: 'cardinal_grotesque_wideReg'
+    font-size 20px
 
-.case-image-last
-    width:100%
-    padding-bottom: 0px
+.hidetext
+    opacity: 0
 
+.showtext
+    opacity:  1
+
+.bodytext
+    font-size 14px
+
+.headtext
+    font-family: 'cardinal_grotesque_wideSBd'
+    font-size 48px
+    text-transform: capitalize
+
+.leftarrow, .rightarrow
+    position absolute
+    height 2%
+    width 3%
+    top 50%
+    background-image: url('../assets/img/test/left.png')
+    background-size contain
+    background-repeat no-repeat
+    background-position: center;
+
+.leftarrow
+    left 15%
+.rightarrow
+    right 15%
+    background-image: url('../assets/img/test/right.png')
+
+.footer
+    width 50%
+    height: 40px
+    margin auto
+    left 0
+    right 0
+    bottom .5%
+    position absolute
+    text-align center
+
+.full
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100%
+  width 100%
+  float left
+
+.ctrimg
+    width: 60vw
+    height: 70vh
+    margin: 0 auto
+    cursor: url('../assets/hand.png'), auto
+
+.ctrimg img, .ctrimg video
+    object-fit: contain
+    width: 100%;
+    height: 100%;
 </style>

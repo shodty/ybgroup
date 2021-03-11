@@ -1,0 +1,126 @@
+.quadrantwrapper {
+    position: relative;
+    top: 5vh;
+    width: 97%;
+    height: 95vh;
+  }
+
+  .quadrantwrapper a {
+    color: white;
+    text-decoration: none;
+  }
+  .quadrant1,
+  .quadrant2,
+  .quadrant3,
+  .quadrant4 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 50%;
+    transition: height 1s ease, width 1s ease, background 1s ease, color 1s ease;
+    border: 3px solid #000;
+  }
+  .quadrant1 p,
+  .quadrant2 p,
+  .quadrant3 p,
+  .quadrant4 p {
+    transition: color 1s ease, opacity 0.5s ease;
+  }
+  .quadrant1 {
+    top: 0;
+    left: 0;
+  }
+  .quadrant2 {
+    top: 0;
+    right: 0;
+  }
+  .quadrant3 {
+    bottom: 0;
+    left: 0;
+  }
+  .quadrant4 {
+    bottom: 0;
+    right: 0;
+  }
+  .h100 {
+    height: 100%;
+  }
+  .hw50 {
+    height: 50%;
+    width: 50%;
+  }
+  .hw100 {
+    height: 100%;
+    width: 100%;
+  }
+  .hw0 {
+    height: 0%;
+    width: 0%;
+  }
+  .w0 {
+    width: 0%;
+  }
+  .h0 {
+    height: 0%;
+  }
+  .h0 p,
+  .w0 p,
+  .hw0 p,
+  .o0 p {
+    color: transparent;
+  }
+  .pink {
+    background: #e2a0c7;
+    color: #0076bb;
+  }
+  .green {
+    background: #235d39;
+    color: #f3b120;
+  }
+  .yellow {
+    background: #f3b120;
+    color: #e43e30;
+  }
+  .blue {
+    background: #0076bb;
+    color: #e2a0c7;
+  }
+  .orange {
+    background: #ec7625;
+    color: #e2a0c7;
+  }
+  .red {
+    background: #e43e30;
+    color: #fff;
+  }
+  .white {
+    background: #fff;
+    color: #000;
+  }
+  .black {
+    background: #000;
+    color: #fff;
+  }
+  .pink-text {
+    color: #e2a0c7;
+  }
+  .green-text {
+    color: #235d39;
+  }
+  .yellow-text {
+    color: #f3b120;
+  }
+  .blue-text {
+    color: #0076bb;
+  }
+  .orange-text {
+    color: #ec7625;
+  }
+  .red-text {
+    color: #e43e30;
+  }
+  .z1000 {
+    z-index: 1000
+  }

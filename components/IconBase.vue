@@ -48,7 +48,7 @@ svg
   //margin-bottom: -2px
 
 .transitional
-  transition: all .8s ease
+  transition: all .5s ease
 
 .svgContainer
   width: inherit

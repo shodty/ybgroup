@@ -28,11 +28,11 @@ export default {
 
 <style scoped lang="stylus">
 #home-button
-    height 40px
-    width 40px
+    height 36x
+    width 36px
 
 img
-    width: 28px
-    margin-left: 5px
-    margin-top: 8px
+    width: 36px
+    margin-left: 0px
+    margin-top -2px
 </style>

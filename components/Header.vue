@@ -2,14 +2,14 @@
 #header-div
     .headerimages
         .icon-container(class='hide-on-mobile')
-          IconTwo(icon-name="yellow brick group" width="80vw" height="5vw" :icon-color=' light? "black" : "white" ')
+          IconTwo(icon-name="yellow brick group" width="80vw" height="5.3vw" :icon-color=' light? "black" : "white" ')
             component(:is="componentName[this.count]")
           .click-box(@click='onClick')
         .mobile-container(class='hide-on-desktop')
           img(:src=' light? getImgUrl("ybg_bubbly", ".png") : getImgUrl("ybg_bubbly_white", ".png")'  width="80%")
         .mobile-instructions(class='hide-on-desktop')
           img(:src=' light? getImgUrl("welcome_mobile", ".png") : getImgUrl("welcome_mobile_white", ".png")' width="60%" v-if='displayNavBar')
-    NavBar(class='hide-on-mobile' v-if='displayNavBar')
+    //NavBar(class='hide-on-mobile' v-if='displayNavBar')
 </template>
 
 <script>

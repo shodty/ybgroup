@@ -56,6 +56,66 @@ export const state = () => ({
     }
   },
   cubeObject: {
+    vote: {
+      letter: 'letter-v',
+      color1: '#000000',
+      color2: '#e8f350',
+      image: 'vote2',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Vote2',
+      show: true
+    },
+    blasphemy: {
+      letter: 'letter-b',
+      color1: '#ff091a',
+      color2: '#131614',
+      image: 'blasphemy',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Blasphemy',
+      show: true
+    },
+    pins: {
+      letter: 'letter-p',
+      color1: '#eaad3c',
+      color2: '#ffffff',
+      image: 'pins',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Dropping Pins',
+      show: true
+    },
+    friendo: {
+      letter: 'letter-f',
+      color1: '#e4613b',
+      color2: '#f9eedf',
+      image: 'friendo',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Friendo',
+      show: true
+    },
+    ruta: {
+      letter: 'letter-r',
+      color1: '#5ca2cd',
+      color2: '#ffffff',
+      image: 'ruta',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Ruta 23',
+      show: true
+    },
+    best: {
+      letter: 'letter-d',
+      color1: '#dc9fc2',
+      color2: '#296bb2',
+      image: 'best',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Do Your Best',
+      show: true
+    },
     os: {
       letter: 'letter-o',
       color1: '#2a276c',
@@ -98,8 +158,8 @@ export const state = () => ({
     },
     btm: {
       letter: 'letter-b',
-      color1: '#f2bcb9',
-      color2: '#f26351',
+      color1: '#f26351',
+      color2: '#ffffff',
       image: 'btm',
       link: 'bottomless',
       pattern: ['concept', 'vid', 'gather', 'print', 'id', 'photo', 'social', 'collab'],
@@ -108,8 +168,8 @@ export const state = () => ({
     },
     shang: {
       letter: 'letter-s',
-      color1: '#d6693f',
-      color2: '#f4e6c1',
+      color1: '#3e5671',
+      color2: '#d6693f',
       image: 'shang',
       link: 'shangrila',
       pattern: ['print', 'id', 'photo'],
@@ -128,8 +188,8 @@ export const state = () => ({
     },
     alt: {
       letter: 'letter-a',
-      color1: '#8667ad',
-      color2: '#61cbea',
+      color1: '#ee7b30',
+      color2: '#8667ad',
       image: 'alt',
       link: 'artlifetour',
       pattern: ['vid', 'gather', 'print', 'id', 'photo', 'social', 'collab'],
@@ -144,6 +204,16 @@ export const state = () => ({
       link: 'bardismiry',
       pattern: ['print', 'id', 'social', 'web'],
       text: 'Bardis Miry',
+      show: true
+    },
+    voter: {
+      letter: 'letter-v',
+      color1: '#e8f350',
+      color2: '#000000',
+      image: 'vote',
+      link: 'bardismiry',
+      pattern: ['print', 'id', 'social', 'web'],
+      text: 'Vote',
       show: true
     }
   }

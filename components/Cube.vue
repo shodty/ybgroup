@@ -2,7 +2,7 @@
 .scene(class="project" @mouseenter="shiftCube(true, color1)" @mouseleave="shiftCube(false, 'white')"  @click="mobileShift(true, color1)")
     .cube(:class="hovered? 'showRight' : cubeFace")
         .cube__face.cube__face--front(:style="bgColor[0]")
-            IconBase(width="22vw" height="22vw" :icon-name="project" :icon-color="color1"  class='hide-on-mobile')
+            IconBase(width="16vw" height="16vw" :icon-name="project" :icon-color="color1"  class='hide-on-mobile')
                 component(:is="letter")
             IconBase(width="42vw" height="42vw" :icon-name="project" :icon-color="color1"  class='hide-on-desktop')
                 component(:is="letter")
@@ -100,7 +100,7 @@ export default {
         --cube-face-size: 42vw
     }
     @media(min-width: 768px) {
-        --cube-face-size: 22vw
+        --cube-face-size: 16vw
     }
 
     box-sizing: border-box
@@ -155,7 +155,7 @@ body
     color: white
     text-align: center
     overflow: hidden
-    transition: background 1s
+    transition: background .5s
 
 .cube__face--front, .cube__face--right
 
