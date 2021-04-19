@@ -1,6 +1,6 @@
 <template lang="pug">
 #work
-    .quadrantwrapper
+    .workquadrantwrapper
         .quadrant1(:class="q1Class")
                 transition(name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }")
                     WorkGrid(v-if="ready && previousQuadrant == 1")
@@ -9,20 +9,23 @@
                     WorkGrid(v-if="ready && previousQuadrant == 2")
         .quadrant3(:class="q3Class")
                 transition(name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }")
-                    WorkGrid(v-if="ready && (previousQuadrant == 0 || previousQuadrant == 4)")
+                    WorkGrid(v-if="ready && currentQuadrant == 3 && (previousQuadrant == 0 || previousQuadrant == 4 || previousQuadrant == 3)")
         .quadrant4(:class="q4Class")
                 transition(name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }")
-                    WorkGrid(v-if="ready  && previousQuadrant == 4")
+                    WorkGrid(v-if="ready  && currentQuadrant == 4 && previousQuadrant == 3")
+    MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
 </template>
 
 <script>
 
 import WorkGrid from '../components/WorkGrid.vue'
+import MobileQuadrantMenu from '../components/MobileQuadrantMenu.vue'
 
 export default {
   name: 'Work',
   components: {
-    WorkGrid
+    WorkGrid,
+    MobileQuadrantMenu
   },
   data () {
     return {
@@ -50,6 +53,14 @@ export default {
     q4Class () {
       return this.$store.state.quadrants.q4Class
     }
+  },
+  mounted () {
+    if (this.currentQuadrant !== 3) { this.changeQuadrant(3) }
+  },
+  methods: {
+    changeQuadrant (newQuadrant) {
+      this.$store.dispatch('quadrants/changeQuadrant', newQuadrant)
+    }
   }
 }
 
@@ -57,4 +68,29 @@ export default {
 
 <style scoped lang="stylus">
 @import '../assets/styles/quadrants.css';
+
+.workquadrantwrapper {
+    position: relative;
+    top: 5vh;
+    width: 97%;
+    height: 95vh;
+  }
+
+  @media(max-width: 767px) {
+    .workquadrantwrapper  {
+      width: 100%;
+      height: 75vh;
+      overflow: scroll;
+    }
+  }
+  .workquadrantwrapper a {
+    text-decoration: none;
+    transition: all .5s ease;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  .workquadrantwrapper a:hover {
+    color: white;
+    text-decoration: none;
+    text-shadow: 8px 10px 0px rgba(0, 0, 0, 1);
+  }
 </style>

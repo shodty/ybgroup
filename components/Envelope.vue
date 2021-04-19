@@ -79,11 +79,12 @@ export default {
     }
 
 .mail-icon
-    z-index : 1300
+    z-index : 2500
     position: fixed
-    top: 5vh
+    top: 0
     right: 0
-    padding 2vw
+    padding .25%
+    padding-right .5%
     @media(max-width: 767px) {
       top: 7.5vw
     }
@@ -95,7 +96,7 @@ export default {
         margin-top: 2vw
     }
     @media(min-width: 768px) {
-        width 4vw
+        width 2vw
     }
 }
 

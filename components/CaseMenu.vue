@@ -1,53 +1,116 @@
 <template lang="pug">
 #casemenu
     .case-menu
-        .casestudy-menu-container
-            .casebox.white.black-text.pointer
-                nuxt-link(to='friendo' event="disabled" @click.native="goToLink($event, 1)") FRIENDO
-            .casebox.white.black-text.pointer
-                nuxt-link(to='marketing' event="disabled" @click.native="goToLink($event, 2)") DO YOUR BEST
-            .casebox.white.black-text.pointer
-                nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") DROPPING PINS
-            .casebox.white.black-text.pointer
-                nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") ACR
-            .casebox.white.black-text.pointer
-                nuxt-link(to='friendo' event="disabled" @click.native="goToLink($event, 1)") JUMP
-            .casebox.white.black-text.pointer
-                nuxt-link(to='marketing' event="disabled" @click.native="goToLink($event, 2)") DEPT. OF SOUND
-            .casebox.white.black-text.pointer
-                nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") RUTA 23
-            .casebox.white.black-text.pointer
-                nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") VISIT MODESTO
-            .casebox.white.black-text.pointer
-                nuxt-link(to='friendo' event="disabled" @click.native="goToLink($event, 1)") ALIENLABS
-            .casebox.white.black-text.pointer
-                nuxt-link(to='marketing' event="disabled" @click.native="goToLink($event, 2)") THC
-            .casebox.white.black-text.pointer
-                nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") VOTE
-            .casebox.white.black-text.pointer
-                nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") BLASPHEMY
-            .casebox.white.black-text.pointer
-                nuxt-link(to='friendo' event="disabled" @click.native="goToLink($event, 1)") OUR STREET
-            .casebox.white.black-text.pointer
-                nuxt-link(to='marketing' event="disabled" @click.native="goToLink($event, 2)") SHANGRI LA
-            .casebox.white.black-text.pointer
-                nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") WJS
-            .casebox.white.black-text.pointer
-                nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") EXTRACTS ACADEMY
+        .casestudy-menu-container(:class='menuclass')
+            .casebox.white.black-text.pointer(v-if="!menuopen" @click="openMenu(!menuopen)") {{menulabel}}
+            div(v-for="(casestudy, index) in cases" :key="index")
+                nuxt-link.casebox.white.black-text.pointer( :to='casestudy.link' event="disabled" @click.native="goToLink") {{casestudy.name}}
+            .casebox.white.black-text.pointer(v-if="menuopen" @click="openMenu(!menuopen)") {{menulabel}}
 </template>
 <script>
 export default {
+  data () {
+    return {
+      menuopen: false,
+      menulabel: '⯅',
+      menuclass: 'closed',
+      cases: {
+        bardismiry: {
+          name: 'icon apparel',
+          link: 'icon'
+        },
+        friendo: {
+          name: 'friendo',
+          link: 'friendo'
+        },
+        doyourbest: {
+          name: 'do your best',
+          link: 'doyourbest'
+        },
+        droppingpins: {
+          name: 'dropping pins',
+          link: 'droppingpins'
+        },
+        acr: {
+          name: 'acr',
+          link: 'acr'
+        },
+        jump: {
+          name: 'jump',
+          link: 'jump'
+        },
+        deptofsound: {
+          name: 'vpp',
+          link: 'vpp'
+        },
+        ruta: {
+          name: 'ruta 23',
+          link: 'ruta'
+        },
+        visitmodesto: {
+          name: 'visit modesto',
+          link: 'friendo'
+        },
+        ybgapparel: {
+          name: 'ybg apparel',
+          link: 'ybgapparel'
+        },
+        thc: {
+          name: 'thc',
+          link: 'thc'
+        },
+        vote: {
+          name: 'vote',
+          link: 'vote'
+        },
+        blasphemy: {
+          name: 'blasphemy',
+          link: 'blasphemy'
+        },
+        ourstreet: {
+          name: 'our street',
+          link: 'ourstreet'
+        },
+        shangrila: {
+          name: 'shangri la',
+          link: 'shangrila'
+        },
+        wjs: {
+          name: 'WJS',
+          link: 'wjs'
+        }
+
+      }
+    }
+  },
   methods: {
-    goToLink (event, quadrant) {
-      this.$store.dispatch('quadrants/changeQuadrant', quadrant)
+    openMenu (truth) {
+      if (truth) {
+        this.menuclass = 'open'
+        this.menulabel = '⯆'
+        this.menuopen = true
+      } else {
+        this.menuclass = 'closed'
+        this.menuopen = false
+        this.menulabel = '⯅'
+      }
+    },
+    goToLink (event) {
       setTimeout(() => {
         this.$router.push(event.target.pathname)
-      }, 1000)
+        setTimeout(() => {
+          this.menuclass = 'closed'
+          this.menuopen = false
+          this.menulabel = '⯅'
+        }, 250)
+      }, 50)
     }
   }
 }
 </script>
 <style lang="stylus">
+@import '../assets/styles/colors.css'
+
 .case-sidemenu
     z-index 100
     position fixed
@@ -63,31 +126,39 @@ export default {
     position fixed
     bottom 1vh
     right 12vw
-
+    @media(max-width: 767px) {
+      bottom 21vh
+      right 72vw
+    }
 .casestudy-menu-container
     position absolute
     bottom 100%
     height 32px
     overflow hidden
-    transition height 1s ease
+    transition height 1s ease, opacity .5s ease
 
-.casestudy-menu-container:hover
-    height: 512px
+.open
+    height: 544px
 
+.closed div div
+    margin-top: 3%
 .casebox
     display: flex
     font-family cardinal_grotesque_wideSBd
     font-size 1em
     width 165px
     border 3px solid black
-    height 32px;
+    height 32px
     text-align center
     justify-content: center
     align-items: center
     overflow hidden
-    transition: background .3s ease;
-
+    transition: background .3s ease
+    text-transform: uppercase
 .casebox:hover
-    background: #0076BB;
+    background: #0076BB
+
+.transparent
+    opacity .5
 
 </style>

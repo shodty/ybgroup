@@ -1,0 +1,248 @@
+.information {
+    position: fixed;
+    top: 0;
+    left: 70%;
+    color: #000;
+    font-size: 12px;
+    z-index: 5000;
+  }
+  .information span {
+    padding-right: 5px;
+  }
+  html {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+  *,
+  *:before,
+  *:after {
+    margin: 0;
+  }
+  .siteheader {
+    z-index: 1000;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border-bottom: 3px solid #000;
+    height: 5vh;
+    width: 100vw;
+  }
+  .icon-container {
+    position: relative;
+    width: 100%;
+  }
+  .click-box {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 20vw;
+    margin: 0 auto;
+    top: 0;
+    left: 40vw;
+    cursor: pointer;
+  }
+  .sidemenu {
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+  .sidemenu a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .menubox {
+    display: flex;
+    font-family: cardinal_grotesque_wideSBd;
+    font-size: 2em;
+    width: 3vw;
+    border: 3px solid #000;
+    height: 19vh;
+    writing-mode: vertical-rl;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  }
+  .menubox:hover {
+    text-shadow: -3px 5px 0px #000;
+  }
+  .button--green {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #3b8070;
+    color: #3b8070;
+    text-decoration: none;
+    padding: 10px 30px;
+  }
+  .button--green:hover {
+    color: #fff;
+    background-color: #3b8070;
+  }
+  .button--grey {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #35495e;
+    color: #35495e;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin-left: 15px;
+  }
+  .button--grey:hover {
+    color: #fff;
+    background-color: #35495e;
+  }
+  @font-face {
+    font-family: 'cardinal_grotesque_condenseBd';
+    src: url("../fonts/cardinalgrotesquecondensed-bold-webfont.woff2") format('woff2'), url("../fonts/cardinalgrotesquecondensed-bold-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'cardinal_grotesque_wideReg';
+    src: url("../fonts/CardinalGrotesqueWide-Regular.woff2") format('woff2'), url("../fonts/CardinalGrotesqueWide-Regular.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'cardinal_grotesque_wideBlack';
+    src: url("../fonts/CardinalGrotesqueWide-Black.woff2") format('woff2'), url("../fonts/CardinalGrotesqueWide-Black.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'cardinal_grotesque_wideSBd';
+    src: url("../fonts/cardinalgrotesquewide-semibold-webfont.woff2") format('woff2'), url("../fonts/cardinalgrotesquewide-semibold-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'goopersemibold_italic';
+    src: url("../fonts/gooper-semibolditalic-webfont.woff2") format('woff2'), url("../fonts/gooper-semibolditalic-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'goopersuperbold_italic';
+    src: url("../fonts/Gooper5-SuperItalic.woff2") format('woff2'), url("../fonts/Gooper5-SuperItalic.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ruta_23regular';
+    src: url("../fonts/ruta-regular_v1-webfont.woff2") format('woff2'), url("../fonts/ruta-regular_v1-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @media (max-width: 767px) {
+    .hide-on-mobile {
+      display: none !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .hide-on-desktop {
+      display: none !important;
+    }
+  }
+  @media (min-width: 1140px) {
+    .show-on-ipad {
+      display: none !important;
+    }
+  }
+  @media (max-width: 1139px) {
+    .hide-on-ipad {
+      display: none !important;
+    }
+  }
+  .nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .button {
+    background-color: #2752ff;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px 17px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .button:hover,
+  .button:focus {
+    background-color: #f26760;
+  }
+  .button:disabled {
+    background: #bfbfbf;
+    cursor: not-allowed;
+  }
+  .white-text {
+    color: #fff !important;
+  }
+  .black-text {
+    color: #000 !important;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  .loadercontainer {
+    top: 2%;
+    left: -1.5%;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: all 0.5s cubic-bezier(0, 0.79, 1, 0.44);
+    pointer-events: none;
+  }
+  .icongif {
+    height: 16vh;
+    width: 16vh;
+    background: #fff;
+    padding: 2%;
+    border-radius: 50%;
+    border: 3px solid #000;
+  }
+  @media (max-width: 767px) {
+    .icongif {
+      height: 8vh;
+      width: 8vh;
+    }
+  }
+  .icongif img {
+    object-fit: cover;
+    width: 100%;
+  }
+  .ruta {
+    z-index: 2000;
+    position: fixed;
+    right: 3%;
+    top: 1.2%;
+    font-family: 'ruta_23regular', sans-serif;
+    color: #008ff8;
+  }
+  

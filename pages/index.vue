@@ -1,184 +1,197 @@
+
 <template lang="pug">
 #home
-  .background-div(:style='[ light? {"background" : bgc } : {"background" : "black"} ]')
-  video(v-if="videoplay" poster="../assets/img/videobg.png" class="video-bottom" :src="getImgUrl(videosource, '.mp4')" autoplay muted loop @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused")
-  Envelope
-  Header(displayNavBar = true)
-  .container-fluid
-      .test-wrapper
-        b-row.shift-right(align-h="center")
-          b-col(v-for="cube in cubeObject" cols=3 md=3  @mouseenter='bgcChange(cube.color2)' @mouseleave='bgcChange("white")' class='nopadding' v-if="cube.show" :key="cube.text")
-            Cube( class="cubeClass" :project='cube.text' :letter='cube.letter' :color1='cubeHovered? faceColor : cube.color1' color2='cube.color2' :image='cube.image' :link='cube.link' :pattern='cube.pattern' :bgColor='[ light? { "background" : bgc} : {"background" : "black"} ]')
-  Footer(class="footerclass")
+    .quadrantwrapper.hide-on-mobile
+        .quadrant1(:class="q1Class"  @mouseenter="hoverAnimation(1)" @mouseleave="hoverAnimation(0)")
+            .quad1gif(:class="quad1hover")
+            transition(name="fade" mode="out-in")
+                .designbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(1)" key=1)
+                    nuxt-link.pink-text(to='design' event="disabled" @click.native="goToLink") Design
+                WorkGrid(v-else-if="currentQuadrant == 3" key=2)
+                .designbox.ctrtxt(v-else-if="currentQuadrant == 4" key=3)
+                  InfoComponent
+                .designpic.ctrtxt(v-else-if="currentQuadrant == 1" key=4)
+                  DesignImages(:design='design')
+                .infotxt(v-else-if="currentQuadrant == 2" key=3)
+                    MarketingInfo(:market='market')
+        .quadrant2(:class="q2Class" @mouseenter="hoverAnimation(2)" @mouseleave="hoverAnimation(0)")
+            .quad2gif(:class="quad2hover")
+            transition(name="fade" mode="out-in")
+                .marketingbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(2)" key=1)
+                    nuxt-link.red-text(to='marketing' event="disabled" @click.native="goToLink") Marketing
+                WorkGrid(v-else-if="currentQuadrant == 3" key=2)
+                .marketingbox.ctrtxt(v-else-if="currentQuadrant == 4" key=3)
+                  InfoComponent
+                .marketingpic.ctrtxt(v-else-if="currentQuadrant == 2" key=4)
+                  MarketingImages(:market='market')
+                .infotxt(v-else-if="currentQuadrant == 1" key=5)
+                  DesignInfo(:design='design')
+        .quadrant3(:class="q3Class"  @mouseenter="hoverAnimation(3)" @mouseleave="hoverAnimation(0)")
+            .quad3gif(:class="quad3hover")
+            transition(name="fade" mode="out-in")
+                .workbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(3)" key=0)
+                    nuxt-link.blue-text(to='work' event="disabled" @click.native="goToLink") Work
+                WorkGrid(v-else-if="currentQuadrant == 3" key=1)
+        .quadrant4(:class="q4Class"  @mouseenter="hoverAnimation(4)" @mouseleave="hoverAnimation(0)")
+            .quad4gif(:class="quad4hover")
+            transition(name="fade" mode="out-in")
+                .infobox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(4)" key=0)
+                  nuxt-link.yellow-text(to='info' event="disabled" @click.native="goToLink") Info
+    .quadrantwrapper.hide-on-desktop
+      .quadrant1mobile.blue
+        nuxt-link.pink-text.mobilectrtxt(to='design' event="disabled" @click.native="goToLink") Design
+      .quadrant2mobile.pink
+        nuxt-link.red-text.mobilectrtxt(to='marketing' event="disabled" @click.native="goToLink") Marketing
+      .quadrant3mobile.yellow
+        nuxt-link.blue-text.mobilectrtxt(to='work' event="disabled" @click.native="goToLink") Work
+      .quadrant4mobile.green
+        nuxt-link.yellow-text.mobilectrtxt(to='info' event="disabled" @click.native="goToLink") Info
+
 </template>
 
 <script>
 
-import { mapState } from 'vuex'
-import Cube from '~/components/Cube.vue'
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-import Envelope from '~/components/Envelope.vue'
+import WorkGrid from '../components/WorkGrid.vue'
+import IconTwo from '../components/IconTwo.vue'
+import DesignImages from '../components/quadrants/DesignImages.vue'
+import MarketingImages from '../components/quadrants/MarketingImages.vue'
+import DesignInfo from '../components/quadrants/DesignInfo.vue'
+import MarketingInfo from '../components/quadrants/MarketingInfo.vue'
+import InfoComponent from '../components/quadrants/InfoComponent.vue'
 
 export default {
   components: {
-    Header,
-    Cube,
-    Envelope,
-    Footer
+    WorkGrid,
+    IconTwo,
+    DesignImages,
+    MarketingImages,
+    DesignInfo,
+    MarketingInfo,
+    InfoComponent
   },
   data () {
     return {
-      videoplay: false,
-      videosource: 'cases/acr/2',
-      videoElement: null,
-      paused: null
+      quadrant: 0,
+      work: false,
+      info: false,
+      market: 'overview',
+      design: 'overview',
+      quad1hover: 'null',
+      quad2hover: 'null',
+      quad3hover: 'null',
+      quad4hover: 'null'
     }
   },
   computed: {
-
-    playing () { return !this.paused },
-
-    ...mapState({
-      light: state => state.darklight.light,
-      iconObject: state => state.colorchange.iconObject,
-      cubeObject: state => state.colorchange.cubeObject,
-      bgc: state => state.backgroundchange.bgc,
-      faceColor: state => state.facechange.faceColor,
-      cubeHovered: state => state.facechange.cubeHovered
-    })
+    currentQuadrant () {
+      return this.$store.state.quadrants.currentQuadrant
+    },
+    previousQuadrant () {
+      return this.$store.state.quadrants.previousQuadrant
+    },
+    q1Class () {
+      return this.$store.state.quadrants.q1Class
+    },
+    q2Class () {
+      return this.$store.state.quadrants.q2Class
+    },
+    q3Class () {
+      return this.$store.state.quadrants.q3Class
+    },
+    q4Class () {
+      return this.$store.state.quadrants.q4Class
+    }
   },
   mounted () {
-    this.$bus.$on('moviechange', (movie, play) => {
-      if (play) {
-        this.videosource = movie
-        this.videoplay = true
-      } else if (!play) {
-        this.videosource = null
-        this.videoplay = false
-      }
-    })
-    this.$bus.$on('playVid', (play) => {
-      if (play) {
-        this.videoElement.play()
-      }
-    })
-    this.$bus.$on('pause', (play) => {
-      if (play) {
-        this.videoElement.pause()
-      }
-    })
-    this.$bus.$on('volumeChange', (vol) => {
-      if (vol > 0) {
-        this.videoElement.muted = false
-        this.videoElement.volume = vol / 100
-      } else { this.videoElement.muted = true }
-    })
+    this.init()
+    if (this.currentQuadrant !== 0) { this.changeQuadrant(0) }
   },
   methods: {
-    bgcChange (color) {
-      this.$store.dispatch('backgroundchange/backgroundChange', color)
+    hoverAnimation (quadrant) {
+      if (quadrant === 0) {
+        this.quad1hover = 'quadblank'
+        this.quad2hover = 'quadblank'
+        this.quad3hover = 'quadblank'
+        this.quad4hover = 'quadblank'
+      }
+      if (quadrant === 1) {
+        this.quad1hover = 'hovered'
+      }
+      if (quadrant === 2) {
+        this.quad2hover = 'hovered'
+      }
+      if (quadrant === 3) {
+        this.quad3hover = 'hovered'
+      }
+      if (quadrant === 4) {
+        this.quad4hover = 'hovered'
+      }
     },
-    getImgUrl (pic, ext) {
-      return require('../assets/img/' + pic + ext)
+    init () {
+      this.$bus.$on('changeQuadrant', (quadrant) => {
+        this.changeQuadrant(quadrant)
+      })
     },
-    updatePaused (event) {
-      this.videoElement = event.target
-      this.paused = event.target.paused
+    changeMarket (market) {
+      this.market = market
+    },
+    changeDesign (design) {
+      this.design = design
+    },
+    changeQuadrant (newQuadrant) {
+      this.$store.dispatch('quadrants/changeQuadrant', newQuadrant)
+    },
+    changeWidth (quadrant) {
+      if (this.quadrant === 2) {
+        this.quadrant = quadrant
+      }
+    },
+    goToLink (event) {
+      setTimeout(() => {
+        this.$router.push(event.target.pathname)
+        /* setTimeout(() => {
+          this.$store.dispatch('quadrants/changeQuadrant', 0)
+        }
+        , 1000) */
+      }, 1000)
     }
   }
 }
 </script>
 
 <style lang="stylus">
-
-.container-fluid
-  position: relative
-  z-index: 1
-
-.test-wrapper{
-  margin: 0 auto
-  z-index: 0
-  position: relative
-  @media(max-width: 767px) {
-    width: 87%
-  }
-  @media(min-width: 768px) {
-    width: 72%
-  }
-}
-
-.shift-right
-  margin-left 2%
-*
-  margin: 0px
-  padding 0px
-
-body
-  margin: 0
-  width: 100%
-  height: 100%
-
-.cubeClass
-  margin-bottom: 1.3vw
+@import '../assets/styles/quadrants.css';
 
 #home
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  text-align: center
-  color: #2c3e50
-  padding-top: 60px
-  overflow-x: hidden
+    width: 100vw
+    height: 100vh
+    overflow hidden
+    background black
 
-.background-div
-  position: fixed
-  z-index: 0
-  top 0
-  left 0
-  height: 100%
-  width: 100%
-  transition: .5s
+.quad1gif, .quad2gif, .quad3gif, .quad4gif
+  position absolute
+  height 100%
+  width 100%
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity 0
+  transition opacity 1s ease
+  background-position: center;
+  background-size: cover;
+.quad1gif
+  background-image url('../assets/quadrants/quad1hovered.gif') !important
 
-.main-container
-  margin: 0 auto
-  width: 80%
-  display: flex
-  align-items: center
-  justify-content: center
-  z-index : 25
+.quad2gif
+  background-image url('../assets/quadrants/quad2hovered.gif') !important
 
-.grid
-  margin: 0 auto
-  width: 100%
-  display: inline-flex
-  flex-wrap: wrap;
-  align-items: center
-  justify-content: center
+.quad3gif
+  background-image url('../assets/quadrants/quad3hovered.gif') !important
 
-.video-bottom
-    position: fixed
-    top: 50%
-    left: 50%
-    -webkit-transform: translateX(-50%) translateY(-50%)
-    transform: translateX(-50%) translateY(-50%)
-    min-height: 100%
-    min-width: 100%
-    z-index: 3
-    overflow: hidden
+.quad4gif
+  background-image url('../assets/quadrants/quad4hovered.gif') !important
 
-.footerclass{
-    position: relative
-    z-index : 950
-    @media (min-width: 768px) and (orientation:portrait) {
-      position: fixed
-      bottom: 0
-    }
+.hovered
+  opacity 1
 
-}
-
-.darklightclass {
-    position: relative
-    z-index : 950
-}
 </style>

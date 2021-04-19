@@ -8,20 +8,26 @@ div
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
             component(is="yellow-brick-group")
-        nuxt-link(to='testfive')
+        nuxt-link(to='home')
           .click-box(@click="changeQuadrant(0)")
-  .case-sidemenu
-    .menubox.white.black-text.pointer
+  .case-sidemenu.hide-on-mobile
+    .menubox.white.black-text.pointer.designmobile
       nuxt-link(to='design' event="disabled" @click.native="goToLink($event, 1)") DESIGN
-    .menubox.white.black-text.pointer
+    .menubox.white.black-text.pointer.marketingmobile
         nuxt-link(to='marketing' event="disabled" @click.native="goToLink($event, 2)") MARKETING
-    .menubox.white.black-text.pointer
+    .menubox.white.black-text.pointer.workmobile
         nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") WORK
-    .menubox.white.black-text.pointer
+    .menubox.white.black-text.pointer.infomobile
         nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") INFO
-    .menubox.white.black-text.pointer
-        p STORE
+    .menubox.white.black-text.pointer.storemobile
+        a(href='https://www.ybgroupshop.us/') STORE
+  transition(name="fade" mode="out-in")
+    .loadercontainer(v-if="!ready")
+        .icongif
+          img(v-if="!ready" src='../assets/img/icon_colorgif.gif')
   CaseMenu
+  nuxt-link.backbtn(to='work' event="disabled" @click.native="goBack($event)") BACK
+  MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
   //.information
     span Current Quadrant: {{currentQuadrant}}
     span Previous Quadrant: {{previousQuadrant}}
@@ -29,6 +35,7 @@ div
 </template>
 
 <script>
+import MobileQuadrantMenu from '../components/MobileQuadrantMenu.vue'
 import IconTwo from '~/components/IconTwo.vue'
 import Cart from '~/components/Cart.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
@@ -41,7 +48,8 @@ export default {
     MobileMenu,
     IconButtons,
     IconTwo,
-    CaseMenu
+    CaseMenu,
+    MobileQuadrantMenu
   },
   computed: {
     currentQuadrant () {
@@ -61,6 +69,15 @@ export default {
         this.$router.push(event.target.pathname)
       }, 1000)
     },
+    goBack (event) {
+      this.$store.dispatch('quadrants/changeReady', false)
+      setTimeout(() => {
+        this.$router.push(event.target.pathname)
+        setTimeout(() => {
+          this.$store.dispatch('quadrants/changeReady', true)
+        }, 1000)
+      }, 1000)
+    },
     changeQuadrant (quadrant) {
       this.$store.dispatch('quadrants/changeQuadrant', quadrant)
     }
@@ -70,242 +87,45 @@ export default {
 
 <style lang="stylus">
 
-.information
-  position fixed
-  top 0
-  left 70%
-  color black
-  font-size 12px
-  z-index 5000
+.designmobile, .marketingmobile, .infomobile, .workmobile, .storemobile
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  transition all 1s ease;
 
-.information span
-  padding-right: 5px
+.designmobile:hover
+    text-shadow: -2px 2px 0px #0076bb !important
 
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
+.marketingmobile:hover
+    text-shadow: -2px 2px 0px #f3b120 !important
 
-*,
-*:before,
-*:after {
-  margin: 0;
-}
+.workmobile:hover
+    text-shadow: -2px 2px 0px #e43e30 !important
 
-.siteheader
-    z-index 1000
-    position fixed
-    display: flex
-    justify-content: center
-    align-items: center
-    top 0
-    left 0
-    background white
-    border-bottom 3px solid black
-    height 5vh
-    width 100vw
+.infomobile:hover
+    text-shadow: -2px 2px 0px #235d39 !important
 
-.icon-container
-  position: relative
-  width: 100%
+.storemobile:hover
+    text-shadow: -2px 2px 0px #ec7625 !important
 
-.click-box
-  position: absolute
-  display: block
-  height: 100%
-  width: 20vw
-  margin: 0 auto
-  top: 0
-  left: 40vw
-  cursor: pointer
+.mobilecasemenu
+    position: absolute;
+    width: 100%;
+    background: black
+    padding-top 4%
+    bottom: 0
+.mobilecasemenu li
+    font-family: cardinal_grotesque_wideSBd;
+    font-size: 1.4em;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 2%;
+    list-style-type: none;
+    cursor: pointer;
+    transition: color 0.35s ease;
 
-.menubox
-    display: flex
-    font-family cardinal_grotesque_wideSBd
-    font-size 2em
-    width 3vw
-    border 3px solid black
-    height 19vh
-    writing-mode vertical-rl
-    text-align center
-    justify-content: center
-    align-items: center
-    overflow hidden
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-
-@font-face {
-    font-family: 'cardinal_grotesque_condenseBd';
-    src: url('../assets/fonts/cardinalgrotesquecondensed-bold-webfont.woff2') format('woff2'),
-         url('../assets/fonts/cardinalgrotesquecondensed-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'cardinal_grotesque_wideReg';
-    src: url('../assets/fonts/CardinalGrotesqueWide-Regular.woff2') format('woff2'),
-         url('../assets/fonts/CardinalGrotesqueWide-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'cardinal_grotesque_wideBlack';
-    src: url('../assets/fonts/CardinalGrotesqueWide-Black.woff2') format('woff2'),
-         url('../assets/fonts/CardinalGrotesqueWide-Black.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-@font-face {
-    font-family: 'cardinal_grotesque_wideSBd';
-    src: url('../assets/fonts/cardinalgrotesquewide-semibold-webfont.woff2') format('woff2'),
-         url('../assets/fonts/cardinalgrotesquewide-semibold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-@font-face {
-    font-family: 'goopersemibold_italic';
-    src: url('../assets/fonts/gooper-semibolditalic-webfont.woff2') format('woff2'),
-         url('../assets/fonts/gooper-semibolditalic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'goopersuperbold_italic';
-    src: url('../assets/fonts/Gooper5-SuperItalic.woff2') format('woff2'),
-         url('../assets/fonts/Gooper5-SuperItalic.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'ruta_23regular';
-    src: url('../assets/fonts/ruta-regular_v1-webfont.woff2') format('woff2'),
-         url('../assets/fonts/ruta-regular_v1-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-.hide-on-mobile {
-  @media(max-width: 767px) {
-    display: none !important
-  }
-}
-
-.hide-on-desktop {
-  @media(min-width: 768px) {
-    display: none !important;
-  }
-}
-
-.show-on-ipad {
-  @media(min-width: 1140px) {
-    display: none !important;
-  }
-}
-
-.hide-on-ipad {
-  @media(max-width: 1139px) {
-    display: none !important;
-  }
-}
-
-.nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
-}
-
-.button
-  background-color: #2752ff;
-  color: white;
-  border: none;
-  font-size: 1.2rem;
-  padding: 10px 17px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  transition background-color .2s ease
-
-.button:hover, .button:focus
-    background-color: #f26760;
-
-.button:disabled
-    background: #bfbfbf;
-    cursor: not-allowed;
-
-.white-text
-    color: white !important
-
-.black-text
-  color black !important
-
-.pointer
-  cursor pointer
-
-.fade-enter-active, .fade-leave-active
-    transition: opacity 1s
-
-.fade-enter, .fade-leave-to
-    opacity: 0
+.mobilecasemenu li a
+  color white !important
 
 </style>
-
-/*
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.5s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
-}
-
-.layout-enter-active,
-.layout-leave-active {
-  transition: opacity 0.5s;
-}
-.layout-enter,
-.layout-leave-to {
-  opacity: 0;
-}*/

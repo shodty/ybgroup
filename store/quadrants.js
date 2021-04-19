@@ -5,9 +5,9 @@ export const state = () => ({
   market: 'overview',
   q1Class: ['hw50', 'blue'],
   q2Class: ['hw50', 'yellow'],
-  q3Class: ['hw50', 'red'],
+  q3Class: ['hw50', 'pink'],
   q4Class: ['hw50', 'green'],
-  ready: false
+  ready: true
 })
 
 export const mutations = {
@@ -42,7 +42,7 @@ export const actions = {
     dispatch('changeReady', false)
     setTimeout(() => {
       dispatch('changeReady', true)
-    }, 2000)
+    }, 1500)
   },
   changeReady ({ commit }, truth) {
     commit('changeReady', truth)
@@ -79,16 +79,16 @@ export const actions = {
   },
   q3Class ({ state, commit }) {
     if (state.currentQuadrant === 0) {
-      commit('changeQ3Class', ['hw50', 'red'])
+      commit('changeQ3Class', ['hw50', 'pink'])
     } else if (state.currentQuadrant === 1) {
-      commit('changeQ3Class', ['h0', 'red'])
+      commit('changeQ3Class', ['h0', 'pink'])
     } else if (state.currentQuadrant === 2) {
       commit('changeQ3Class', ['hw50', 'pink', 'black-text'])
     } else if (state.currentQuadrant === 3 && state.previousQuadrant === 0) {
-      commit('changeQ3Class', ['hw100', 'red', 'z1000 '])
-    } else if (state.currentQuadrant === 4 && state.previousQuadrant === 3) {
-      commit('changeQ3Class', ['hw100', 'red', 'z1000 '])
-    } else { commit('changeQ3Class', ['o0', 'red']) }
+      commit('changeQ3Class', ['hw100', 'pink', 'z1000 '])
+    } else if (state.currentQuadrant === 3 && (state.previousQuadrant === 4 || state.previousQuadrant === 3)) {
+      commit('changeQ3Class', ['hw100', 'white', 'z1000 '])
+    } else { commit('changeQ3Class', ['o0', 'pink']) }
   },
   q4Class ({ state, commit }) {
     if (state.currentQuadrant === 0) {
@@ -99,7 +99,7 @@ export const actions = {
       commit('changeQ4Class', ['h0', 'green'])
     } else if (state.currentQuadrant === 4 && state.previousQuadrant === 0) {
       commit('changeQ4Class', ['hw100', 'white', 'z1000 '])
-    } else if (state.currentQuadrant === 3 && state.previousQuadrant === 4) {
+    } else if (state.currentQuadrant === 4 && state.previousQuadrant === 3) {
       commit('changeQ4Class', ['hw100', 'white', 'z1000 '])
     } else { commit('changeQ4Class', ['o0', 'green']) }
   }

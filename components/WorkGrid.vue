@@ -11,7 +11,7 @@
             .case-img.no-top-border
                 img(src="../assets/covers/vm01.jpg")
                 .overlay.vmgreen
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") VISIT MODESTO
+                    nuxt-link(to='/friendo' event="disabled" @click.native="goToWork") VISIT MODESTO
             .case-img.no-top-border
                 img(src="../assets/covers/ru01.jpg")
                 .overlay.blue
@@ -19,11 +19,11 @@
             .case-img.no-top-border.no-right-border
                 img(src="../assets/covers/thc01.jpg")
                 .overlay.tan
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") TAHOE HONEY CO.
+                    nuxt-link(to='/thc' event="disabled" @click.native="goToWork") TAHOE HONEY CO.
             .case-img.no-left-border
                 img(src="../assets/covers/ybga01.jpg")
-                .overlay.gray
-                    nuxt-link(to='/ybgapparel' event="disabled" @click.native="goToWork") YBG Apparel
+                .overlay.yellow
+                    nuxt-link(to='/ybgapparel' event="disabled" @click.native="goToWork") YBG APPAREL
             .case-img
                 img(src="../assets/covers/vo01.jpg")
                 .overlay.neon
@@ -31,7 +31,7 @@
                         //p VOTE
                         //p.secondary MAIL SERVICE
             .case-img
-                img(src="../assets/covers/fr01.jpg")
+                img(src="../assets/covers/fr03.jpg")
                 .overlay.orange
                     nuxt-link(to='/friendo' event="disabled" @click.native="goToWork") FRIENDO
             .case-img.no-right-border
@@ -45,31 +45,31 @@
             .case-img
                 img(src="../assets/covers/os01.jpg")
                 .overlay.purple
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") OUR STREET
+                    nuxt-link(to='/ourstreet' event="disabled" @click.native="goToWork") OUR STREET
             .case-img
-                img(src="../assets/covers/bl01.jpg")
+                img(src="../assets/covers/bl03.jpg")
                 .overlay.black
                     nuxt-link(to='/blasphemy' event="disabled" @click.native="goToWork") BLASPHEMY
             .case-img.no-right-border
-                img(src="../assets/covers/sh01.jpg")
+                img(src="../assets/covers/sh02.jpg")
                 .overlay.navy
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") SHANGRI LA
+                    nuxt-link(to='/shangrila' event="disabled" @click.native="goToWork") SHANGRI LA
             .case-img.no-bottom-border.no-left-border
-                img(src="../assets/covers/fr02.jpg")
-                .overlay.orange
-                    nuxt-link(to='/friendo' event="disabled" @click.native="goToWork") FRIENDO
+                img(src="../assets/covers/icon.jpg")
+                .overlay.teal
+                    nuxt-link(to='/icon' event="disabled" @click.native="goToWork") ICON
             .case-img.no-bottom-border
-                img(src="../assets/covers/dos01.jpg")
-                .overlay.red
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") DEPT. OF SOUND
+                img(src="../assets/covers/wjs.jpg")
+                .overlay.wjsblue
+                    nuxt-link(to='/WJS' event="disabled" @click.native="goToWork") WJS
             .case-img.no-bottom-border
                 img(src="../assets/covers/acr01.jpg")
                 .overlay.acrgreen
                     nuxt-link(to='/acr' event="disabled" @click.native="goToWork") ALL CITY RIDERS
             .case-img.no-bottom-border.no-right-border
-                img(src="../assets/covers/dos02.jpg")
+                img(src="../assets/covers/vpp01.jpg")
                 .overlay.dosblue
-                    nuxt-link(to='/testthree' event="disabled" @click.native="goToWork") DEPT. OF SOUND
+                    nuxt-link(to='/vpp' event="disabled" @click.native="goToWork") VALLEY PRODUCER PROGRAM
         .worksingle(v-else key=2)
 </template>
 
@@ -97,6 +97,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import '../assets/styles/colors.css'
 
 #work-grid, .workholder
     position relative
@@ -107,6 +108,7 @@ export default {
     background white
     width 100%
     height 100%
+
 .case-img
     display: flex
     justify-content: center
@@ -117,7 +119,9 @@ export default {
     float left
     border 3px solid black
     background black
-
+    @media(max-width: 767px) {
+        height 33.3333%
+    }
 .case-img a
     min-width: 100%
     min-height: 100%
@@ -128,18 +132,30 @@ export default {
     padding 0
     margin 0
 
+.case-img
+  @media(max-width: 767px) {
+    width 100%
+  }
 .no-top-border
     border-top 0px solid black
-
+    @media(max-width: 767px) {
+        border-top 3px solid black
+    }
 .no-right-border
     border-right 0px solid black
-
+    @media(max-width: 767px) {
+        border-right 3px solid black
+    }
 .no-bottom-border
     border-bottom 0px solid black
-
+    @media(max-width: 767px) {
+        border-bottom 3px solid black
+    }
 .no-left-border
     border-left 0px solid black
-
+    @media(max-width: 767px) {
+        border-left 3px solid black
+    }
 .overlay
     display: flex
     justify-content: center
@@ -152,8 +168,12 @@ export default {
     border 3px solid black
     color white
     font-family: goopersuperbold_italic
+    line-height 1
     font-size: 3em
-
+    @media(max-width: 767px) {
+        min-width: 100%
+        min-height 33.3333%
+    }
 .overlay:hover
     opacity 1
 
@@ -161,46 +181,6 @@ export default {
     text-align center
     text-decoration none
     color white
-.orange
-    background: #ec7625
-.pink
-    background: #E2A0C7
-    color black
-
-.pink p
-    color black
-.green
-    background: #235D39
-.yellow
-    background: #F3B120
-.vmgreen
-    background: #a5cf53
-.vmgreen a
-    color black
-.blue
-    background: #0076BB
-.orange
-    background: #ec7625
-.red
-    background: #E43E30
-.dosblue
-    background: #005cff
-.neon
-    background: #e8f34f
-.neon a
-    color black
-.acrgreen
-    background: #5bb947
-.black
-    background: #000
-.navy
-    background: #3f5371
-.tan
-    background: #eee9d3
-.tan a
-    color black
-.purple
-    background: #230871
 
 .secondary
     font-size 24px

@@ -44,12 +44,18 @@ export default {
     font-size: 7em
     text-align: center
     line-height: 50%
+    @media(max-width: 767px) {
+        font-size: 2em;
+    }
 .email
   width: 100%;
   font-family cardinal_grotesque_wideSBd
   text-align: center
   line-height 1.5
   font-size 5em
+  @media(max-width: 767px) {
+    font-size: 2em;
+  }
 .est
   width: 100%;
   font-family goopersemibold_italic
@@ -57,4 +63,7 @@ export default {
   letter-spacing 6px
   text-align: center
   font-size 3em
+  @media(max-width: 767px) {
+    font-size: 1em;
+  }
 </style>

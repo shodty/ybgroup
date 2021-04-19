@@ -1,42 +1,43 @@
 <template lang="pug">
 #ruta-main
-  .bg(:style='{"background" : bgc}')
-  .gridbackground(:style="gridStyles")
-  .paper.multiply
-  .parental(ref="parental")
-    TextBox.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index" :pointer='box.pointer')
-    TextBox.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index" :pointer='box.pointer')
-    TextBox.absolute(v-if='layout === "what"' v-for="(box, index) in whatObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"B" + index'  :key="'B' + index")
-    TextBox.absolute(v-if='layout === "why"' v-for="(box, index) in howObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :pointer='box.pointer' :zkey='"C" + index' :key="'C' + index")
-    TextBox.absolute(v-for="(box, index) in chaosCount"  :initW='w' :initH='h' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * Math.random(), 6)' :initStroked='(Math.random() >= 0.5)' :initTracking='Math.random()' :chaos='true' :zkey='"D" + index' :key="'D' + index")
-    TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
-    TextBox.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h*.8, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
-  .bottombar
-    b-row.bottomcontrols
-      .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") b
-      .inlinedivsquare.no-overflow(@click="changeBGColor('#008ff8')" style="background: #008ff8" v-tooltip="'blue'") b
-      .inlinedivsquare.no-overflow(@click="changeBGColor('#ff5b49')" style="background: #ff5b49; border: 1px solid white" v-tooltip="'red'") r
-      .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
-      .inlinedivgrid.bluehover.no-overflow(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px; color: white" v-tooltip="'Toggle Grid'") ⋮⋮⋮
-      .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="resetCount" style="margin-left: 24px") START
-      .inlinedivgrid.bluehover.no-overflow.hide-on-desktop(@click="createMobileTextBox()" style="margin-left: 24px") PLAY
-      .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") •
-      .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") COLLAGE
-      .inlinedivgrid.no-overflow.hide-on-mobile(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") •
-      .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="howTo" style="margin-left: 24px") HOW TO?
-      //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      //.inlinedivgrid.bluehover(@click="scramble" style="margin-left: 24px") scramble
-      //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      //.inlinedivgrid.bluehover(@click="clear" style="margin-left: 24px" v-tooltip="'Blank Canvas'") clear
-      //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
-      .inlinedivgrid.buyclass.no-overflow
-        a(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") Add to Cart
-  .circlebuttons.no-overflow
-      .addbutton.hide-on-mobile.pointerall(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
-      .addbutton.hide-on-desktop.pointerall(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
-      .clearbutton.pointerall(@click="clear" v-tooltip="'Clear Canvas'") x
-      .buybtn.pointerall(v-tooltip="'Add to Cart'")
-        a.buycursor(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") $
+  .rutawrapper
+    .bg(:style='{"background" : bgc}')
+    .gridbackground(:style="gridStyles")
+    .paper.multiply
+    .parental(ref="parental")
+      TextBox.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index" :pointer='box.pointer')
+      TextBox.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index" :pointer='box.pointer')
+      TextBox.absolute(v-if='layout === "what"' v-for="(box, index) in whatObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"B" + index'  :key="'B' + index")
+      TextBox.absolute(v-if='layout === "why"' v-for="(box, index) in howObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :pointer='box.pointer' :zkey='"C" + index' :key="'C' + index")
+      TextBox.absolute(v-for="(box, index) in chaosCount"  :initW='w' :initH='h' :top='y' :left='x' :index="index" :initTextSize='roundToMultiple(ts * Math.random(), 6)' :initStroked='(Math.random() >= 0.5)' :initTracking='Math.random()' :chaos='true' :zkey='"D" + index' :key="'D' + index")
+      TextBox.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
+      TextBox.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h*.8, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
+    .bottombar
+      b-row.bottomcontrols
+        .inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") k
+        .inlinedivsquare.no-overflow(@click="changeBGColor('#008ff8')" style="background: #008ff8" v-tooltip="'blue'") b
+        .inlinedivsquare.no-overflow(@click="changeBGColor('#ff5b49')" style="background: #ff5b49; border: 1px solid white" v-tooltip="'red'") r
+        .inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
+        .inlinedivgrid.bluehover.no-overflow(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px; color: white" v-tooltip="'Toggle Grid'") ⋮⋮⋮
+        .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="resetCount" style="margin-left: 24px") START
+        .inlinedivgrid.bluehover.no-overflow.hide-on-desktop(@click="createMobileTextBox()" style="margin-left: 24px") PLAY
+        .inlinedivgrid.no-overflow(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") •
+        .inlinedivgrid.bluehover.no-overflow(@click="chaos" style="margin-left: 24px") COLLAGE
+        .inlinedivgrid.no-overflow.hide-on-mobile(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") •
+        .inlinedivgrid.bluehover.no-overflow.hide-on-mobile(@click="howTo" style="margin-left: 24px") HOW TO?
+        //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
+        //.inlinedivgrid.bluehover(@click="scramble" style="margin-left: 24px") scramble
+        //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
+        //.inlinedivgrid.bluehover(@click="clear" style="margin-left: 24px" v-tooltip="'Blank Canvas'") clear
+        //.inlinedivgrid(style="color: white; margin-left: 24px; cursor: default; font-family: Georgia") 🞗
+        .inlinedivgrid.buyclass.no-overflow
+          a(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") Add to Cart
+    .circlebuttons.no-overflow
+        .addbutton.hide-on-mobile.pointerall(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+        .addbutton.hide-on-desktop.pointerall(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
+        .clearbutton.pointerall(@click="clear" v-tooltip="'Clear Canvas'") x
+        .buybtn.pointerall(v-tooltip="'Add to Cart'")
+          a.buycursor(href="https://yellow-brick-group.myshopify.com/cart/35164074737818:1?channel=buy_button") $
 </template>
 
 <script>
@@ -50,7 +51,7 @@ import '../static/v-tooltip.css'
 
 export default {
   name: 'Ruta23',
-  layout: 'ruta23',
+  layout: 'rutanew',
   components: {
     VueDraggableResizable,
     TextBox,
@@ -68,7 +69,6 @@ export default {
       quantity: 1
     }
   },
-
   computed: {
     ...mapState({
       bgc: state => state.backgroundchange.bgc,
@@ -134,6 +134,11 @@ export default {
         this.selectedOptions
       )
     }
+  },
+  mounted () {
+    this.boxCount = 0
+    this.chaosCount = 0
+    this.$store.dispatch('ruta/changeLayout', 'purchase')
   },
   methods: {
 
@@ -205,6 +210,14 @@ export default {
 <style lang="stylus">
 #ruta-main
   overflow hidden
+
+.rutawrapper
+    position: relative;
+    top: 5vh;
+    width: 97%;
+    height: 95vh;
+    background: #fff;
+    border-top: 3px solid #000;
 
 .gridbackground
   position absolute
