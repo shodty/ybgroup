@@ -40,7 +40,7 @@ export default {
       currentSlide: 1,
       slideObject: {
         slideCount: 14,
-        ext: ['mp4', 'jpg', 'jpg', 'jpg', 'jpg', 'png', 'jpg', 'jpg', 'jpg', 'png', 'jpg', 'jpg', 'jpg', 'mp4'],
+        ext: ['mp4', 'jpg', 'jpg', 'jpg', 'jpg', 'jpg', 'jpg', 'jpg', 'jpg', 'png', 'jpg', 'jpg', 'jpg', 'mp4'],
         icon: ['social', 'social', 'concept', 'web', 'id', 'id', 'id', 'print', 'print', 'print', 'gather', 'id', 'gather', 'id']
       },
       hooperSettings: {
