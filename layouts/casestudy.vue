@@ -2,7 +2,6 @@
 div
   //IconButtons
   nuxt
-  Cart
   //MobileMenu
   .siteheader
     .icon-container
@@ -37,14 +36,12 @@ div
 <script>
 import MobileQuadrantMenu from '../components/MobileQuadrantMenu.vue'
 import IconTwo from '~/components/IconTwo.vue'
-import Cart from '~/components/Cart.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
 import IconButtons from '~/components/IconButtons.vue'
 import CaseMenu from '~/components/CaseMenu.vue'
 
 export default {
   components: {
-    Cart,
     MobileMenu,
     IconButtons,
     IconTwo,

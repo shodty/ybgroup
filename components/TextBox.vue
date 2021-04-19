@@ -249,22 +249,7 @@ export default {
     },
     ...mapState({
       bgc: state => state.backgroundchange.bgc
-    }),
-    product () {
-      return this.$store.state.shopify.products[0]
-    },
-    selectedOptions () {
-      return this.product.options.reduce(
-        (acc, cur) => ({ ...acc, [cur.name]: cur.values[0].value }),
-        {}
-      )
-    },
-    selectedVariant () {
-      return this.$shopifyClient.product.helpers.variantForOptions(
-        this.product,
-        this.selectedOptions
-      )
-    }
+    })
   },
   mounted () {
     this.addToZStack()
@@ -337,23 +322,6 @@ export default {
     closeBox () {
       this.display = 'none'
       this.$store.dispatch('ruta/removeFromZStack', this.zkey)
-    },
-    addToCart () {
-      this.$store.commit('shopify/openCart')
-
-      const checkoutId = this.$store.state.shopify.checkout.id
-      const lineItemsToAdd = [
-        {
-          variantId: this.selectedVariant.id,
-          quantity: parseInt(this.quantity, 10)
-        }
-      ]
-
-      this.$shopifyClient.checkout
-        .addLineItems(checkoutId, lineItemsToAdd)
-        .then((res) => {
-          this.$store.commit('shopify/updateCheckout', res)
-        })
     }
   }
 }

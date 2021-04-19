@@ -2,18 +2,16 @@
 div
   //IconButtons
   nuxt
-  Cart
   //MobileMenu
 </template>
 
 <script>
-import Cart from '~/components/Cart.vue'
+
 import MobileMenu from '~/components/MobileMenu.vue'
 import IconButtons from '~/components/IconButtons.vue'
 
 export default {
   components: {
-    Cart,
     MobileMenu,
     IconButtons
   }

@@ -185,23 +185,6 @@ export default {
     },
     roundToMultiple (value, multiple) {
       return Math.ceil(value / multiple) * multiple
-    },
-    addToCart () {
-      this.$store.commit('shopify/openCart')
-
-      const checkoutId = this.$store.state.shopify.checkout.id
-      const lineItemsToAdd = [
-        {
-          variantId: this.selectedVariant.id,
-          quantity: parseInt(this.quantity, 10)
-        }
-      ]
-
-      this.$shopifyClient.checkout
-        .addLineItems(checkoutId, lineItemsToAdd)
-        .then((res) => {
-          this.$store.commit('shopify/updateCheckout', res)
-        })
     }
   }
 }

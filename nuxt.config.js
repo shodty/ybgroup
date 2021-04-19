@@ -36,8 +36,12 @@ export default {
           }
         })
       }
-    },
-    vendor: ['isomorphic-fetch', 'shopify-buy']
+    }
+  },
+  /*
+  server: {
+    host: '0.0.0.0',
+    port: 8080
   },
   /*
   ** Global CSS
@@ -54,8 +58,7 @@ export default {
       src: '~plugins/vue-slider-component.js',
       ssr: false
     },
-    '~/plugins/vue-tooltip.js',
-    '~/plugins/shopify'
+    '~/plugins/vue-tooltip.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -97,7 +100,5 @@ export default {
     unoptimized: false
   }, */
   env: {
-    shopifyAccessToken: 'c457b61d335473bcc75ab81d94827259',
-    shopifyDomain: 'yellow-brick-group.myshopify.com'
   }
 }

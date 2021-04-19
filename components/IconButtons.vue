@@ -4,27 +4,22 @@
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
             HomeButton(v-if="!isHome")
-        //.hide-on-desktop
-            CartButton
     .desktop.hide-on-mobile
         DarkLight(:darkmode='darkmode')
         nuxt-link(to='/')
             HomeButton(v-if="!isHome")
-        //CartButton
 </template>
 
 <script>
 
 import DarkLight from './DarkLight.vue'
 import HomeButton from './HomeButton.vue'
-import CartButton from './CartButton.vue'
 
 export default {
   name: 'IconButtons',
   components: {
     DarkLight,
-    HomeButton,
-    CartButton
+    HomeButton
   },
   props: {
     darkmode: { type: Boolean, default: true }
