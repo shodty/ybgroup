@@ -51,7 +51,7 @@ import '../static/v-tooltip.css'
 
 export default {
   name: 'Ruta23',
-  layout: 'rutanew',
+  layout: 'ruta23',
   components: {
     VueDraggableResizable,
     TextBox,

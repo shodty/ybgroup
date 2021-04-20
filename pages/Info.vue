@@ -13,7 +13,8 @@
         .quadrant4(:class="q4Class")
                 transition(name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }")
                     InfoComponent(v-if="ready  && (previousQuadrant == 0 || previousQuadrant == 3)")
-    MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
+    .work3mobile.black.hide-on-desktop
+      MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
 </template>
 
 <script>
@@ -68,6 +69,11 @@ export default {
 
 <style scoped lang="stylus">
 @import '../assets/styles/quadrants.css';
+#info
+    width: 100vw
+    height: 100vh
+    overflow hidden
+    background black
 
 .infoquadrantwrapper {
     position: relative;
@@ -79,7 +85,7 @@ export default {
   @media(max-width: 767px) {
     .infoquadrantwrapper  {
       width: 100%;
-      height: 75vh;
+      height: 80%;
       overflow: scroll;
     }
   }
@@ -93,5 +99,13 @@ export default {
     text-decoration: none;
     text-shadow: 8px 10px 0px rgba(0, 0, 0, 1);
   }
-
+  .work3mobile
+    height: 20%;
+    margin 0 auto
+    padding 0
+    width 100%
+    border-bottom 3px solid black
+    display: flex;
+    justify-content: center;
+    align-items: center;
 </style>

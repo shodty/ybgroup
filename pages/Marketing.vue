@@ -54,7 +54,8 @@
                 p.marketing-copy Every brand has a story to tell and what we’ve found is that the truest way
                   |  of telling it is often in person, getting physical, and wrapping oneself into the experience
                   |  of a brand rather than the consumption of it.
-    MobileQuadrantMenu(bg="pink" text="black" :links="['design', 'work', 'info', 'home']")
+      .marketing3mobile.pink
+        MobileQuadrantMenu(bg="pink" text="black" :links="['design', 'work', 'info', 'home']")
 </template>
 
 <script>

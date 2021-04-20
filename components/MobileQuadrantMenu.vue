@@ -3,7 +3,7 @@
     .mobileworkmenu.hide-on-desktop(:class="bg")
         ul
           li(v-for='link in links')
-            nuxt-link(:to='link' :class="textcolor" style='text-transform: uppercase;') {{link}}
+            nuxt-link(:to='urls[link]' :class="textcolor" style='text-transform: uppercase;') {{link}}
 
 </template>
 
@@ -18,6 +18,13 @@ export default {
   },
   data () {
     return {
+      urls: {
+        design: 'design',
+        marketing: 'marketing',
+        info: 'info',
+        work: 'work',
+        home: '/'
+      }
     }
   },
   computed: {
@@ -32,18 +39,14 @@ export default {
 <style scoped lang="stylus">
 @import '../assets/styles/quadrants.css';
 
-.mobileworkmenu
-    position: absolute;
-    bottom: 0;
+#mobilequadrantmenu
     width: 100%;
-    height: 20vh;
-    padding-top 4%
-    border-top: 3px solid black;
+    height: 100%;
     z-index: 1000;
 
 .mobileworkmenu ul
     padding-left: 10%
-
+    padding-top 4%
 .mobileworkmenu li
     font-family: cardinal_grotesque_wideSBd;
     font-size: 1.4em;

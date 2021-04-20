@@ -45,7 +45,8 @@
             slide
                 p.design-services Packaging
                 p.design-copy Designing packaging that not only looks beautiful but clears all the compliance and regulatory hurdles to get your product on the shelf is no small feat. Our team is well-versed in the entire packaging production pipeline, allowing us to help you R&D the packaging for your next product line, find vendors, prototype, create dielines, design, print prep, and execute production at scale.
-    MobileQuadrantMenu(bg="red" text="white" :links="['marketing', 'work', 'info', 'home']")
+      .design3mobile.red
+        MobileQuadrantMenu(bg="red" text="white" :links="['marketing', 'work', 'info', 'home']")
 </template>
 <script>
 

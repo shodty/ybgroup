@@ -27,9 +27,10 @@ export default {
     align-items: center
     overflow: hidden
     z-index 1000
-#design-images img, #design-images video
-    flex-shrink: 0
-    min-width: 100%
-    min-height: 100%
 
+#design-images img, #design-images video
+    object-fit: cover
+    overflow: hidden
+    height: 100%
+    width: 100%
 </style>

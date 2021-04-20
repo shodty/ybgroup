@@ -7,7 +7,7 @@ div
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
             component(is="yellow-brick-group")
-        nuxt-link(to='home')
+        nuxt-link(to='/')
           .click-box(@click="changeQuadrant(0)")
   .case-sidemenu.hide-on-mobile
     .menubox.white.black-text.pointer.designmobile
@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../assets/styles/default.css';
 
 .designmobile, .marketingmobile, .infomobile, .workmobile, .storemobile
   text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);

@@ -28,8 +28,8 @@ export default {
     overflow: hidden
 
 #marketing-images img, #marketing-images video
-    flex-shrink: 0
-    min-width: 100%
-    min-height: 100%
-
+    object-fit: cover
+    overflow: hidden
+    height: 100%
+    width: 100%
 </style>

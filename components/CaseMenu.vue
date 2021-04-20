@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       menuopen: false,
-      menulabel: '⯅',
+      menulabel: 'MORE',
       menuclass: 'closed',
       cases: {
         bardismiry: {
@@ -87,12 +87,12 @@ export default {
     openMenu (truth) {
       if (truth) {
         this.menuclass = 'open'
-        this.menulabel = '⯆'
+        this.menulabel = 'CLOSE'
         this.menuopen = true
       } else {
         this.menuclass = 'closed'
         this.menuopen = false
-        this.menulabel = '⯅'
+        this.menulabel = 'MORE'
       }
     },
     goToLink (event) {
@@ -101,7 +101,7 @@ export default {
         setTimeout(() => {
           this.menuclass = 'closed'
           this.menuopen = false
-          this.menulabel = '⯅'
+          this.menulabel = 'MORE'
         }, 250)
       }, 50)
     }
@@ -110,7 +110,6 @@ export default {
 </script>
 <style lang="stylus">
 @import '../assets/styles/colors.css'
-
 .case-sidemenu
     z-index 100
     position fixed
@@ -127,7 +126,7 @@ export default {
     bottom 1vh
     right 12vw
     @media(max-width: 767px) {
-      bottom 21vh
+      bottom 12vh
       right 72vw
     }
 .casestudy-menu-container
@@ -136,9 +135,14 @@ export default {
     height 32px
     overflow hidden
     transition height 1s ease, opacity .5s ease
-
+    @media(max-width: 767px) {
+      height 24px
+    }
 .open
     height: 544px
+    @media(max-width: 767px) {
+      height 408px
+    }
 
 .closed div div
     margin-top: 3%
@@ -155,6 +159,10 @@ export default {
     overflow hidden
     transition: background .3s ease
     text-transform: uppercase
+    @media(max-width: 767px) {
+      font-size .8em
+      height 24px
+    }
 .casebox:hover
     background: #0076BB
 

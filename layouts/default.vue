@@ -7,7 +7,7 @@ div
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
             component(is="yellow-brick-group")
-        nuxt-link.click-box(to='home' event="disabled" @click.native="goToLink($event, 0)")
+        nuxt-link.click-box(to='/' event="disabled" @click.native="goToLink($event, 0)")
   .sidemenu.hide-on-mobile
     .menubox.blue.white-text.pointer
         nuxt-link(to='design' event="disabled" @click.native="goToLink($event, 1)") DESIGN
