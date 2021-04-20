@@ -19,6 +19,9 @@
       border: 0px solid #000;
       height: 75vh;
     }
+    .case-study {
+      height: 80vh;
+    }
   }
   hr {
     border-top: 4px solid #000;

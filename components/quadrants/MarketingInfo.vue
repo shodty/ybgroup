@@ -4,14 +4,14 @@
         .overview(v-if='market == "overview"' key=10)
             p.marketing-services Overview
             span.marketing-overview MARKETING
-            img(src="../../assets/icons/marketing-icons.png" height="40px")
+            img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy Creating with purpose, intent and a cohesive strategy in mind is what we do best.
                 |  Work with our creative team to not only develop an effective and compelling strategy but
                 |  to also manage and execute the plan in a collaborative manner.
         .branding(v-else-if='market == "lifestyle"' key=11)
             p.marketing-services Lifestyle Marketing
             span.marketing-overview MARKETING
-            img(src="../../assets/icons/marketing-icons.png" height="40px")
+            img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy Our strength is helping our clients tie it all together.
                 |  Whether it’s a product or service you offer, we enjoy synthesizing all
                 |  of your various marketing efforts into an effective and on-brand strategy.
@@ -19,14 +19,14 @@
         .packaging(v-else-if='market == "content"' key=13)
             p.marketing-services Content Creation
             span.marketing-overview MARKETING
-            img(src="../../assets/icons/marketing-icons.png" height="40px")
+            img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy In today’s digital landscape the ability to tell your story through
                 |  meaningful, impactful and contextual content is essential to compete in any industry.
                 |  We specialize in and enjoy the process of creating custom content that is unique and on brand.
         .motion(v-else-if='market == "activation"' key=12)
             p.marketing-services Brand Activation
             span.marketing-overview MARKETING
-            img(src="../../assets/icons/marketing-icons.png" height="40px")
+            img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy Every brand has a story to tell and what we’ve found is that the truest way
                 |  of telling it is often in person, getting physical, and wrapping oneself into the experience
                 |  of a brand rather than the consumption of it.
@@ -62,7 +62,7 @@ export default {
 
 .marketing-services
     font-size 3.5vw
-    line-height 0
+    line-height: .35;
 
 .marketing-overview
     font-size .7em

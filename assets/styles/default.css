@@ -1,6 +1,8 @@
 .lazy-placeholder {
   height: 100px;
   background-image: url("../../static/images/ybg_loading.gif");
+  background-position: center;
+  background-size: cover;
 }
 
 .information {
@@ -27,6 +29,10 @@
   *:before,
   *:after {
     margin: 0;
+  }
+
+  p {
+    margin-bottom: 0;
   }
   .siteheader {
     z-index: 1000;
@@ -161,12 +167,12 @@
       display: none !important;
     }
   }
-  @media (min-width: 1140px) {
+  @media (min-width: 1376px) {
     .show-on-ipad {
       display: none !important;
     }
   }
-  @media (max-width: 1139px) {
+  @media (max-width: 1375px) {
     .hide-on-ipad {
       display: none !important;
     }

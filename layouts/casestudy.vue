@@ -21,11 +21,12 @@ div
         a(href='https://www.ybgroupshop.us/') STORE
   transition(name="fade" mode="out-in")
     .loadercontainer(v-if="!ready")
-        .icongif
-          img(v-if="!ready" src='../assets/img/icon_colorgif.gif')
+      .icongif
+        img(v-if="!ready" src='../assets/img/icon_colorgif.gif')
   CaseMenu
-  nuxt-link.backbtn(to='work' event="disabled" @click.native="goBack($event)") BACK
-  MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
+  nuxt-link.backbtn.hide-on-mobile(to='work' event="disabled" @click.native="goBack($event)") BACK
+  .mobilemenudiv.hide-on-desktop
+    MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
   //.information
     span Current Quadrant: {{currentQuadrant}}
     span Previous Quadrant: {{previousQuadrant}}
@@ -123,4 +124,7 @@ export default {
 .mobilecasemenu li a
   color white !important
 
+.mobilemenudiv
+  height: 20vh;
+  background: black;
 </style>

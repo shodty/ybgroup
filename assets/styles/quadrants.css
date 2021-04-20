@@ -104,12 +104,12 @@
 
   .ctrtxt {
     font-family: goopersuperbold_italic;
-    font-size: 7em;
+    font-size: 5.5vw;
     text-align: center;
     line-height: 50%;
   }
   .infotxt {
-    font-family: cardinal_grotesque_wideSBd;
+    font-family: cardinal_grotesque_wideReg;
     font-size: 4em;
     height: 100%;
     width: 100%;
