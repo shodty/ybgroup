@@ -23,9 +23,9 @@
       .design1mobile.pink
         hooper.designslider(ref="hooperimages" :settings='hooperSettings'  @slide='changeSlides($event)')
             slide
-                video(src="../assets/vid/ybg_launch02.mp4" autoplay muted loop key=1)
+                video(src="../assets/vid/ybg_launch02.mp4" autoplay muted loop index)
             slide
-                img( src="../assets/img/test/vpp01.png" key=2)
+                img( src="../assets/img/test/vpp01.png" index)
             slide
                 video(src="../assets/cases/wjs/1.mp4" autoplay muted loop key=3)
             slide

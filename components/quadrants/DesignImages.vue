@@ -1,8 +1,8 @@
 <template lang="pug">
 #design-images
     transition(name="fade" mode="out-in")
-        video(v-if='design == "overview"' src="../../assets/vid/ybg_launch02.mp4" autoplay muted loop key=1)
-        img(v-else-if='design == "branding"' src="../../assets/img/test/vpp01.png" key=2)
+        video(v-if='design == "overview"' src="../../assets/vid/ybg_launch02.mp4" autoplay muted loop index)
+        img(v-else-if='design == "branding"' src="../../assets/img/test/vpp01.png" index)
         video(v-else-if='design == "motion"' src="../../assets/cases/wjs/1.mp4" autoplay muted key=3)
         img(v-else-if='design == "packaging"' src="../../assets/img/test/fr03.jpg" key=4)
 

@@ -24,9 +24,9 @@
       .marketing1mobile.pink
         hooper.marketingslider(ref="hooperimages" :settings='hooperSettings'  @slide='changeSlides($event)')
             slide
-                img(src="../assets/img/ruta01.jpg" key=1)
+                img(src="../assets/img/ruta01.jpg" index)
             slide
-                img( src="../assets/img/test/friendo01.jpg" key=2)
+                img( src="../assets/img/test/friendo01.jpg" index)
             slide
                 video(src="../assets/img/test/burn01.mp4" autoplay muted loop key=3)
             slide

@@ -1,10 +1,10 @@
 <template lang="pug">
 #marketing-images
     transition(name="fade" mode="out-in")
-        img(v-if='market == "overview"' src="../../assets/img/ruta01.jpg" key=10)
-        img(v-else-if='market == "lifestyle"' src="../../assets/img/test/friendo01.jpg" key=11)
-        video(v-else-if='market == "content"' src="../../assets/img/test/burn01.mp4" autoplay loop muted key=12)
-        img(v-else-if='market == "activation"' src="../../assets/img/test/Jump-60.jpg" key=13)
+        img(v-if='market == "overview"' src="../../assets/img/ruta01.jpg" index0)
+        img(v-else-if='market == "lifestyle"' src="../../assets/img/test/friendo01.jpg" index1)
+        video(v-else-if='market == "content"' src="../../assets/img/test/burn01.mp4" autoplay loop muted index2)
+        img(v-else-if='market == "activation"' src="../../assets/img/test/Jump-60.jpg" index3)
 
 </template>
 
