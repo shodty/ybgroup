@@ -18,6 +18,9 @@ export default {
     },
     getImgUrl (name, pic, ext) {
       return require('../assets/cases/' + name + '/' + pic + '.' + ext)
+    },
+    getPosterUrl (name, pic, ext) {
+      return require('../assets/cases/' + name + '/poster/' + pic + '.' + ext)
     }
   }
 }

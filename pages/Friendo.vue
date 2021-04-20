@@ -8,8 +8,9 @@
             slide(v-for="(slide, index) in slideObject.slideCount")
                 .ctrimg(v-if="(slideObject.ext[index] != 'mp4')" key=index)
                     img(:src='getImgUrl(name, index+1, slideObject.ext[index])')
-                .ctrimg(v-else-if key=index)
-                    video(:src='getImgUrl(name, index+1, slideObject.ext[index])' autoplay muted loop )
+                .ctrimg(v-else key=index)
+                    video( :poster='getPosterUrl(name, index+1, "jpg")'  autoplay muted loop)
+                      source(:src='getImgUrl(name, index+1, slideObject.ext[index])')
             hooper-navigation(slot="hooper-addons")
         SliderCounter.footer.hide-on-mobile(:lit='count' :slideObject='slideObject' :icon='slideObject.icon')
 
