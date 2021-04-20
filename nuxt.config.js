@@ -75,7 +75,11 @@ export default {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    ['nuxt-lazy-load', {
+      // defaultImage: '/images/icon_colorgif.gif',
+      loadingClass: 'lazy-placeholder'
+    }]
   ],
   /*
   ** Axios module configuration

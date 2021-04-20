@@ -77,13 +77,11 @@
 
 import axios from 'axios'
 import MailLogo from '../components/MailLogo.vue'
-import Header from '../components/Header.vue'
 
 export default {
   name: 'Mailservice',
   components: {
-    MailLogo,
-    Header
+    MailLogo
   },
   data () {
     return {
