@@ -1,7 +1,7 @@
 <template lang="pug">
 #work-grid
     transition(name="fade" mode="out-in")
-        .workholder(v-if="workgrid" key=1)
+        .workholder(v-if="workgrid" index)
             .case-img.no-top-border.no-left-border
                 img(src="../assets/covers/dyb01.jpg")
                 .overlay.pink
@@ -70,7 +70,7 @@
                 img(src="../assets/covers/vpp01.jpg")
                 .overlay.dosblue
                     nuxt-link(to='/vpp' event="disabled" @click.native="goToWork") VALLEY PRODUCER PROGRAM
-        .worksingle(v-else key=2)
+        .worksingle(v-else index)
 </template>
 
 <script>

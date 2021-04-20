@@ -5,9 +5,9 @@
         .quadrant1(:class="q1Class"  @mouseenter="hoverAnimation(1)" @mouseleave="hoverAnimation(0)")
             .quad1gif(:class="quad1hover")
             transition(name="fade" mode="out-in")
-                .designbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(1)" key=1)
+                .designbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(1)" index)
                     nuxt-link.pink-text(to='design' event="disabled" @click.native="goToLink") Design
-                WorkGrid(v-else-if="currentQuadrant == 3" key=2)
+                WorkGrid(v-else-if="currentQuadrant == 3" index)
                 .designbox.ctrtxt(v-else-if="currentQuadrant == 4" key=3)
                   InfoComponent
                 .designpic.ctrtxt(v-else-if="currentQuadrant == 1" key=4)
@@ -17,9 +17,9 @@
         .quadrant2(:class="q2Class" @mouseenter="hoverAnimation(2)" @mouseleave="hoverAnimation(0)")
             .quad2gif(:class="quad2hover")
             transition(name="fade" mode="out-in")
-                .marketingbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(2)" key=1)
+                .marketingbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(2)" index)
                     nuxt-link.red-text(to='marketing' event="disabled" @click.native="goToLink") Marketing
-                WorkGrid(v-else-if="currentQuadrant == 3" key=2)
+                WorkGrid(v-else-if="currentQuadrant == 3" index)
                 .marketingbox.ctrtxt(v-else-if="currentQuadrant == 4" key=3)
                   InfoComponent
                 .marketingpic.ctrtxt(v-else-if="currentQuadrant == 2" key=4)
@@ -31,7 +31,7 @@
             transition(name="fade" mode="out-in")
                 .workbox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(3)" key=0)
                     nuxt-link.blue-text(to='work' event="disabled" @click.native="goToLink") Work
-                WorkGrid(v-else-if="currentQuadrant == 3" key=1)
+                WorkGrid(v-else-if="currentQuadrant == 3" index)
         .quadrant4(:class="q4Class"  @mouseenter="hoverAnimation(4)" @mouseleave="hoverAnimation(0)")
             .quad4gif(:class="quad4hover")
             transition(name="fade" mode="out-in")

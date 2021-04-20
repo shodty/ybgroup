@@ -26,7 +26,7 @@
                 video(poster="../assets/vid/poster/ybg_launch.jpg" autoplay muted loop controls key=1)
                   source( src="../assets/vid/ybg_launch02.mp4")
             slide
-                img( src="../assets/img/test/vpp01.png" key=2)
+                img( src="../assets/img/test/vpp01.png" index)
             slide
                 video(poster="../assets/cases/wjs/poster/1.jpg" autoplay muted loop controls key=3)
                   source(src="../assets/cases/wjs/1.mp4")

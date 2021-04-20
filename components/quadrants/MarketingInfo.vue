@@ -1,14 +1,14 @@
 <template lang="pug">
 #marketing-info
     transition(name="fade" mode="out-in")
-        .overview(v-if='market == "overview"' key=10)
+        .overview(v-if='market == "overview"' index0)
             p.marketing-services Overview
             span.marketing-overview MARKETING
             img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy Creating with purpose, intent and a cohesive strategy in mind is what we do best.
                 |  Work with our creative team to not only develop an effective and compelling strategy but
                 |  to also manage and execute the plan in a collaborative manner.
-        .branding(v-else-if='market == "lifestyle"' key=11)
+        .branding(v-else-if='market == "lifestyle"' index1)
             p.marketing-services Lifestyle Marketing
             span.marketing-overview MARKETING
             img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
@@ -16,14 +16,14 @@
                 |  Whether it’s a product or service you offer, we enjoy synthesizing all
                 |  of your various marketing efforts into an effective and on-brand strategy.
 
-        .packaging(v-else-if='market == "content"' key=13)
+        .packaging(v-else-if='market == "content"' index3)
             p.marketing-services Content Creation
             span.marketing-overview MARKETING
             img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy In today’s digital landscape the ability to tell your story through
                 |  meaningful, impactful and contextual content is essential to compete in any industry.
                 |  We specialize in and enjoy the process of creating custom content that is unique and on brand.
-        .motion(v-else-if='market == "activation"' key=12)
+        .motion(v-else-if='market == "activation"' index2)
             p.marketing-services Brand Activation
             span.marketing-overview MARKETING
             img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
