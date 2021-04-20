@@ -1,6 +1,5 @@
 <template lang='pug'>
 div
-  //IconButtons
   nuxt
   //MobileMenu
   .siteheader
@@ -35,13 +34,11 @@ div
 <script>
 import IconTwo from '~/components/IconTwo.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
-import IconButtons from '~/components/IconButtons.vue'
 import CaseMenu from '~/components/CaseMenu.vue'
 
 export default {
   components: {
     MobileMenu,
-    IconButtons,
     IconTwo,
     CaseMenu
   },
