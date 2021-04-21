@@ -15,7 +15,7 @@ div
     .menubox.red.white-text.pointer
         nuxt-link(to='work' event="disabled" @click.native="goToLinkAlt($event, 3)") WORK
     .menubox.green.white-text.pointer
-        nuxt-link(to='info' event="disabled" @click.native="goToLinkAlt($event, 4)") INFO
+        nuxt-link(to='info' event="disabled" @click.native="goToLinkAlt($event, 4)") CONTACT
     .menubox.orange.white-text.pointer
         a(href='https://www.ybgroupshop.us/') STORE
   transition(name="fade" mode="out-in")

@@ -14,18 +14,18 @@ export default {
   props: {
     bg: { type: String, default: 'black' },
     text: { type: String, default: 'white' },
-    links: { type: Array, default () { return ['design', 'marketing', 'info', 'home'] } }
+    links: { type: Array, default () { return ['design', 'marketing', 'contact', 'home'] } }
   },
   data () {
     return {
       urls: {
         design: 'design',
         marketing: 'marketing',
-        info: 'info',
+        contact: 'info',
         work: 'work',
         home: '/'
       },
-      staticlinks: ['design', 'marketing', 'work', 'info']
+      staticlinks: ['design', 'marketing', 'work', 'contact']
     }
   },
   computed: {

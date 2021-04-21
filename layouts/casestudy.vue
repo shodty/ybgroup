@@ -16,7 +16,7 @@ div
     .menubox.white.black-text.pointer.workmobile
         nuxt-link(to='work' event="disabled" @click.native="goToLink($event, 3)") WORK
     .menubox.white.black-text.pointer.infomobile
-        nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") INFO
+        nuxt-link(to='info' event="disabled" @click.native="goToLink($event, 4)") CONTACT
     .menubox.white.black-text.pointer.storemobile
         a(href='https://www.ybgroupshop.us/') STORE
   transition(name="fade" mode="out-in")

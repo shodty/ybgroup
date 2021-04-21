@@ -1,16 +1,16 @@
 <template lang="pug">
 #information-component
     //.centered
-        p.contact Contact Us
         p.email(:class="emailColor[count]") info@ybgroup.us
         p.est EST. 2018
     .container
-      form
-        label Name
+      p.email Contact Us
+      form(@submit.prevent="sendEmail")
+        label.contact Name
         input(type='text' v-model='name' name='name' placeholder='Your Name')
-        label Email
+        label.contact Email
         input(type='email' v-model='email' name='email' placeholder='Your Email')
-        label Message
+        label.contact Message
         textarea(name='message' v-model='message' cols='30' rows='5' placeholder='Message')
         input(type='submit' value='Send')
 </template>
@@ -18,9 +18,7 @@
 import emailjs from 'emailjs-com'
 
 export default {
-  components: {
-    emailjs
-  },
+  name: 'ContactUs',
   data () {
     return {
       emailColor: ['pink-text', 'red-text', 'blue-text', 'green-text', 'yellow-text', 'orange-text'],
@@ -31,10 +29,9 @@ export default {
     }
   },
   mounted () {
-    this.init()
   },
   methods: {
-    init () {
+    changeColor () {
       this.count = setInterval(() => {
         this.count++
         if (this.count > 5) { this.count = 0 }
@@ -48,6 +45,7 @@ export default {
             email: this.email,
             message: this.message
           })
+        alert('Message Received!')
       } catch (error) {
         console.log({ error })
       }
@@ -74,11 +72,12 @@ export default {
 .contact
     flex-basis: 100%;
     font-family: goopersuperbold_italic
-    font-size: 7em
+    font-size: 2em
     text-align: center
-    line-height: 50%
+    line-height: 2
     @media(max-width: 767px) {
-        font-size: 2em;
+        font-size: 1em;
+        line-height: 1
     }
 .email
   width: 100%;
@@ -104,10 +103,12 @@ export default {
   display: block;
   margin:auto;
   text-align: center;
-  border-radius: 5px;
-  background-color: #f2f2f2;
   padding: 20px;
   width: 50%;
+  @media(max-width: 767px) {
+    width: 90%;
+    padding: 2%;
+  }
 }
 
 label {
@@ -123,18 +124,26 @@ input[type=text], [type=email], textarea {
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
+  @media(max-width: 767px) {
+    margin-top: 0px;
+    padding: 4px;
+  }
 }
 
 input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
+  font-family goopersemibold_italic
+  background-color: #f3b120;
+  color: black;
+  padding: 12px 20px 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  @media(max-width: 767px) {
+    padding: 4px 20px 2px 20px
+  }
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #0076bb;
 }
 </style>
