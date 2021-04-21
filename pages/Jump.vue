@@ -9,7 +9,7 @@
                 .ctrimg(v-if="(slideObject.ext[index] != 'mp4')" key=index)
                     img(:src='getImgUrl(name, index+1, slideObject.ext[index])')
                 .ctrimg(v-else key=index-100)
-                    video( :poster='getPosterUrl(name, index+1, "jpg")'  autoplay muted loop controls)
+                    video( :poster='getPosterUrl(name, index+1, "jpg")'  playsinline autoplay muted loop)
                       source(:src='getImgUrl(name, index+1, slideObject.ext[index])')
             hooper-navigation(slot="hooper-addons")
         SliderCounter.footer.hide-on-mobile(:lit='count' :slideObject='slideObject' :icon='slideObject.icon')

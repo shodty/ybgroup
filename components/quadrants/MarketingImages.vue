@@ -3,7 +3,7 @@
     transition(name="fade" mode="out-in")
         img(v-if='market == "overview"' src="../../assets/img/ruta01.jpg" key=10)
         img(v-else-if='market == "lifestyle"' src="../../assets/img/test/friendo01.jpg" key=11)
-        video(v-else-if='market == "content"' poster="../../assets/img/test/burn.jpg" autoplay loop muted controls key=12)
+        video(v-else-if='market == "content"' poster="../../assets/img/test/burn.jpg" playsinline autoplay loop muted  key=12)
           source(src="../../assets/img/test/burn01.mp4")
         img(v-else-if='market == "activation"' src="../../assets/img/test/Jump-60.jpg" key=13)
 

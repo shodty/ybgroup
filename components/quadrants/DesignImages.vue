@@ -1,10 +1,10 @@
 <template lang="pug">
 #design-images
     transition(name="fade" mode="out-in")
-        video(v-if='design == "overview"'  autoplay muted loop controls key=1)
+        video(v-if='design == "overview"'  playsinline autoplay muted loop key=1)
           source( src="../../assets/vid/ybg_launch02.mp4")
         img(v-else-if='design == "branding"' src="../../assets/img/test/vpp01.png" key=2)
-        video(v-else-if='design == "motion"' poster="../../assets/cases/wjs/poster/1.jpg" autoplay muted controls key=3)
+        video(v-else-if='design == "motion"' poster="../../assets/cases/wjs/poster/1.jpg" playsinline autoplay muted key=3)
           source(src="../../assets/cases/wjs/1.mp4")
         img(v-else-if='design == "packaging"' src="../../assets/img/test/fr03.jpg" key=4)
 

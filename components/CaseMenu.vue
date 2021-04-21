@@ -126,7 +126,7 @@ export default {
     bottom 1vh
     right 12vw
     @media(max-width: 767px) {
-      bottom 8%
+      bottom 10%
       right 72vw
     }
 .casestudy-menu-container

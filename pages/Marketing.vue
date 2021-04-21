@@ -28,7 +28,7 @@
             slide
                 img( src="../assets/img/test/friendo01.jpg" index)
             slide
-                video(poster="../assets/img/test/burn.jpg" autoplay muted loop controls key=3)
+                video(poster="../assets/img/test/burn.jpg" playsinline autoplay muted loop key=3)
                   source(src="../assets/img/test/burn01.mp4")
             slide
                 img(src="../assets/img/test/Jump-60.jpg" key=4)
