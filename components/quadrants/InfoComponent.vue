@@ -1,16 +1,33 @@
 <template lang="pug">
 #information-component
-    .centered
+    //.centered
         p.contact Contact Us
         p.email(:class="emailColor[count]") info@ybgroup.us
         p.est EST. 2018
+    .container
+      form
+        label Name
+        input(type='text' v-model='name' name='name' placeholder='Your Name')
+        label Email
+        input(type='email' v-model='email' name='email' placeholder='Your Email')
+        label Message
+        textarea(name='message' v-model='message' cols='30' rows='5' placeholder='Message')
+        input(type='submit' value='Send')
 </template>
 <script>
+import emailjs from 'emailjs-com'
+
 export default {
+  components: {
+    emailjs
+  },
   data () {
     return {
       emailColor: ['pink-text', 'red-text', 'blue-text', 'green-text', 'yellow-text', 'orange-text'],
-      count: 0
+      count: 0,
+      name: '',
+      email: '',
+      message: ''
     }
   },
   mounted () {
@@ -22,6 +39,22 @@ export default {
         this.count++
         if (this.count > 5) { this.count = 0 }
       }, 1500)
+    },
+    sendEmail (e) {
+      try {
+        emailjs.sendForm('service_296hcep', 'template_cu44pdv', e.target,
+          'user_XC8lCOdBkcQkQpUs4QkTs', {
+            name: this.name,
+            email: this.email,
+            message: this.message
+          })
+      } catch (error) {
+        console.log({ error })
+      }
+      // Reset form field
+      this.name = ''
+      this.email = ''
+      this.message = ''
     }
   }
 }
@@ -66,4 +99,42 @@ export default {
   @media(max-width: 767px) {
     font-size: 1em;
   }
+
+.container {
+  display: block;
+  margin:auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+}
+
+label {
+  float: left;
+}
+
+input[type=text], [type=email], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
 </style>

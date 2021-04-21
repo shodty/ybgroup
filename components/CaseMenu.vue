@@ -15,69 +15,69 @@ export default {
       menulabel: 'MORE',
       menuclass: 'closed',
       cases: {
-        bardismiry: {
-          name: 'icon apparel',
-          link: 'icon'
-        },
-        friendo: {
-          name: 'friendo',
-          link: 'friendo'
-        },
         doyourbest: {
           name: 'do your best',
           link: 'doyourbest'
-        },
-        droppingpins: {
-          name: 'dropping pins',
-          link: 'droppingpins'
-        },
-        acr: {
-          name: 'acr',
-          link: 'acr'
-        },
-        jump: {
-          name: 'jump',
-          link: 'jump'
-        },
-        deptofsound: {
-          name: 'vpp',
-          link: 'vpp'
-        },
-        ruta: {
-          name: 'ruta 23',
-          link: 'ruta'
         },
         visitmodesto: {
           name: 'visit modesto',
           link: 'friendo'
         },
-        ybgapparel: {
-          name: 'ybg apparel',
-          link: 'ybgapparel'
+        ruta: {
+          name: 'ruta 23',
+          link: 'ruta'
         },
         thc: {
           name: 'thc',
           link: 'thc'
         },
+        ybgapparel: {
+          name: 'ybg apparel',
+          link: 'ybgapparel'
+        },
         vote: {
           name: 'vote',
           link: 'vote'
         },
-        blasphemy: {
-          name: 'blasphemy',
-          link: 'blasphemy'
+        friendo: {
+          name: 'friendo',
+          link: 'friendo'
+        },
+        droppingpins: {
+          name: 'dropping pins',
+          link: 'droppingpins'
+        },
+        jump: {
+          name: 'jump',
+          link: 'jump'
         },
         ourstreet: {
           name: 'our street',
           link: 'ourstreet'
         },
+        blasphemy: {
+          name: 'blasphemy',
+          link: 'blasphemy'
+        },
         shangrila: {
           name: 'shangri la',
           link: 'shangrila'
         },
+        icon: {
+          name: 'icon apparel',
+          link: 'icon'
+        },
         wjs: {
           name: 'WJS',
           link: 'wjs'
+        },
+        acr: {
+          name: 'acr',
+          link: 'acr'
+        },
+        vpp: {
+          name: 'vpp',
+          link: 'vpp'
         }
 
       }
@@ -126,7 +126,7 @@ export default {
     bottom 1vh
     right 12vw
     @media(max-width: 767px) {
-      bottom 12vh
+      bottom 8%
       right 72vw
     }
 .casestudy-menu-container

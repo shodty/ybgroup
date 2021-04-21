@@ -55,8 +55,9 @@
                 p.marketing-copy Every brand has a story to tell and what we’ve found is that the truest way
                   |  of telling it is often in person, getting physical, and wrapping oneself into the experience
                   |  of a brand rather than the consumption of it.
-      .marketing3mobile.pink
-        MobileQuadrantMenu(bg="pink" text="black" :links="['design', 'work', 'info', 'home']")
+        .fixed-arrow →
+      .marketing3mobile.black
+        MobileQuadrantMenu(bg="black" text="white" :links="['design', 'work', 'info', 'home']")
 </template>
 
 <script>
@@ -157,7 +158,11 @@ export default {
   height: 30%;
 
 .marketing3mobile
-  height: 20%;
+  position: fixed
+  height: 40px;
+  bottom: 0%
+  overflow hidden
+  border-top 3px solid black
 
 .marketing1mobile img, .marketing1mobile video
   height: 100%
@@ -187,7 +192,7 @@ li.is-active.is-current
     padding-right: 10%
     color black
 .marketingslider .marketing-services
-    padding-top 8%
+    padding-top 6%
     font-weight 1000
     text-transform uppercase
     letter-spacing 2px
@@ -211,5 +216,11 @@ li img, li video
 
 .marketing-links li a
   color black !important
+
+.fixed-arrow
+  position absolute
+  color black
+  right 3%
+  top 62%
 
 </style>

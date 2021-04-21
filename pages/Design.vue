@@ -47,8 +47,9 @@
             slide
                 p.design-services Packaging
                 p.design-copy Designing packaging that not only looks beautiful but clears all the compliance and regulatory hurdles to get your product on the shelf is no small feat. Our team is well-versed in the entire packaging production pipeline, allowing us to help you R&D the packaging for your next product line, find vendors, prototype, create dielines, design, print prep, and execute production at scale.
-      .design3mobile.red
-        MobileQuadrantMenu(bg="red" text="white" :links="['marketing', 'work', 'info', 'home']")
+        .fixed-arrow →
+      .design3mobile.black
+        MobileQuadrantMenu(bg="black" text="white" :links="['marketing', 'work', 'info', 'home']")
 </template>
 <script>
 
@@ -135,6 +136,11 @@ export default {
     overflow hidden
     background black
 
+body
+  @media screen {
+    position fixed
+  }
+
 .design1mobile, .design2mobile, .design3mobile
   width 100%
   border-bottom 3px solid black
@@ -145,11 +151,14 @@ export default {
   height: 50%;
 
 .design2mobile
-  height: 30%;
+  height: 50%;
 
 .design3mobile
-  height: 20%;
-
+  position: fixed
+  height: 40px;
+  bottom: 0%
+  overflow hidden
+  border-top 3px solid black
 .design1mobile img, .design1mobile video
   height: 100%
 
@@ -179,7 +188,7 @@ li.is-active.is-current
     padding-right: 10%
     color white
 .designslider .design-services
-    padding-top 8%
+    padding-top 5%
     font-weight 1000
     text-transform uppercase
     letter-spacing 2px
@@ -202,5 +211,11 @@ li.is-active.is-current
 
 .design-categories li
   color white
+
+.fixed-arrow
+  position absolute
+  color white
+  right 3%
+  top 62%
 
 </style>

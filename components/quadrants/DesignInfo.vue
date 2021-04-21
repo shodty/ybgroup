@@ -54,6 +54,9 @@ export default {
 .design-services
     font-size 3.5vw
     line-height: .35
+    @media screen {
+        padding-bottom: 3%
+    }
 
 .design-overview
     font-size 2vw

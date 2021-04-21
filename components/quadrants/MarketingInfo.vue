@@ -63,7 +63,9 @@ export default {
 .marketing-services
     font-size 3.5vw
     line-height: .35;
-
+    @media screen {
+        padding-bottom: 3%
+    }
 .marketing-overview
     font-size .7em
     line-height 1
