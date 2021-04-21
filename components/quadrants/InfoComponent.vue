@@ -1,10 +1,10 @@
 <template lang="pug">
-#information-component
+#information-component.black
     //.centered
         p.email(:class="emailColor[count]") info@ybgroup.us
         p.est EST. 2018
     .container
-      p.email Contact Us
+      p.email {{header}}
       form(@submit.prevent="sendEmail")
         label.contact Name
         input(type='text' v-model='name' name='name' placeholder='Your Name')
@@ -25,7 +25,8 @@ export default {
       count: 0,
       name: '',
       email: '',
-      message: ''
+      message: '',
+      header: 'Contact Us'
     }
   },
   mounted () {
@@ -45,7 +46,10 @@ export default {
             email: this.email,
             message: this.message
           })
-        alert('Message Received!')
+        this.header = 'Success!'
+        setTimeout(() => {
+          this.header = 'Contact Us'
+        }, 10000)
       } catch (error) {
         console.log({ error })
       }
@@ -113,6 +117,7 @@ export default {
 
 label {
   float: left;
+  margin-bottom: 0;
 }
 
 input[type=text], [type=email], textarea {

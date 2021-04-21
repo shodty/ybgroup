@@ -51,10 +51,10 @@ export default {
     justify-content: space-between;
     width: 100%;
     margin: 0;
-    padding: 1.5% 5%;
+    padding: 1.5% 4%;
 .mobileworkmenu li
     font-family: cardinal_grotesque_wideSBd;
-    font-size: 4.5vw;
+    font-size: 4vw;
     flex: 0 1 auto;
     float: left;
     overflow: hidden;
