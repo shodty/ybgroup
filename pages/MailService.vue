@@ -1,87 +1,92 @@
 <template lang="pug">
-#main
-  #main-canvas
-    canvas(id="c" @click="stamp" :height='canvasHeight' :width='canvasWidth')
-    canvas(id="r" @click="stamp" :height='canvasHeight' :width='canvasWidth')
-    img(v-show="false" src='../assets/mail_globe_og.png' id='0' width='50px')
-    img(v-show="false" src='../assets/copyright.png' id='1' width='50px')
-    img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
-    img(v-show="false" src='../assets/air_mail_white.png' id='3' width='50px')
-  img(:src=' light? getImgUrl("air_mail_black", ".png") : getImgUrl("air_mail_white", ".png")' class='headerimage')
-  MailLogo
-  transition(name='slide-fade')
-    .success(v-if="success")
-      img(src='../assets/submit_success.png' width='40%')
-      br
-      nuxt-link(to='/')
-        button(class="success-btn black tanbackground") Home
-      button(v-if="isItRaining" class="success-btn black whitebackground" @click="clear") Stop the Rain
-      button(v-if="!isItRaining" class="success-btn black whitebackground" @click="firstRain") Start the Rain
-      button(class="success-btn black redbackground" @click="reloadPage") Reset Form
-  b-row(v-if="!success" align-h="center")
-    b-col(cols=11 lg=4 class="description")
-      p(class="infotext") YBG Mail Service is our way of showing our appreciation for you and sharing our love of physical media.
-      p(class="big") It's simple!
-      p(class="infotext") Sign up through the form below and get free stuff in the mail.
-  b-row(v-if="!success" align-h="center")
-    b-col(cols=11 md=8 lg=6)
-      b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
-        input(type='hidden' name='form-name' value='ybg-mail-service')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue ")
-                p First Name
-            b-col(class="nopadding")
-                b-form-input( name="firstname" type="text" required v-model="form.firstname" key='1')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue ")
-                p Last Name
-            b-col(class="nopadding")
-                b-form-input( name="lastname" type="text" required v-model="form.lastname" key='2')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
-                p Email
-            b-col(class="nopadding")
-                b-form-input( name="email" type="email" required v-model="form.email" key='3')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
-                p Mailing Address
-            b-col(class="nopadding")
-                b-form-input( name="address1" type="text" required v-model="form.address1" key='4')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
-                p Apt/Unit/PO Box
-            b-col(class="nopadding")
-                b-form-input( name="address2" type="text" v-model="form.address2" key='5')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
-                p City
-            b-col(class="nopadding")
-                b-form-input( name="city" type="text" required v-model="form.city" key='6')
-        b-row
-            b-col(cols="4" sm="3" class="blackborder darkblue")
-                p State
-            b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="state" type="text" required v-model="form.state" key='7')
-            b-col(cols="2" sm="1" class="blackborder darkblue")
-                p Zip
-            b-col(cols="3" sm="2" class="nopadding")
-                b-form-input( name="zip" type="text" required v-model="form.zip" key='8')
-            b-col(cols="4" sm="1" class="nopadding")
-                b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
-            b-col(cols="8" sm="3" class="nopadding")
-                b-button(type="submit" variant="primary" class="btn-block black tanbackground" @onSubmit='firstRain') Done?
-  img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
+#mail-service
+  .mail-service-wrapper
+    #main-canvas
+      //canvas(id="c" @click="stamp" :height='canvasHeight' :width='canvasWidth')
+      //canvas(id="r" @click="stamp" :height='canvasHeight' :width='canvasWidth')
+      img(v-show="false" src='../assets/mail_globe_og.png' id='0' width='50px')
+      img(v-show="false" src='../assets/copyright.png' id='1' width='50px')
+      img(v-show="false" src='../assets/ybg_mail_bxb.png' id='2' width='50px')
+      img(v-show="false" src='../assets/air_mail_white.png' id='3' width='50px')
+    img(:src=' light? getImgUrl("air_mail_black", ".png") : getImgUrl("air_mail_white", ".png")' class='headerimage')
+    MailLogo
+    transition(name='slide-fade')
+      .success(v-if="success")
+        img(src='../assets/submit_success.png' width='40%')
+        br
+        nuxt-link(to='/')
+          button(class="success-btn black tanbackground") Home
+        button(v-if="isItRaining" class="success-btn black whitebackground" @click="clear") Stop the Rain
+        button(v-if="!isItRaining" class="success-btn black whitebackground" @click="firstRain") Start the Rain
+        button(class="success-btn black redbackground" @click="reloadPage") Reset Form
+    b-row(v-if="!success" align-h="center")
+      b-col(cols=11 lg=4 class="description")
+        p(class="infotext") YBG Mail Service is our way of showing our appreciation for you and sharing our love of physical media.
+        p(class="big") It's simple!
+        p(class="infotext") Sign up through the form below and get free stuff in the mail.
+    b-row(v-if="!success" align-h="center")
+      b-col(cols=11 md=8 lg=6)
+        b-form(name='ybg-mail-service' method='post' id="mailserviceform" data-netlify="true" data-netlify-honeypot="bot-field" v-on:submit.prevent="handleSubmit")
+          input(type='hidden' name='form-name' value='ybg-mail-service')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue ")
+                  p First Name
+              b-col(class="nopadding")
+                  b-form-input( name="firstname" type="text" required v-model="form.firstname" key='1')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue ")
+                  p Last Name
+              b-col(class="nopadding")
+                  b-form-input( name="lastname" type="text" required v-model="form.lastname" key='2')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue")
+                  p Email
+              b-col(class="nopadding")
+                  b-form-input( name="email" type="email" required v-model="form.email" key='3')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue")
+                  p Mailing Address
+              b-col(class="nopadding")
+                  b-form-input( name="address1" type="text" required v-model="form.address1" key='4')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue")
+                  p Apt/Unit/PO Box
+              b-col(class="nopadding")
+                  b-form-input( name="address2" type="text" v-model="form.address2" key='5')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue")
+                  p City
+              b-col(class="nopadding")
+                  b-form-input( name="city" type="text" required v-model="form.city" key='6')
+          b-row
+              b-col(cols="4" sm="3" class="blackborder darkblue")
+                  p State
+              b-col(cols="3" sm="2" class="nopadding")
+                  b-form-input( name="state" type="text" required v-model="form.state" key='7')
+              b-col(cols="2" sm="1" class="blackborder darkblue")
+                  p Zip
+              b-col(cols="3" sm="2" class="nopadding")
+                  b-form-input( name="zip" type="text" required v-model="form.zip" key='8')
+              b-col(cols="4" sm="1" class="nopadding")
+                  b-button(type="reset" variant="primary" class="btn-block black redbackground" @click='clear') Reset
+              b-col(cols="8" sm="3" class="nopadding")
+                  b-button(type="submit" variant="primary" class="btn-block black tanbackground" @onSubmit='firstRain') Done?
+    img(class='bxb' :src="light? getImgUrl('bxb', '.png') : getImgUrl('bxb_white', '.png')" @click='clear')
+    .mailservicemobile.black.hide-on-desktop
+      MobileQuadrantMenu(bg="black" text="white" :links="['design', 'work', 'info', 'home']")
 </template>
 
 <script>
 
 import axios from 'axios'
 import MailLogo from '../components/MailLogo.vue'
+import MobileQuadrantMenu from '../components/MobileQuadrantMenu.vue'
 
 export default {
   name: 'Mailservice',
   components: {
-    MailLogo
+    MailLogo,
+    MobileQuadrantMenu
   },
   data () {
     return {
@@ -110,14 +115,14 @@ export default {
     }
   },
   mounted () {
-    const c = document.getElementById('c')
+    /* const c = document.getElementById('c')
     const ctx = c.getContext('2d')
     this.vueCanvas = ctx
     const r = document.getElementById('r')
     const rctx = r.getContext('2d')
     this.vueCanvasRain = rctx
     this.canvasHeight = screen.height
-    this.canvasWidth = screen.width
+    this.canvasWidth = screen.width */
   },
   beforeDestroy () {
     clearInterval(this.intervalID)
@@ -210,11 +215,25 @@ export default {
 
 <style scoped lang="stylus">
 
+#mail-service
+    position: relative
+    width: 100vw
+    height: 100vh
+    overflow hidden
+    background white
+    padding-top: 60px
+    background : white
+    overflow: scroll
+    @media(max-width: 767px){
+      overflow: scroll
+    }
+
 #mailserviceform
     padding-top: 3vh
     margin: 0 auto
     z-index: 2000
     position: relative
+
 #c
   position: fixed;
 
@@ -222,6 +241,18 @@ export default {
   position: fixed;
   z-index: 5
 
+.mail-service-wrapper
+    position: relative;
+    top: 5vh;
+    width: 100%;
+    height: 95vh;
+    @media(max-width: 767px) {
+      .mail-service-wrapper  {
+        width: 100%;
+        height: 75%;
+        overflow: scroll;
+      }
+  }
 .description
   padding-top 2vw
   @media(max-width: 767px){
@@ -260,6 +291,7 @@ export default {
   position: relative
   z-index : 0
   margin: 0 auto
+  margin-top 2%
   text-align: center
   width: 30%
   display: block
@@ -268,8 +300,8 @@ export default {
     width: 50%
   }
 
-input, textarea
-    background-color:#81cff3
+#mail-service input, #mail-service textarea
+
     color: black
     border: 1px solid black
     border-radius 0px
@@ -277,6 +309,7 @@ input, textarea
     letter-spacing: 1px
     font-size: 1em
     padding-left: 10px
+    margin: 0;
     @media(max-width: 767px){
       padding-left: 4px
     }
@@ -286,15 +319,6 @@ input, textarea
 
 .blackborder
     border: 1px solid black
-
-#main
-    padding-top: 60px
-    background : #81cff3
-    min-height: 100%
-    width: 100%
-    top 0
-    left 0
-    position absolute
 
 .darkblue p
   text-transform uppercase
@@ -391,4 +415,16 @@ input, textarea
   transform: translateY(350px)
   opacity: 0
 
+.mailservicemobile
+  position: fixed
+  height: 40px;
+  bottom: 0%
+  overflow hidden
+  border-top 3px solid black
+  width 100%
+  border-bottom 3px solid black
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000
 </style>

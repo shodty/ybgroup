@@ -136,11 +136,6 @@ export default {
     overflow hidden
     background black
 
-body
-  @media screen {
-    position fixed
-  }
-
 .design1mobile, .design2mobile, .design3mobile
   width 100%
   border-bottom 3px solid black

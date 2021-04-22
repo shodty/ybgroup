@@ -67,7 +67,7 @@ export default {
 
 </script>
 
-<style scoped lang="stylus">
+<style  lang="stylus">
 @import '../assets/styles/quadrants.css';
 #work
     width: 100vw
@@ -80,15 +80,12 @@ export default {
     top: 5vh;
     width: 97%;
     height: 95vh;
-  }
-
-  @media(max-width: 767px) {
-    .workquadrantwrapper  {
-      width: 100%;
-      height: 75%;
-      overflow: scroll;
+    @media(max-width: 767px) {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
     }
-  }
+}
   .workquadrantwrapper a {
     text-decoration: none;
     transition: all .5s ease;
@@ -101,6 +98,7 @@ export default {
   }
   .work3mobile
     position: fixed
+    z-index: 10000;
     height: 40px;
     bottom: 0%
     width 100%

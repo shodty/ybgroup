@@ -1,3 +1,9 @@
+
+@media (max-width: 767px) {
+  body { position: fixed;}
+  
+}
+
 .lazy-placeholder {
   height: 100px;
   background-image: url("../../static/images/ybg_loading.gif");
