@@ -1,7 +1,6 @@
 <template lang='pug'>
 div
   nuxt
-  //MobileMenu
   .siteheader
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
@@ -27,6 +26,7 @@ div
   nuxt-link.backbtn.hide-on-mobile(to='work' event="disabled" @click.native="goBack($event)") BACK
   .mobilemenudiv.hide-on-desktop
     MobileQuadrantMenu(bg="black" text="white" :links="['design', 'marketing', 'info', 'home']")
+  IconHeader
   //.information
     span Current Quadrant: {{currentQuadrant}}
     span Previous Quadrant: {{previousQuadrant}}
@@ -36,14 +36,14 @@ div
 <script>
 import MobileQuadrantMenu from '../components/MobileQuadrantMenu.vue'
 import IconTwo from '~/components/IconTwo.vue'
-import MobileMenu from '~/components/MobileMenu.vue'
+import IconHeader from '~/components/IconHeader.vue'
 import CaseMenu from '~/components/CaseMenu.vue'
 
 export default {
   components: {
-    MobileMenu,
     IconTwo,
     CaseMenu,
+    IconHeader,
     MobileQuadrantMenu
   },
   computed: {

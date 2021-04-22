@@ -24,7 +24,7 @@ div
         .icongif
           img(v-if="!ready" src='../assets/img/icon_colorgif.gif')
   nuxt-link.backbtn(to='work' event="disabled" @click.native="goBack($event)") BACK
-
+  IconHeader
   //.information
     span Current Quadrant: {{currentQuadrant}}
     span Previous Quadrant: {{previousQuadrant}}
@@ -35,12 +35,14 @@ div
 import IconTwo from '~/components/IconTwo.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
 import CaseMenu from '~/components/CaseMenu.vue'
+import IconHeader from '~/components/IconHeader.vue'
 
 export default {
   components: {
     MobileMenu,
     IconTwo,
-    CaseMenu
+    CaseMenu,
+    IconHeader
   },
   computed: {
     currentQuadrant () {

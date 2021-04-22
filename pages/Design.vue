@@ -20,7 +20,7 @@
               li(@click="changeDesign('motion')") MOTION
               li(@click="changeDesign('packaging')") PACKAGING
     .quadrantwrapper.hide-on-desktop
-      .design1mobile.pink
+      .design1mobile.black
         hooper.designslider(ref="hooperimages" :settings='hooperSettings'  @slide='changeSlides($event)')
             slide
                 video(poster="../assets/vid/poster/ybg_launch.jpg" @click="this.paused ? this.play() : this.pause();" playsinline autoplay muted loop key=1)
@@ -37,7 +37,9 @@
         hooper.designslider(ref="hooperinfo" :settings='hooperSettings'  @slide='changeSlides($event)')
             slide
                 p.design-services Design
-                p.design-copy We work to effectively communicate the story of your brand, product, or project to your audience. Whether that story is told through the packaging your product comes in or the logo that serves as the face of your brand, our team strategizes from the ground-up to craft the most effective solution and follow it through from conception to execution. Building you a strong foundation and developing systems for continued excellence is our bread & butter.
+                p.design-copy We work to effectively communicate the story of your brand, product, or project to your audience. Whether that story is told through the packaging your product
+                  |  comes in or the logo that serves as the face of your brand, our team strategizes to craft the most effective solution and follow it through from conception
+                  |  to execution. Building you a strong foundation and developing systems for continued excellence is our bread & butter.
             slide
                 p.design-services Branding
                 p.design-copy A brand is more than a logo. It is every touchpoint a person has with your company; from the way you communicate to the aesthetic of each digital or physical piece of collateral. We can help you develop those touchpoints to successfully tell the story of your brand. Whether you need to re-work your current brand or build one from the ground up, we are equipped to help you discover your authentic brand identity.

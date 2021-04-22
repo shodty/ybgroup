@@ -21,7 +21,7 @@
                             li(@click="changeMarket('activation')") BRAND ACTIVATION
         .quadrant4(:class="q4Class")
     .quadrantwrapper.hide-on-desktop
-      .marketing1mobile.pink
+      .marketing1mobile.black
         hooper.marketingslider(ref="hooperimages" :settings='hooperSettings'  @slide='changeSlides($event)')
             slide
                 img(src="../assets/img/ruta01.jpg" index)

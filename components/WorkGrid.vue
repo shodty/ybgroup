@@ -70,6 +70,7 @@
                 img(src="../assets/covers/vpp01.jpg")
                 .overlay.dosblue
                     nuxt-link(to='/vpp' event="disabled" @click.native="goToWork") VALLEY PRODUCER PROGRAM
+            .case-img.no-bottom-border.no-right-border.hide-on-desktop.black
         .worksingle(v-else index)
 </template>
 

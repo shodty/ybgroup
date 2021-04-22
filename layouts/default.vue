@@ -22,9 +22,7 @@ div
     .loadercontainer(v-if="!ready")
         .icongif
           img(v-if="!ready" src='../assets/img/icon_colorgif.gif')
-  Envelope.hide-on-mobile
-  nuxt-link.hide-on-mobile(to='ruta23')
-          .nav.nav-text.ruta(href='#')   <span style='color: #f26760; line-height: 2'>*</span>RUTA 23<span style='color: #f26760; line-height: 2'>*</span>
+  IconHeader
   //.information
     span Current Quadrant: {{currentQuadrant}}
     span Previous Quadrant: {{previousQuadrant}}
@@ -33,13 +31,14 @@ div
 
 <script>
 import IconTwo from '~/components/IconTwo.vue'
+import IconHeader from '~/components/IconHeader.vue'
 import MobileMenu from '~/components/MobileMenu.vue'
-import Envelope from '~/components/Envelope.vue'
+
 export default {
   components: {
     MobileMenu,
     IconTwo,
-    Envelope
+    IconHeader
   },
   computed: {
     currentQuadrant () {

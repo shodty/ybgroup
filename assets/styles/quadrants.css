@@ -22,11 +22,7 @@
     text-decoration: none;
     text-shadow: 8px 10px 0px rgba(0, 0, 0, 1);
   }
-  @media screen {
-    .quadrantwrapper a:hover{
-      text-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
-    }
-  }
+
   .quadrant1,
   .quadrant2,
   .quadrant3,

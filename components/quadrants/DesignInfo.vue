@@ -5,7 +5,10 @@
             p.design-services Overview
             span.design-overview(v-if='toggleHeaders') DESIGN
             img.hide-on-ipad(v-if='toggleHeaders' src="../../assets/icons/design-icons.png" height="40px")
-            p.design-copy We work to effectively communicate the story of your brand, product, or project to your audience. Whether that story is told through the packaging your product comes in, your website, or the logo that serves as the face of your brand, our team strategizes from the ground-up to craft the most effective solution and follow it through from conception to execution. Building you a strong foundation and developing systems for continued excellence is our bread & butter.
+            p.design-copy We work to effectively communicate the story of your brand, product, or project to your audience. Whether that story is told
+                |  through the packaging your product comes in, your website, or the logo that serves as the face of your brand, our team strategizes
+                |  to craft the most effective solution and follow it through from conception to execution. Building you a strong foundation and
+                |  developing systems for continued excellence is our bread & butter.
         .branding(v-else-if='design == "branding"' index1)
             p.design-services Branding
             span.design-overview(v-if='toggleHeaders') DESIGN
