@@ -5,8 +5,7 @@ div
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
             component(is="yellow-brick-group")
-        nuxt-link(to='/')
-          .click-box(@click="changeQuadrant(0)")
+        nuxt-link.home-click-box(to='/' event="disabled" @click.native="goHome($event, 0)")
   .case-sidemenu.hide-on-mobile
     .menubox.white.black-text.pointer.designmobile
       nuxt-link(to='design' event="disabled" @click.native="goToLink($event, 1)") DESIGN
@@ -58,6 +57,12 @@ export default {
     }
   },
   methods: {
+    goHome (event, quadrant) {
+      this.$store.dispatch('quadrants/changeQuadrant', quadrant)
+      setTimeout(() => {
+        this.$router.push(event.target.pathname)
+      }, 1000)
+    },
     goToLink (event, quadrant) {
       this.$store.dispatch('quadrants/changeQuadrant', quadrant)
       setTimeout(() => {

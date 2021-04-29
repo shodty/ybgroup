@@ -36,7 +36,7 @@
             .quad4gif(:class="quad4hover")
             transition(name="fade" mode="out-in")
                 .infobox.ctrtxt.pointer(v-if="currentQuadrant == 0" @click="changeQuadrant(4)" key=0)
-                  nuxt-link.yellow-text(to='info' event="disabled" @click.native="goToLink") Info
+                  nuxt-link.yellow-text(to='info' event="disabled" @click.native="goToLink") Contact
     .quadrantwrapper.hide-on-desktop
       .quadrant1mobile.blue
         nuxt-link.pink-text.mobilectrtxt(to='design' event="disabled" @click.native="goToLink") Design
@@ -45,7 +45,7 @@
       .quadrant3mobile.yellow
         nuxt-link.blue-text.mobilectrtxt(to='work' event="disabled" @click.native="goToLink") Work
       .quadrant4mobile.green
-        nuxt-link.yellow-text.mobilectrtxt(to='info' event="disabled" @click.native="goToLink") Info
+        nuxt-link.yellow-text.mobilectrtxt(to='info' event="disabled" @click.native="goToLink") Contact
       .quadrant4mobile.white
         nuxt-link.black-text.mobilectrtxt(to='mailservice' event="disabled" @click.native="goToLink") Mail Service
       .quadrant4mobile.red
