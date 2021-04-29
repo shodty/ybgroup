@@ -1,12 +1,12 @@
 <template lang='pug'>
-div
+.default-wrapper
   nuxt
   //MobileMenu
   .siteheader
     .icon-container
         IconTwo(icon-name="yellow brick group" width="100vw" height="2.5vh" icon-color='black')
             component(is="yellow-brick-group")
-        nuxt-link.click-box(to='/' event="disabled" @click.native="goToLink($event, 0)")
+        nuxt-link.home-click-box(to='/' event="disabled" @click.native="goHome($event, 0)")
   .sidemenu.hide-on-mobile
     .menubox.blue.white-text.pointer
         nuxt-link(to='design' event="disabled" @click.native="goToLink($event, 1)") DESIGN
@@ -52,6 +52,12 @@ export default {
     }
   },
   methods: {
+    goHome (event, quadrant) {
+      this.$store.dispatch('quadrants/changeQuadrant', quadrant)
+      setTimeout(() => {
+        this.$router.push(event.target.pathname)
+      }, 1000)
+    },
     goToLink (event, quadrant) {
       if (this.currentQuadrant !== quadrant) {
         this.$store.dispatch('quadrants/changeQuadrant', quadrant)

@@ -41,7 +41,7 @@
     margin-bottom: 0;
   }
   .siteheader {
-    z-index: 1000;
+    z-index: 10000;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@
     width: 100%;
     left: -1.2%;
   }
-  .click-box {
+  .home-click-box {
     position: absolute;
     display: block;
     height: 100%;
@@ -67,7 +67,15 @@
     top: 0;
     left: 40vw;
     cursor: pointer;
+    z-index: 10000;
   }
+  @media (max-width: 767px) {
+    .home-click-box {
+      width: 60vw;
+      left: 20vw;
+    }
+  }
+    
   .sidemenu {
     z-index: 100;
     position: fixed;

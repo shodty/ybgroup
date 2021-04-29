@@ -11,7 +11,7 @@
             .case-img.no-top-border
                 img(src="../assets/covers/vm01.jpg")
                 .overlay.vmgreen
-                    nuxt-link(to='/friendo' event="disabled" @click.native="goToWork") VISIT MODESTO
+                    nuxt-link(to='/visitmodesto' event="disabled" @click.native="goToWork") VISIT MODESTO
             .case-img.no-top-border
                 img(src="../assets/covers/ru01.jpg")
                 .overlay.blue

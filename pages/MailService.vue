@@ -154,7 +154,7 @@ export default {
       return require('../assets/' + pic + ext)
     },
     stamp () {
-      this.vueCanvas.save()
+      /* this.vueCanvas.save()
       this.index = Math.floor(Math.random() * 4)
       const img = document.getElementById(this.index.toString())
       this.vueCanvas.translate(event.clientX, event.clientY)
@@ -164,10 +164,11 @@ export default {
       } else {
         this.vueCanvas.drawImage(img, -50, -50, 100, 100)
       }
-      this.vueCanvas.restore()
+      this.vueCanvas.restore() */
     },
     firstRain () {
-      const noOfDrops = 20
+
+      /* const noOfDrops = 20
       const fallingDrops = []
       if (this.vueCanvasRain) {
         this.intervalID = setInterval(() => { this.raining(fallingDrops, noOfDrops) }, 6)
@@ -180,9 +181,10 @@ export default {
           fallingDr.speed = 1 + Math.random() * 2
           fallingDrops.push(fallingDr)
         }
-      }
+      } */
     },
     raining (fallingDrops, noOfDrops) {
+      /*
       this.isItRaining = true
       this.clearRain()
       for (let i = 0; i < noOfDrops; i++) {
@@ -193,18 +195,19 @@ export default {
           fallingDrops[i].y = -250 // Account for the image size
           fallingDrops[i].x = Math.random() * this.canvasWidth // Make it appear randomly along the width
         }
-      }
+      } */
     },
-    clear () {
+    clear () { /*
       this.isItRaining = false
       const c = document.getElementById('c')
       clearInterval(this.intervalID)
       this.vueCanvasRain.clearRect(0, 0, c.width, c.height)
-      this.vueCanvas.clearRect(0, 0, c.width, c.height)
+      this.vueCanvas.clearRect(0, 0, c.width, c.height) */
     },
     clearRain () {
+      /*
       const c = document.getElementById('r')
-      this.vueCanvasRain.clearRect(0, 0, c.width, c.height)
+      this.vueCanvasRain.clearRect(0, 0, c.width, c.height) */
     },
     reloadPage () {
       window.location.reload(true)
@@ -219,13 +222,12 @@ export default {
     position: relative
     width: 100vw
     height: 100vh
-    overflow hidden
+    overflow-y scroll
     background white
     padding-top: 60px
     background : white
-    overflow: scroll
     @media(max-width: 767px){
-      overflow: scroll
+      overflow-y: scroll
     }
 
 #mailserviceform
@@ -243,14 +245,14 @@ export default {
 
 .mail-service-wrapper
     position: relative;
-    top: 5vh;
+    top: 1vh;
     width: 100%;
     height: 95vh;
     @media(max-width: 767px) {
       .mail-service-wrapper  {
         width: 100%;
         height: 75%;
-        overflow: scroll;
+        overflow-y: scroll;
       }
   }
 .description
@@ -390,6 +392,7 @@ export default {
   cursor: url("../assets/close3.png"), auto
   @media(max-width: 767px){
     width 50px
+    padding-bottom: 200px;
   }
 
 .success

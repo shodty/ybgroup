@@ -46,6 +46,10 @@
         nuxt-link.blue-text.mobilectrtxt(to='work' event="disabled" @click.native="goToLink") Work
       .quadrant4mobile.green
         nuxt-link.yellow-text.mobilectrtxt(to='info' event="disabled" @click.native="goToLink") Info
+      .quadrant4mobile.white
+        nuxt-link.black-text.mobilectrtxt(to='mailservice' event="disabled" @click.native="goToLink") Mail Service
+      .quadrant4mobile.red
+        nuxt-link.white-text.mobilectrtxt(to='ruta23' event="disabled" @click.native="goToLink") Ruta 23
 
 </template>
 

@@ -9,7 +9,7 @@
                 |  Work with our creative team to not only develop an effective and compelling strategy but
                 |  to also manage and execute the plan in a collaborative manner.
         .branding(v-else-if='market == "lifestyle"' index1)
-            p.marketing-services Lifestyle Marketing
+            p.marketing-services Lifestyle
             span.marketing-overview MARKETING
             img.hide-on-ipad(src="../../assets/icons/marketing-icons.png" height="40px")
             p.marketing-copy Our strength is helping our clients tie it all together.

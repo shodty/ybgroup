@@ -16,7 +16,7 @@
                     .marketing-categories(v-if="ready")
                         ul
                             li(@click="changeMarket('overview')") OVERVIEW
-                            li(@click="changeMarket('lifestyle')") LIFESTYLE MARKETING
+                            li(@click="changeMarket('lifestyle')") LIFESTYLE
                             li(@click="changeMarket('content')") CONTENT CREATION
                             li(@click="changeMarket('activation')") BRAND ACTIVATION
         .quadrant4(:class="q4Class")

@@ -21,7 +21,7 @@ export default {
         },
         visitmodesto: {
           name: 'visit modesto',
-          link: 'friendo'
+          link: 'visitmodesto'
         },
         ruta: {
           name: 'ruta 23',

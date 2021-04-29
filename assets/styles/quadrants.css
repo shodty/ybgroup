@@ -22,7 +22,22 @@
     text-decoration: none;
     text-shadow: 8px 10px 0px rgba(0, 0, 0, 1);
   }
+  a.black-text:hover {
+    text-decoration: none;
+    text-shadow: 8px 10px 0px #f3b120;
+  }
 
+  @media(max-width: 767px) {
+    .quadrantwrapper a:hover {
+      text-decoration: none;
+      text-shadow: 5px 7px 0px rgba(0, 0, 0, 1);
+    }
+    a.black-text:hover {
+      text-decoration: none;
+      text-shadow: 5px 7px 0px #f3b120;
+    }
+  
+  }
   .quadrant1,
   .quadrant2,
   .quadrant3,
@@ -159,14 +174,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 21.2%;
+    height: 14%;
     width: 100%;
     border-bottom: 3px solid black;
   }
 
   .mobilectrtxt {
     font-family: goopersuperbold_italic;
-    font-size: 3.5em;
+    font-size: 2.8em;
     text-align: center;
     line-height: 50%;
   }
