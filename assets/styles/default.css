@@ -171,6 +171,12 @@
     font-weight: normal;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'blacksupper';
+    src: url("../fonts/BlackSupper-Display.woff2") format('woff2'), url("../fonts/BlackSupper-Display.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
   @media (max-width: 767px) {
     .hide-on-mobile {
       display: none !important;

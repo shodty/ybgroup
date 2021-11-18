@@ -46,6 +46,8 @@
         nuxt-link.blue-text.mobilectrtxt(to='work' event="disabled" @click.native="goToLink") Work
       .quadrant4mobile.green
         nuxt-link.yellow-text.mobilectrtxt(to='info' event="disabled" @click.native="goToLink") Contact
+      .quadrant4mobile.black
+        nuxt-link.white-text.mobilectrtxt(to='blacksupper' event="disabled" @click.native="goToLink") Black Supper
       .quadrant4mobile.white
         nuxt-link.black-text.mobilectrtxt(to='mailservice' event="disabled" @click.native="goToLink") Mail Service
       .quadrant4mobile.red

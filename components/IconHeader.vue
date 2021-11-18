@@ -1,5 +1,7 @@
 <template lang="pug">
 #icon-strip.hide-on-mobile
+    nuxt-link(to="/blacksupper")
+        img(src="../assets/icons/blacksupper.png")
     a(href="https://instagram.com/yellowbrickgroup")
         img.pad-more(src="../assets/icons/ig.png")
     nuxt-link(to="/ruta23")
