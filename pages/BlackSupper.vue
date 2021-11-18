@@ -1,10 +1,10 @@
 <template lang="pug">
-#ruta-main
-  .rutawrapper
-    .bg(:style='{"background" : bgc}')
-    .gridbackground(:style="gridStyles")
-    .paper.multiply
-    .parental(ref="parental")
+#blacksupper-main
+  .bs-wrapper
+    .bs-bg(:style='{"background" : bgc}')
+    .bs-gridbackground(:style="gridStyles")
+    .bs-paper.multiply
+    .bs-parental(ref="parental")
       TextBoxSupper.absolute.hide-on-mobile(v-if='layout === "purchase"' v-for="(box, index) in startObject"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A' + index" :pointer='box.pointer')
       TextBoxSupper.absolute.hide-on-desktop(v-if='layout === "purchase"' v-for="(box, index) in startMobile"  :initW='roundToMultiple(w * box.width, grid)' :initH='roundToMultiple(h * box.height, grid)' :top='roundToMultiple(y * box.y, grid)' :left='roundToMultiple(x * box.x, grid)' :index="index" :initTextSize='roundToMultiple(ts * box.textSize, 6)' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"A" + index' :key="'A2' + index" :pointer='box.pointer')
       TextBoxSupper.absolute(v-if='layout === "what"' v-for="(box, index) in whatObject"  :initW='w * box.width' :initH='h * box.height' :top='y * box.y' :left='x * box.x' :index="index" :initTextSize='ts * box.textSize' :initContent='box.content' :initAlign='box.align' :initColor='box.color' :initTracking='box.tracking' :initStroked='box.stroked' :resize='box.resize' :layout='box.layout' :zkey='"B" + index'  :key="'B' + index")
@@ -13,7 +13,7 @@
       TextBoxSupper.absolute(v-for="(box, index) in boxCount"  :initW='roundToMultiple(w * .25, grid)' :initH='roundToMultiple(h * .5, grid)' :top='y*2' :left='newX' :index="index" :initTextSize='roundToMultiple(ts * .2, 6)' :initActive='true' :initAlign='"center"' :zkey='"E" + index' :key="'E' + index")
       TextBoxSupper.absolute(v-for="(box, index) in mobileBoxCount"  :initW='roundToMultiple(w, grid)' :initH='roundToMultiple(h*.8, grid)' :top='y*2' :left='x*.5' :index="index" :initTextSize='roundToMultiple(ts * 1.5, 6)' :initActive='true' :initAlign='"center"' :zkey='"F" + index' :key="'F' + index" :layout='"mobile"')
     .bs-bottombar
-      b-row.bottomcontrols
+      b-row.bs-bottomcontrols
         .bs-inlinedivsquare.no-overflow(@click="changeBGColor('black')" style="background: black; margin-left: 32px" v-tooltip="'black'") k
         .bs-inlinedivsquare.no-overflow(@click="changeBGColor('white')" style="background: white; color: black" v-tooltip="'white'") w
         .bs-inlinedivgrid.bs-bluehover.no-overflow(@click="toggleGrid(!gridded)" style="font-family: Georgia; margin-left: 24px; color: black" v-tooltip="'Toggle Grid'") ⋮⋮⋮
@@ -23,9 +23,9 @@
         .bs-inlinedivgrid.no-overflow.hide-on-mobile(style="color: black; margin-left: 24px; cursor: default; font-family: Georgia") •
         .bs-inlinedivgrid.bs-bluehover.no-overflow.hide-on-mobile(@click="clear" style="margin-left: 24px"  v-tooltip="'Clear Canvas'") clear canvas
         .bs-inlinedivgrid.bs-bluehover.no-overflow.hide-on-desktop(@click="createMobileTextBox()" style="margin-left: 24px") play
-        .bs-inlinedivgrid.buyclass.no-overflow
+        .bs-inlinedivgrid.bs-buyclass.no-overflow
           a(href="https://www.ybgroupshop.us/products/black-supper-typeface") Add to Cart
-    .circlebuttons.no-overflow
+    .bs-circlebuttons.no-overflow
         .bs-addbutton.hide-on-mobile.pointerall(@click="createTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
         .bs-addbutton.hide-on-desktop.pointerall(@click="createMobileTextBox" style="cursor: cell" v-tooltip="'Add Text Box'") +
         .bs-clearbutton.pointerall(@click="clear" v-tooltip="'Clear Canvas'") x
@@ -172,10 +172,10 @@ export default {
 </script>
 
 <style lang="stylus">
-#ruta-main
+#blacksupper-main
   overflow hidden
 
-.rutawrapper
+.bs-wrapper
     position: relative;
     top: 5vh;
     width: 97%;
@@ -183,14 +183,14 @@ export default {
     background: #fff;
     border-top: 3px solid #000;
 
-.gridbackground
+.bs-gridbackground
   position absolute
   height 100vh
   width 100vw
   z-index 0
   pointer-events: none
 
-.paper
+.bs-paper
   position absolute
   height 100vh
   width 100vw
@@ -198,7 +198,7 @@ export default {
   pointer-events: none
   background: url(../assets/paper3.jpg)
   background-size: cover
-.parental
+.bs-parental
   height 100vh
   width 100vw
   position relative
@@ -207,14 +207,14 @@ export default {
   margin: 0px
   padding: 0px
 
-.bg
+.bs-bg
   position fixed
   background : black
   min-height: 100%;
   transition 1s
   width: 100%
 
-.bottomcontrols
+.bs-bottomcontrols
   justify-content: center
   display: flex;
   width: 100%
@@ -316,10 +316,10 @@ export default {
 .lighten
   mix-blend-mode: overlay
 
-.buyclass
+.bs-buyclass
   margin-left: auto
 
-.circlebuttons
+.bs-circlebuttons
   width 100%
   pointer-events: none
   z-index: 9999

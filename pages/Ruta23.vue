@@ -310,7 +310,7 @@ export default {
   background #ff5b49
   color white
   width 100%
-  z-index 2000
+  z-index 5000
   overflow: hidden
 .absolute
   position absolute

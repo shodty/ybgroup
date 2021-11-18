@@ -498,14 +498,6 @@ export default {
   background #ff5b49 !important
   border 1px solid white !important
 
-.bottombar
-  position absolute
-  height 48px
-  bottom 0
-  background #ff5b49
-  color white
-  width 100%
-
 .dragicon
     background transparent
 
@@ -514,12 +506,6 @@ export default {
 
 .white
   color white
-
-.red
-  color #ff5b49
-
-.blue
-  color #008ff8
 
 .multiply
   mix-blend-mode: multiply
