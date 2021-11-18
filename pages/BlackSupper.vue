@@ -282,8 +282,13 @@ export default {
 .bs-buycursor
   cursor: url("../assets/hand.png"), auto;
 .bs-addbutton:hover, .bs-clearbutton:hover, .bs-buybtn:hover
-  background #008ff8
+  background black
+  color white
+  border 2px solid white
 
+.bs-buybtn:hover a
+  color white !important
+  text-decoration:  none
 .bs-bottombar
   position fixed
   bottom 0
@@ -303,7 +308,7 @@ export default {
   color black
 
 .bs-bluehover:hover
-  color #f26760
+  color gray
 
 .multiply
   mix-blend-mode: multiply
